@@ -7,6 +7,12 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      sans: ["IBM Plex Sans", "sans-serif"],
+      serif: ["Noto Serif", "serif"],
+      mono: ["JetBrains Mono", "monospace"],
+      noto: ["Noto Sans", "sans-serif"],
+    },
     container: {
       center: true,
       padding: "2rem",
