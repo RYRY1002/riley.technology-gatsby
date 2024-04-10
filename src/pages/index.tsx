@@ -15,7 +15,10 @@ const IndexPage: React.FC<PageProps> = () => {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <main >
         <ThemeToggleButton/>
-        <div className="my-0 mx-20 mt-12">
+        <video className="fixed top-0 left-0 w-full h-full object-cover z-[-1]" autoPlay loop muted>
+            <source src={v4loop} type="video/mp4"/>
+        </video>
+        <div id="hero" className="px-20 pt-12 h-screen w-screen">
           <h1 className="text-6xl font-bold mb-5 relative">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h1>
           <div className="relative fill-foreground">
             <Link to="https://www.youtube.com/@RYRY1002" className="pr-1">
@@ -31,9 +34,6 @@ const IndexPage: React.FC<PageProps> = () => {
               <svg className="fill-foreground w-[1.4em] h-[1.4em] inline-block"><path className="text-foreground" d="m16.67,3.71c-1.29-.59-2.66-1.01-4.06-1.25-.19.34-.37.7-.52,1.06-1.49-.23-3.01-.23-4.51,0-.15-.36-.33-.71-.52-1.06-1.4.24-2.77.66-4.06,1.25C.43,7.52-.26,11.22.08,14.88H.08c1.5,1.11,3.19,1.96,4.98,2.5.4-.54.76-1.12,1.07-1.72-.58-.22-1.14-.49-1.68-.8.14-.1.28-.21.41-.31,3.15,1.48,6.8,1.48,9.96,0,.13.11.27.22.41.31-.54.32-1.1.59-1.68.8.31.6.66,1.18,1.07,1.72,1.79-.54,3.48-1.39,4.98-2.5h0c.41-4.24-.7-7.91-2.93-11.17ZM6.57,12.63c-.97,0-1.77-.88-1.77-1.96s.77-1.97,1.77-1.97,1.79.89,1.77,1.97-.78,1.96-1.77,1.96Zm6.54,0c-.97,0-1.77-.88-1.77-1.96s.77-1.97,1.77-1.97,1.79.89,1.77,1.97-.78,1.96-1.77,1.96Z"></path></svg>
             </Link>
           </div>
-          <video className="absolute top-0 left-0 w-full h-full object-cover z-[-10]" autoPlay loop muted>
-            <source src={v4loop} type="video/mp4"/>
-          </video>
         </div>
       </main>
     </ThemeProvider>
