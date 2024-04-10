@@ -8,7 +8,7 @@ import { NavMenu } from "@/components/navbar"
 
 import Spline from "@splinetool/react-spline"
 
-import v4loop from "../media/videos/v4_loop.mp4";
+import v4loop from "../../static/videos/v4_loop.mp4";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (

@@ -3,7 +3,7 @@ import type { GatsbyConfig } from "gatsby";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `riley.technology`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://riley.technology`
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -15,28 +15,28 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "media",
-        "path": "src/media/"
+        "path": "static"
       },
       __key: "media"
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "images",
-        "path": "src/media/images/"
+        "path": "static/images/"
       },
       __key: "images"
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "pages",
-        "path": "src/pages/"
+        "path": "src/pages"
       },
       __key: "pages"
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "posts",
-        "path": "src/posts/"
+        "path": "posts"
       },
       __key: "posts"
     }, {
@@ -54,7 +54,7 @@ const config: GatsbyConfig = {
         background_color: '#ffffff',
         theme_color: '#663399',
         display: 'standalone',
-        icon: 'src/media/images/icon.png'
+        icon: 'static/images/icon.png'
       }
     }
   ]
