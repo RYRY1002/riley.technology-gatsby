@@ -10,7 +10,7 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
-    "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts", "gatsby-transformer-remark", "gatsby-plugin-sharp", "gatsby-transformer-sharp", 
+    "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts", "gatsby-transformer-remark", "gatsby-transformer-sharp",
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -55,6 +55,16 @@ const config: GatsbyConfig = {
         theme_color: '#663399',
         display: 'standalone',
         icon: 'static/images/icon.png'
+      }
+    }, {
+      resolve: 'gatsby-plugin-sharp',
+      options: {
+        defaults: {
+          formats: ['auto', 'webp'],
+          placeholder: 'blurred',
+          breakpoints: [750, 1080, 1366, 1920, 2560, 3840],
+          backgroundColor: 'transparent',
+        }
       }
     }
   ]
