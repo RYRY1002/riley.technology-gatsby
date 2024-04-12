@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, PageProps, graphql } from 'gatsby';
-import $ from 'jquery';
+
 
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { ThemeToggleButton } from '@/components/theme-toggle-button';
@@ -20,15 +20,16 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
 
   // This is to prevent builds from messing up, nodejs doesn't have access to window as it doesn't load it in a browser
   // It seems a bit out of place for JS, checks like this are usually reserved for well made programs in good languages. This is necessary for it to build though.
-  if (typeof window !== 'undefined') {
-    $(window).on('scroll', function() {
-      // Makes the socials sticky after the hero text is hidden
-      {
+  if (typeof window !== "undefined") {
+    import('jquery').then((jQuery) => {
+      const $ = jQuery.default;
+      $(window).on('scroll', function() {
+        // Makes the socials sticky after the hero text is hidden
         var currentScroll = $(window).scrollTop();
         var socialTop = $('#hero-text').offset().top;
         var socialBottom = socialTop + $('#hero-text').height();
 
-        if ( currentScroll >= socialBottom) {
+        if (currentScroll >= socialBottom) {
           $('#socials').addClass('sticky');
           $('#socials').removeClass('relative');
           $('#socials').addClass('top-5');
@@ -39,8 +40,8 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
           $('#socials').removeClass('top-5');
           $('#hero-text').css('margin-bottom', 0 + "!important");
         }
-      }
-    })
+      });
+    });
   }
 
   return (
