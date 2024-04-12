@@ -106,7 +106,7 @@ export default BlogIndex
 export const pageQuery = graphql`
   query BlogPageQuery($limit: Int!, $skip: Int!) {
     allMarkdownRemark(
-      sort: {fields: {slug: DESC}}, 
+      sort: {frontmatter: {date: DESC}}, 
       limit: $limit, 
       skip: $skip
     ) {
@@ -121,7 +121,11 @@ export const pageQuery = graphql`
             title
             image {
               childImageSharp {
-                gatsbyImageData
+                gatsbyImageData(
+                  layout: FULL_WIDTH, 
+                  blurredOptions: {
+                    width: 48
+                  })
               }
             }
           }

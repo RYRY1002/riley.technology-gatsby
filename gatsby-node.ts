@@ -18,7 +18,10 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
       query BlogListNodeQuery {
-        allMarkdownRemark(sort: {frontmatter: {date: DESC}}, limit: 1000) {
+        allMarkdownRemark(sort: 
+        {frontmatter: {date: DESC}},
+        limit: 1000
+      ) {
           edges {
             node {
               frontmatter {

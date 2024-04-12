@@ -60,10 +60,10 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-sharp',
       options: {
         defaults: {
-          formats: ['auto', 'webp'],
+          formats: ['webp'],
           placeholder: 'blurred',
           breakpoints: [750, 1080, 1366, 1920, 2560, 3840],
-          backgroundColor: 'transparent',
+          backgroundColor: 'transparent'
         }
       }
     }
