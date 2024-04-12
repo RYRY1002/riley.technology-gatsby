@@ -23,7 +23,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
         <video className="fixed top-0 left-0 w-full h-full object-cover z-[-1]" autoPlay loop muted>
             <source src={v4loop} type="video/mp4"/>
         </video>
-        <div id="hero" className="px-20 pt-12 h-screen w-screen">
+        <div id="hero" className="px-20 pt-12 h-screen w-full">
           <h1 className="text-6xl font-bold mb-5 relative">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h1>
           <div className="relative fill-foreground">
             <Link to="https://www.youtube.com/@RYRY1002" className="pr-1">
@@ -40,17 +40,16 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
             </Link>
           </div>
         </div>
-        <div id="articles" className="flex flex-wrap justify-center content-center flex-row gap-[0.65rem] m-16">
+        <div id="articles" className="flex grow shrink-0 flex-wrap justify-center content-center flex-row gap-[0.65rem] m-16">
           {posts.map(({ node }) => {
             const title = node.frontmatter.title;
             const image = getImage(node.frontmatter.image?.childImageSharp?.gatsbyImageData);
             return (
-              <article id={node.id} className="transition-transform duration-150 ease-in-out grow shrink-0 bg-cover bg-center min-h-[25vmin] rounded-[15px] relative overflow-hidden hover:scale-[1.075]">
-                <GatsbyImage image={image} alt={title} className="absolute w-full h-full pointer-events-none object-fill z-[-1]"/>
-                <Link to={"/project" + node.fields.slug} className="p-8 relative w-full h-full inline-block">
-                  <h2 className="text-3xl font-bold leading-[76%]">{title}</h2>
+              <article id={node.id} className="transition-transform duration-150 ease-in-out grow shrink-0 bg-cover bg-center h-[35vmin] min-w-min max-w-full rounded-[15px] relative overflow-hidden hover:scale-[1.075]">
+                <GatsbyImage image={image} alt={title} className="!absolute w-full h-full pointer-events-none object-fill z-[-1]"/>
+                <Link to={"/project" + node.fields.slug} className="p-8 relative w-full h-full inline-block -top-1.5">
+                  <h2 className="text-3xl font-bold leading-none">{title}</h2>
                   <small className="italic text-sm" style={{fontStretch: 85 + "%"}}>{node.frontmatter.date}</small>
-                  <p className="text-lg leading-8" style={{fontStretch: 85 + "%"}} dangerouslySetInnerHTML={{ __html: node.excerpt }}/>
                 </Link>
               </article>
             )
