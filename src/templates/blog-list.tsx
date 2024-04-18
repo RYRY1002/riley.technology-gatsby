@@ -10,6 +10,8 @@ import v4loop from "../../static/videos/v4_loop.mp4";
 import { StaticImage } from 'gatsby-plugin-image';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
+import { remapValue } from '@/lib/utils';
+
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;
   const { currentPage, numPages } = pageContext;
@@ -23,31 +25,44 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   if (typeof window !== "undefined") {
     import('jquery').then((jQuery) => {
       const $ = jQuery.default;
-      $(window).on('scroll', function() {
+      {
         // Makes the socials sticky after the hero text is hidden
-        var currentScroll = $(window).scrollTop();
-        var socialTop = $('#hero-text').offset().top;
-        var socialBottom = socialTop + $('#hero-text').height();
+        $(window).on('scroll load', function() {
+          var currentScroll = $(window).scrollTop();
+          var socialTop = $('#hero-text').offset().top;
+          var socialBottom = socialTop + $('#hero-text').height();
 
-        if (currentScroll >= socialBottom) {
-          $('#socials').addClass('sticky');
-          $('#socials').removeClass('relative');
-          $('#socials').addClass('top-5');
-          $('#hero-text').css('margin-bottom', $('#socials').height() + "!important");
-        } else {
-          $('#socials').removeClass('sticky');
-          $('#socials').addClass('relative');
-          $('#socials').removeClass('top-5');
-          $('#hero-text').css('margin-bottom', 0 + "!important");
-        }
-      });
+          if ( currentScroll >= socialBottom ) {
+            $('#socials').addClass('sticky');
+            $('#socials').removeClass('relative');
+            $('#socials').addClass('top-5');
+            $('#hero-text').css('margin-bottom', $('#socials').height() + "!important");
+          } else {
+            $('#socials').removeClass('sticky');
+            $('#socials').addClass('relative');
+            $('#socials').removeClass('top-5');
+            $('#hero-text').css('margin-bottom', 0 + "!important");
+          }
+        });
+      }
+      {
+        // Blurs the background video when scrolling
+        $(window).on('scroll load', function() {
+          var currentScroll = $(window).scrollTop();
+          var heroBottom = $('#hero-text').offset().top + $('#hero-text').height();
+  
+          $('#bg-video').css('filter', 
+            'blur(' + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + 'px) ' + 
+            'brightness(' + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ')');
+        });
+      }
     });
   }
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <main>
-        <video className="fixed top-0 left-0 w-full h-full object-cover z-[-1]" autoPlay loop muted>
+        <video id="bg-video" className="fixed top-0 left-0 w-full h-full object-cover z-[-1]" autoPlay loop muted>
             <source src={v4loop} type="video/mp4"/>
         </video>
         <div id="hero" className="px-20 pt-12 h-screen w-full">
