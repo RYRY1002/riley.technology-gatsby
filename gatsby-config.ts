@@ -46,8 +46,8 @@ const config: GatsbyConfig = {
     }, {
       resolve: 'gatsby-plugin-nprogress',
       options: {
-        color: 'red',
-        showSpinner: true
+        color: '#ff5e27',
+        showSpinner: false
       }
     }, {
       resolve: 'gatsby-plugin-manifest',
@@ -66,7 +66,7 @@ const config: GatsbyConfig = {
         defaults: {
           formats: ['webp'],
           placeholder: 'blurred',
-          breakpoints: [750, 1080, 1366, 1920, 2560, 3840],
+          breakpoints: [480, 720, 1080, 1366, 1920, 2560, 3840],
           backgroundColor: 'transparent'
         }
       }

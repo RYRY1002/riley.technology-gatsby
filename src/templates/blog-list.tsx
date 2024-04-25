@@ -10,6 +10,17 @@ import v4loop from "../../static/videos/v4_loop.mp4";
 import { StaticImage } from 'gatsby-plugin-image';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationFirst,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationLast
+} from "@/components/ui/pagination"
+
 import { remapValue } from '@/lib/utils';
 
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
@@ -17,8 +28,8 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
-  const prevPage = currentPage - 1 === 1 ? '/' : (currentPage - 1).toString();
-  const nextPage = (currentPage + 1).toString();
+  const prevPage = currentPage - 1 === 1 ? '/' : '/' + (currentPage - 1).toString();
+  const nextPage = '/' + (currentPage + 1).toString();
 
   // This is to prevent builds from messing up, nodejs doesn't have access to window as it doesn't load it in a browser
   // It seems a bit out of place for JS, checks like this are usually reserved for well made programs in good languages. This is necessary for it to build though.
@@ -97,47 +108,35 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
             )
           })}
         </div>
-        <ul
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              listStyle: 'none',
-              padding: 0,
-            }}
-          >
+        <Pagination className="mb-2">
+          <PaginationContent>
           {!isFirst && (
-            <Link to={prevPage} rel="prev">
-              ← Previous Page
-            </Link>
-          )}
-          {Array.from({ length: numPages }, (_, i) => (
-            <li
-              key={`pagination-number${i + 1}`}
-              style={{
-                margin: 0,
-              }}
-            >
-              <Link
-                to={`/${i === 0 ? '' : i + 1}`}
-                style={{
-                  padding: 25,
-                  textDecoration: 'none',
-                  color: i + 1 === currentPage ? '#ffffff' : '',
-                  background: i + 1 === currentPage ? '#007acc' : '',
-                }}
-              >
-                {i + 1}
-              </Link>
-            </li>
-          ))}
-          {!isLast && (
-            <Link to={nextPage} rel="next">
-              Next Page →
-            </Link>
-          )}
-          </ul>
+              <PaginationItem>
+                <PaginationFirst to="/"/>
+              </PaginationItem>
+            )}
+            {!isFirst && (
+              <PaginationItem>
+                <PaginationPrevious to={prevPage}/>
+              </PaginationItem>
+            )}
+            {Array.from({ length: numPages }, (_, i) => (
+              <PaginationItem key={`pagination-number${i + 1}`}>
+                <PaginationLink to={`/${i === 0 ? "" : i + 1}`} className={i === currentPage - 1 && "bg-accent text-accent-foreground"}>{i + 1}</PaginationLink>
+              </PaginationItem>
+            ))}
+            {!isLast && (
+              <PaginationItem>
+                <PaginationNext to={nextPage}/>
+              </PaginationItem>
+            )}
+            {!isLast && (
+              <PaginationItem>
+                <PaginationLast to={`/${numPages}`}/>
+              </PaginationItem>
+            )}
+          </PaginationContent>
+        </Pagination>
       </main>
     </ThemeProvider>
   )
