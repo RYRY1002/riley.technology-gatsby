@@ -47,7 +47,7 @@
     "@splinetool/runtime": "^1.0.91",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "embla-carousel-react": "^8.0.0",
     "gatsby": "^5.13.3",
