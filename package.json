@@ -44,13 +44,13 @@
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@splinetool/react-spline": "^2.2.6",
-    "@splinetool/runtime": "^1.0.91",
+    "@splinetool/runtime": "^1.2.1",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
-    "embla-carousel-react": "^8.0.0",
-    "gatsby": "^5.13.3",
+    "embla-carousel-react": "^8.0.2",
+    "gatsby": "^5.13.4",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-nprogress": "^5.13.1",
@@ -63,21 +63,21 @@
     "gatsby-transformer-sharp": "^5.13.1",
     "next-themes": "^0.3.0",
     "postcss": "^8.4.38",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.51.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.51.3",
     "react-material-symbols": "^4.4.0",
-    "react-resizable-panels": "^2.0.13",
-    "tailwind-merge": "^2.2.2",
+    "react-resizable-panels": "^2.0.19",
+    "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.0",
-    "zod": "^3.22.4"
+    "zod": "^3.23.5"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "typescript": "^5.3.3"
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.4.5"
   }
 }
