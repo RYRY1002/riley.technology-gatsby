@@ -72,8 +72,8 @@ export function Footer(this: any) {
     }
   `)
 
-  const urlArray: string[] = location.pathname.split("/").filter((item) => item !== "");
-  const currentPath = location.pathname;
+  const urlArray: string[] = useLocation().pathname.split("/").filter((item) => item !== "");
+  const currentPath = useLocation().pathname;
   let breadcrumbUrl = "";
   const buildTime = new Intl.DateTimeFormat('en-AU', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Sydney' }).format(new Date(query.site.buildTime)) + " Sydney time";
   return (

@@ -1,6 +1,8 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
+import { Footer } from '@/components/footer';
+
 export default function BlogPostTemplate({
   data, // this prop will be injected by the GraphQL query below.
 }) {
@@ -15,6 +17,7 @@ export default function BlogPostTemplate({
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
+      <Footer/>
     </div>
   )
 }
