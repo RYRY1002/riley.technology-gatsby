@@ -23,6 +23,8 @@ import {
 
 import { remapValue } from '@/lib/utils';
 
+import { Footer } from '@/components/footer';
+
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;
   const { currentPage, numPages } = pageContext;
@@ -137,10 +139,17 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
             )}
           </PaginationContent>
         </Pagination>
+        <Footer/>
       </main>
     </ThemeProvider>
   )
 }
+
+export const Head = () => (
+  <>
+    <title>riley.technology</title>
+  </>
+)
 
 export default BlogIndex  
 
