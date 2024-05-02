@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Link } from "gatsby"
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -7,6 +8,9 @@ import {
 
 import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
+
+import { MaterialSymbol } from 'react-material-symbols';
+import 'react-material-symbols/outlined';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -41,7 +45,7 @@ PaginationItem.displayName = "PaginationItem"
 type PaginationLinkProps = {
   isActive?: boolean
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"a">
+  React.ComponentProps<typeof Link>
 
 const PaginationLink = ({
   className,
@@ -49,7 +53,7 @@ const PaginationLink = ({
   size = "icon",
   ...props
 }: PaginationLinkProps) => (
-  <a
+  <Link
     aria-current={isActive ? "page" : undefined}
     className={cn(
       buttonVariants({
@@ -63,6 +67,21 @@ const PaginationLink = ({
 )
 PaginationLink.displayName = "PaginationLink"
 
+const PaginationFirst = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to first page"
+    size="default"
+    className={cn("", className)}
+    {...props}
+  >
+    <MaterialSymbol icon="first_page" size={20} fill/>
+  </PaginationLink>
+)
+PaginationFirst.displayName = "PaginationFirst"
+
 const PaginationPrevious = ({
   className,
   ...props
@@ -70,10 +89,10 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
-    className={cn("gap-1 pl-2.5", className)}
+    className={cn("", className)}
     {...props}
   >
-    <ChevronLeftIcon className="h-4 w-4" />
+    <MaterialSymbol icon="chevron_left" size={20} fill/>
     <span>Previous</span>
   </PaginationLink>
 )
@@ -86,14 +105,29 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="Go to next page"
     size="default"
-    className={cn("gap-1 pr-2.5", className)}
+    className={cn("", className)}
     {...props}
   >
     <span>Next</span>
-    <ChevronRightIcon className="h-4 w-4" />
+    <MaterialSymbol icon="chevron_right" size={20} fill/>
   </PaginationLink>
 )
 PaginationNext.displayName = "PaginationNext"
+
+const PaginationLast = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to last page"
+    size="default"
+    className={cn("", className)}
+    {...props}
+  >
+    <MaterialSymbol icon="last_page" size={20} fill/>
+  </PaginationLink>
+)
+PaginationLast.displayName = "PaginationLast"
 
 const PaginationEllipsis = ({
   className,
@@ -115,7 +149,9 @@ export {
   PaginationContent,
   PaginationLink,
   PaginationItem,
+  PaginationFirst,
   PaginationPrevious,
   PaginationNext,
+  PaginationLast,
   PaginationEllipsis,
 }
