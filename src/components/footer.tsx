@@ -77,11 +77,11 @@ export function Footer(this: any) {
   let breadcrumbUrl = "";
   const buildTime = new Intl.DateTimeFormat('en-AU', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Sydney' }).format(new Date(query.site.buildTime)) + " Sydney time";
   return (
-    <footer className="bg-background pt-4 pb-0 px-24 w-full bottom-0">
-      <div id="footer-details-recap" className="px-[10vw] mb-5 flex items-center space-x-4 h-48">
+    <footer className="bg-background pt-4 pb-0 px-24 w-full bottom-0 sticky z-0 block">
+      <div id="footer-details-recap" className="px-[10vw] mb-5 mt-16 flex items-center space-x-4 h-24">
         <h2 className="text-4xl font-bold">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h2>
         <Separator orientation="vertical"/>
-        <h2 className="text-4xl font-bold">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h2>
+        <h2 className="text-4xl font-bold">Website built with Gatsby, a really fast React framework.</h2>
       </div>
       <div id="footer-pageinfo" className="z-[1] px-[10vw]">
         <Breadcrumb>
@@ -139,11 +139,11 @@ export function Footer(this: any) {
           </BreadcrumbList>
         </Breadcrumb>
         <small className="text-muted-foreground text-xs">
-          Page last updated on {buildTime}
+          Page last compiled {buildTime}
         </small>
       </div>
       <div id="footer-copyright-deco" className="h-[14vw] relative overflow-hidden -mt-8">
-        <h1 id="footer-massive-copyright" style={{fontSize: "calc((100vw - 12rem) / (1088 / 208))"}} className="select-none absolute bottom-0 left-0 translate-y-[14%] align-text-bottom !leading-[0.78] font-bold text-nowrap bg-gradient-to-b from-[#ffffff21] to-foreground bg-clip-text text-transparent">{"© " + romanize(new Date().getFullYear())}</h1>
+        <h1 id="footer-massive-copyright" style={{fontSize: "calc((100vw - 12rem) / (1088 / 208))"}} className="select-none absolute bottom-0 left-0 translate-y-[14%] align-text-bottom !leading-[0.78] font-bold text-nowrap bg-gradient-to-b from-[#00000000] to-foreground bg-clip-text text-transparent">{"© " + romanize(new Date().getFullYear())}</h1>
       </div>
     </footer>
   )

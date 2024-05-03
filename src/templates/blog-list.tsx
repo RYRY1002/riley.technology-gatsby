@@ -24,6 +24,7 @@ import {
 import { remapValue } from '@/lib/utils';
 
 import { Footer } from '@/components/footer';
+import { MaterialSymbol } from 'react-material-symbols';
 
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;
@@ -59,14 +60,41 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
         });
       }
       {
+        $(window).on('scroll load', function() {
+          let viewportHeight = $(window).height();
+          let currentScroll = $(window).scrollTop();
+          currentScroll = currentScroll + viewportHeight;
+          let mainHeight = $('main').height();
+          let videoHeight = $('#bg-video').height();
+
+          if (currentScroll >= mainHeight) {
+            $('#bg-video').addClass('!absolute');
+            $('#bg-video').addClass('h-screen');
+            $('#bg-video').removeClass('fixed');
+            $('#bg-video').removeClass('h-full');
+            //$('#bg-video').css('height', '100vh');
+          } else {
+            $('#bg-video').removeClass('!absolute');
+            $('#bg-video').removeClass('h-screen');
+            $('#bg-video').addClass('fixed');
+            $('#bg-video').addClass('h-full');
+            //$('#bg-video').css('height', '100%');
+          }
+        });
+      }
+      {
         // Blurs the background video when scrolling
         $(window).on('scroll load', function() {
           var currentScroll = $(window).scrollTop();
           var heroBottom = $('#hero-text').offset().top + $('#hero-text').height();
   
-          $('#bg-video').css('filter', 
+          if (currentScroll >= heroBottom) {
+            $('#bg-video').css('filter', 
             'blur(' + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + 'px) ' + 
             'brightness(' + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ')');
+          } else {
+            $('#bg-video').css('filter', '');
+          }
         });
       }
     });
@@ -74,11 +102,11 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      <main>
-        <video id="bg-video" className="fixed top-0 left-0 w-full h-full object-cover z-[-1]" autoPlay loop muted>
+      <main className="relative z-[1]">
+        <video id="bg-video" className="fixed bottom-0 left-0 w-full h-full object-cover -z-[1]" autoPlay loop muted>
             <source src={v4loop} type="video/mp4"/>
         </video>
-        <div id="hero" className="px-20 pt-12 h-screen w-full">
+        <div id="hero" className="px-20 pt-12 h-[89vh] w-full">
           <h1 id="hero-text" className="text-6xl font-bold mb-5 relative">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h1>
           <div id="socials" className="relative fill-foreground">
             <Link id="social-link" to="https://www.youtube.com/@RYRY1002" className="pr-1">
@@ -94,6 +122,10 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
               <svg className="fill-foreground w-[1.4em] h-[1.4em] inline-block"><path className="text-foreground" d="m16.67,3.71c-1.29-.59-2.66-1.01-4.06-1.25-.19.34-.37.7-.52,1.06-1.49-.23-3.01-.23-4.51,0-.15-.36-.33-.71-.52-1.06-1.4.24-2.77.66-4.06,1.25C.43,7.52-.26,11.22.08,14.88H.08c1.5,1.11,3.19,1.96,4.98,2.5.4-.54.76-1.12,1.07-1.72-.58-.22-1.14-.49-1.68-.8.14-.1.28-.21.41-.31,3.15,1.48,6.8,1.48,9.96,0,.13.11.27.22.41.31-.54.32-1.1.59-1.68.8.31.6.66,1.18,1.07,1.72,1.79-.54,3.48-1.39,4.98-2.5h0c.41-4.24-.7-7.91-2.93-11.17ZM6.57,12.63c-.97,0-1.77-.88-1.77-1.96s.77-1.97,1.77-1.97,1.79.89,1.77,1.97-.78,1.96-1.77,1.96Zm6.54,0c-.97,0-1.77-.88-1.77-1.96s.77-1.97,1.77-1.97,1.79.89,1.77,1.97-.78,1.96-1.77,1.96Z"></path></svg>
             </Link>
           </div>
+        </div>
+        <div id="acticles-header" className="mx-16 -mb-4 flex flex-wrap">
+          <h2 className="text-4xl font-bold">Some of the things I've made</h2>
+          <MaterialSymbol icon="arrow_outward" size={40} fill className="ml-2"/>
         </div>
         <div id="articles" className="flex grow shrink-0 flex-wrap justify-center content-center flex-row gap-[0.65rem] m-16">
           {posts.map(({ node }) => {
@@ -139,8 +171,8 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
             )}
           </PaginationContent>
         </Pagination>
-        <Footer/>
       </main>
+      <Footer/>
     </ThemeProvider>
   )
 }
