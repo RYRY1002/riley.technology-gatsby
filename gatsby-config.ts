@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
+import path from "path";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -68,6 +69,24 @@ const config: GatsbyConfig = {
           placeholder: 'blurred',
           breakpoints: [480, 720, 1080, 1366, 1920, 2560, 3840],
           backgroundColor: 'transparent'
+        }
+      }
+    }, {
+      resolve: 'gatsby-plugin-purgecss',
+      options: {
+        printRejected: false,
+        tailwind: true,
+        //develop: true,
+        purgeCSSOptions: {
+          content: [
+            path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx,md,mdx}'),
+
+            // This will absolutely nuke build performance.
+            //path.join(process.cwd(), 'node_modules/**/!(*.d).{ts,js,jsx,tsx,md,mdx}'),
+          ],
+          safelist: [
+            'material-symbols'
+          ]
         }
       }
     }
