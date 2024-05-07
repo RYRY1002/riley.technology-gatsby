@@ -7,7 +7,6 @@ import { ThemeToggleButton } from '@/components/theme-toggle-button';
 
 import v4loop from "../../static/videos/v4_loop.mp4";
 
-import { StaticImage } from 'gatsby-plugin-image';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import {
@@ -25,6 +24,7 @@ import { remapValue } from '@/lib/utils';
 
 import { Footer } from '@/components/footer';
 import { MaterialSymbol } from 'react-material-symbols';
+import 'react-material-symbols/outlined';
 
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;
@@ -102,7 +102,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      <main className="relative z-[1]">
+      <main className="relative z-[1] bg-background">
         <video id="bg-video" className="fixed bottom-0 left-0 w-full h-full object-cover -z-[1]" autoPlay loop muted>
             <source src={v4loop} type="video/mp4"/>
         </video>
@@ -124,7 +124,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
           </div>
         </div>
         <div id="acticles-header" className="mx-16 -mb-4 flex flex-wrap">
-          <h2 className="text-4xl font-bold">Some of the things I've made</h2>
+          <h2 className="text-4xl font-bold">Things I've made</h2>
           <MaterialSymbol icon="arrow_outward" size={40} fill className="ml-2"/>
         </div>
         <div id="articles" className="flex grow shrink-0 flex-wrap justify-center content-center flex-row gap-[0.65rem] m-16">
@@ -132,7 +132,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
             const title = node.frontmatter.title;
             const image = getImage(node.frontmatter.image?.childImageSharp?.gatsbyImageData);
             return (
-              <article id={node.id} className="transition-transform duration-150 ease-in-out grow shrink-0 bg-cover bg-center h-[35vmin] min-w-min max-w-full rounded-[15px] relative overflow-hidden hover:scale-[1.075]">
+              <article id={node.id} className="transition-transform duration-150 ease-in-out grow shrink-0 bg-cover bg-center h-[35vmin] min-w-min max-w-full rounded-lg relative overflow-hidden hover:scale-[1.075]">
                 <GatsbyImage image={image} alt={title} className="!absolute w-full h-full pointer-events-none object-fill z-[-1]"/>
                 <Link to={"/project" + node.fields.slug} className="p-8 relative w-full h-full inline-block -top-1.5">
                   <h2 className="text-3xl font-bold leading-none">{title}</h2>

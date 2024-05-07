@@ -15,21 +15,27 @@ const config: GatsbyConfig = {
     FAST_DEV: true
   },
   plugins: [
-    "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts", "gatsby-transformer-remark", "gatsby-transformer-sharp",
+    "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts", 
     {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [{
+          resolve: 'gatsby-remark-vscode',
+          options: {
+            theme: {
+              default: 'Light+ (default light)',
+              dark: 'Dark+ (default dark)'
+            }
+          }
+        }]
+      }
+    }, "gatsby-transformer-sharp", {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "media",
         "path": "static"
       },
       __key: "media"
-    }, {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        "name": "images",
-        "path": "static/images/"
-      },
-      __key: "images"
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {

@@ -1,0 +1,132 @@
+---
+slug: "markdown"
+date: "2024-04-26"
+title: "Markdown"
+image: images/v4.jpg
+video: videos/v4.mp4
+videoLooping: videos/v4_loop.mp4
+tags:
+  - "Test"
+  - "Tag"
+---
+
+Text can be **bold**, _italic_, ~~strikethrough~~ or `keyword`
+
+[Link to another page](./another-page.html).
+
+There should be whitespace between paragraphs.
+
+There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+
+#### Image
+
+Images can be clicked to enlarge :)
+
+![Dummy Image 1](https://picsum.photos/1366/768)
+![Dummy Image 2](https://picsum.photos/1200/400)
+
+#### Video
+
+Videos can be embedded using HTML.
+
+<iframe class="ytplayer content" src="https://www.youtube.com/embed/Dfd5xpEHLII?color=white&widget_refferer=https%3A%2F%2Friley.technology%2F" frameborder="0" allowfullscreen></iframe>
+
+# Header 1
+
+This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+
+## Header 2
+
+> This is a blockquote following a header.
+>
+> When something is important enough, you do it even if the odds are not in your favor.
+
+### Header 3
+
+> This is another blockquote following header 3
+
+```js {numberLines}
+// JavaScript with syntax highlighting.
+var fun = function lang(l) {
+  dateformat.i18n = require("./lang/" + l);
+  return true;
+};
+```
+
+```ruby
+# Ruby with syntax highlighting
+GitHubPages::Dependencies.gems.each do |gem, version|
+# highlight-next-line
+  s.add_dependency(gem, "= #{version}")
+end
+```
+
+#### Header 4
+
+- This is an unordered list following a header.
+- This is an unordered list following a header.
+- This is an unordered list following a header.
+
+##### Header 5
+
+1.  This is an ordered list following a header.
+2.  This is an ordered list following a header.
+3.  This is an ordered list following a header.
+
+###### Header 6
+
+| head1        | head two          | three |
+| :----------- | :---------------- | :---- |
+| ok           | good swedish fish | nice  |
+| out of stock | good and plenty   | nice  |
+| ok           | good `oreos`      | hmm   |
+| ok           | good `zoute` drop | yumm  |
+
+### There's a horizontal rule below this.
+
+---
+
+### Here is an unordered list:
+
+- Item foo
+- Item bar
+- Item baz
+- Item zip
+
+### And an ordered list:
+
+1.  Item one
+    1.  Item one
+    1.  Item two
+        1.  Item one
+        1.  Item two
+        1.  Item three
+    1.  Item three
+1.  Item four
+1.  Item two
+1.  Item three
+1.  Item four
+
+### And a nested list:
+
+- level 1 item
+  - level 2 item
+  - level 2 item
+    - level 3 item
+    - level 3 item
+- level 1 item
+  - level 2 item
+  - level 2 item
+  - level 2 item
+- level 1 item
+  - level 2 item
+  - level 2 item
+- level 1 item
+
+```
+Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long.
+```
+
+```
+The final element.
+```
