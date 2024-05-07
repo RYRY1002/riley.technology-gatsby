@@ -3,8 +3,8 @@ slug: "v5-poc"
 date: "2021-10-15"
 title: "Acid Interstate V5 Proof of Concept"
 image: ../static/images/v5-poc.jpg
-video: ../static/videos/v5-poc.mp4
-videoLooping: ../static/videos/v5-poc_loop.mp4
+video: ../static/videos/v4.mp4
+videoLooping: ../static/videos/v4_loop.mp4
 ---
 
 This will be a written blog post at some point. Allegedly.

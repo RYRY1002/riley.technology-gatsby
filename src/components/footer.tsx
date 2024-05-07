@@ -43,7 +43,7 @@ import {
 } from "@/components/ui/tooltip";
 
 import { MaterialSymbol } from 'react-material-symbols';
-import 'react-material-symbols/outlined';
+//import 'react-material-symbols/outlined';
 
 function romanize (num: number) {
   if (isNaN(num))
@@ -78,7 +78,7 @@ export function Footer(this: any) {
   const buildTime = new Intl.DateTimeFormat('en-AU', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Sydney' }).format(new Date(query.site.buildTime)) + " Sydney time";
   return (
     <footer className="bg-background pt-4 pb-0 px-24 w-full bottom-0 sticky z-0 block">
-      <div id="footer-details-recap" className="px-[10vw] mb-5 mt-16 flex items-center space-x-4 h-24">
+      <div id="footer-details-recap" className="px-[10vw] my-4 flex items-center space-x-4 h-24">
         <h2 className="text-4xl font-bold">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h2>
         <Separator orientation="vertical"/>
         <h2 className="text-4xl font-bold">Website built with Gatsby, a really fast React framework.</h2>

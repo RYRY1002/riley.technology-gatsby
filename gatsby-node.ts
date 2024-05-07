@@ -15,48 +15,83 @@ export const onCreateWebpackConfig = ({ actions }) => {
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  return graphql(
-    `
-      query BlogListNodeQuery {
-        allMarkdownRemark(sort: 
-        {frontmatter: {date: DESC}},
-        limit: 1000
-      ) {
-          edges {
-            node {
-              frontmatter {
-                title
+  return graphql(`
+    query nodeQuery {
+      allMarkdownRemark(sort: {frontmatter: {date: DESC}}, limit: 1000) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              video {
+                relativePath
               }
-              fields {
-                slug
+              videoLooping {
+                relativePath
               }
+              tags
+              date(formatString: "DD MMM, YYYY")
+              image {
+                relativePath
+              }
+            }
+            fields {
+              slug
             }
           }
         }
       }
-    `
-  ).then(result => {
+    }
+  `).then(result => {
     if (result.errors) {
       throw result.errors
     }
 
-    // Create blog post list pages
-    const posts = result.data.allMarkdownRemark.edges
-    const postsPerPage = 2;
-    const numPages = Math.ceil(posts.length / postsPerPage);
-
-    Array.from({ length: numPages }).forEach((_, i) => {
-      createPage({
-        path: i === 0 ? `/` : `/${i + 1}`,
-        component: path.resolve('./src/templates/blog-list.tsx'),
-        context: {
-          limit: postsPerPage,
-          skip: i * postsPerPage,
-          numPages,
-          currentPage: i + 1
-        },
+    // Create homepage w/ pagination
+    {
+      const posts = result.data.allMarkdownRemark.edges;
+      const postsPerPage = 2;
+      const numPages = Math.ceil(posts.length / postsPerPage);
+  
+      Array.from({ length: numPages }).forEach((_, i) => {
+        createPage({
+          path: i === 0 ? `/` : `/${i + 1}`,
+          component: path.resolve('./src/templates/blog-list.tsx'),
+          context: {
+            limit: postsPerPage,
+            skip: i * postsPerPage,
+            numPages,
+            currentPage: i + 1
+          },
+        });
       });
-    });
+    }
+
+    // Create post pages
+    {
+      const posts = result.data.allMarkdownRemark.edges;
+      posts.forEach(({ node }, index) => {
+        const previous = index === posts.length - 1 ? null : posts[index + 1].node;
+        const next = index === 0 ? null : posts[index - 1].node;
+
+        createPage({
+          path: "/project" + node.fields.slug,
+          component: path.resolve("./src/templates/post.tsx"),
+          context: {
+            id: node.id,
+            slug: node.fields.slug,
+            title: node.frontmatter.title,
+            tags: node.frontmatter.tags,
+            date: node.frontmatter.date,
+            imageUrl: node.frontmatter.image.relativePath,
+            videoUrl: node.frontmatter.video?.relativePath,
+            videoLoopingUrl: node.frontmatter.videoLooping?.relativePath,
+            previous,
+            next,
+          },
+        });
+      });
+    }
   })
 }
 

@@ -62,20 +62,22 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
       {
         $(window).on('scroll load', function() {
           let viewportHeight = $(window).height();
+          let viewportWidth = $(window).width();
           let currentScroll = $(window).scrollTop();
-          currentScroll = currentScroll + viewportHeight;
+          currentScroll = currentScroll + viewportHeight - (viewportWidth * 0.03);
           let mainHeight = $('main').height();
-          let videoHeight = $('#bg-video').height();
 
           if (currentScroll >= mainHeight) {
             $('#bg-video').addClass('!absolute');
             $('#bg-video').addClass('h-screen');
+            $('#bg-video').addClass('!-bottom-[3vw]');
             $('#bg-video').removeClass('fixed');
             $('#bg-video').removeClass('h-full');
             //$('#bg-video').css('height', '100vh');
           } else {
             $('#bg-video').removeClass('!absolute');
             $('#bg-video').removeClass('h-screen');
+            $('#bg-video').removeClass('!-bottom-[3vw]');
             $('#bg-video').addClass('fixed');
             $('#bg-video').addClass('h-full');
             //$('#bg-video').css('height', '100%');
@@ -103,7 +105,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <main className="relative z-[1] bg-background">
-        <video id="bg-video" className="fixed bottom-0 left-0 w-full h-full object-cover -z-[1]" autoPlay loop muted>
+        <video id="bg-video" className="fixed bottom-0 left-0 w-full h-full object-cover -z-[1]" autoPlay loop muted style={{maskImage: "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)"}}>
             <source src={v4loop} type="video/mp4"/>
         </video>
         <div id="hero" className="px-20 pt-12 h-[89vh] w-full">
@@ -172,6 +174,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
           </PaginationContent>
         </Pagination>
       </main>
+      <div id="footer-gradient-deco" className="relative z-0 h-[2vw] w-full bg-gradient-to-b from-background to-[#ffffff00]" style={{maskImage: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)"}}/>
       <Footer/>
     </ThemeProvider>
   )

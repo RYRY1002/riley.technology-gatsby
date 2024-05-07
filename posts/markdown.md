@@ -2,9 +2,9 @@
 slug: "markdown"
 date: "2024-04-26"
 title: "Markdown"
-image: images/v4.jpg
-video: videos/v4.mp4
-videoLooping: videos/v4_loop.mp4
+image: ../static/images/v4.jpg
+video: ../static/videos/v4.mp4
+videoLooping: ../static/videos/v4_loop.mp4
 tags:
   - "Test"
   - "Tag"
@@ -21,6 +21,7 @@ There should be whitespace between paragraphs. We recommend including a README, 
 #### Image
 
 Images can be clicked to enlarge :)
+*Well, you will be able to at some point.*
 
 ![Dummy Image 1](https://picsum.photos/1366/768)
 ![Dummy Image 2](https://picsum.photos/1200/400)
