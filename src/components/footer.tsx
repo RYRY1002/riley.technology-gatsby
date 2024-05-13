@@ -59,7 +59,7 @@ function romanize (num: number) {
   return Array(+digits.join("") + 1).join("M") + roman;
 }
 
-export function Footer(this: any) {
+export default function Footer(this: any) {
   const query = useStaticQuery(graphql`
     query footerQuery {
       site {
@@ -148,5 +148,3 @@ export function Footer(this: any) {
     </footer>
   )
 }
-
-export default Footer;

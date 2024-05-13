@@ -79,7 +79,7 @@ const ListItem = React.forwardRef<
 })
 ListItem.displayName = "ListItem"
 
-export function NavMenu() {
+export default function NavMenu() {
   return (
     <NavigationMenu>
       <NavigationMenuList>

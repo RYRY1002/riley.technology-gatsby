@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Link, PageProps, graphql } from 'gatsby';
 
 
-import { ThemeProvider } from '@/components/ui/theme-provider';
-import { ThemeToggleButton } from '@/components/theme-toggle-button';
+import ThemeProvider from '@/components/ui/theme-provider';
+import ThemeToggleButton from '@/components/theme-toggle-button';
 
 import v4loop from "../../static/videos/v4_loop.mp4";
 
@@ -22,7 +22,7 @@ import {
 
 import { remapValue } from '@/lib/utils';
 
-import { Footer } from '@/components/footer';
+import Footer from '@/components/footer';
 import { MaterialSymbol } from 'react-material-symbols';
 import 'react-material-symbols/outlined';
 

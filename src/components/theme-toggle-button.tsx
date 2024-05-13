@@ -16,7 +16,7 @@ import 'react-material-symbols/outlined';
 
 import { UseThemeProps } from "next-themes/dist/types";
 
-export function ThemeToggleButton() {
+export default function ThemeToggleButton() {
   const [position, setPosition] = React.useState("system")
   const { theme, setTheme } = useTheme() as UseThemeProps;
  

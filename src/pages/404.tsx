@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link, HeadFC, PageProps, navigate } from "gatsby"
 
 import { ThemeProvider } from "next-themes";
-import { ThemeToggleButton } from "@/components/theme-toggle-button";
+import ThemeToggleButton from "@/components/theme-toggle-button";
 
 const NotFoundPage: React.FC<PageProps> = () => {
   return (
