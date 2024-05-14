@@ -1,7 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-/*@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');*/
-/*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');*/
+@font-face {
+  src: url(fonts/jetbrains-mono-var.woff2) format('woff2-variations');
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  font-feature-settings: 'calt' 0, 'zero', 'ss19', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20';
+}
+@font-face {
+  src: url(fonts//jetbrains-mono-var_italic.woff2) format('woff2-variations');
+  font-family: 'JetBrains Mono';
+  font-style: italic;
+  font-weight: 100 800;
+  font-display: swap;
+  font-feature-settings: 'calt' 0, 'zero', 'ss19', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20';
+}
 
 @font-face {
   src: url(fonts/ibm-plex-sans-var_roman.woff2) format('woff2-variations');
@@ -94,5 +106,14 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  :any-link.link-styling, *.link-styling :any-link {
+    @apply font-mono;
+    @apply hover:font-extrabold;
+    @apply transition-varfonts;
+    @apply duration-100;
   }
 }

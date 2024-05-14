@@ -98,7 +98,7 @@ export default function Footer(this: any) {
               </TooltipProvider>
             ) : (
               <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
+                <Link to="/" className="z-[1]">Home</Link>
               </BreadcrumbLink>
             )}
             </BreadcrumbItem>

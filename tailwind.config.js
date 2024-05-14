@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
@@ -9,9 +11,12 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ["IBM Plex Sans", "sans-serif"],
-      serif: ["Noto Serif", "serif"],
-      mono: ["JetBrains Mono", "monospace"],
-      noto: ["Noto Sans", "sans-serif"],
+      //serif: ["Noto Serif", "serif"],
+      mono: [
+        ["JetBrains Mono", "monospace"],
+        { fontFeatureSettings: "'calt' 0, 'zero', 'ss19', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20'" },
+      ],
+      //noto: ["Noto Sans", "sans-serif"],
     },
     container: {
       center: true,
@@ -19,6 +24,12 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    stretch: {
+      85: '85%',
+      90: '90%',
+      95: '95%',
+      100: '100%',
     },
     extend: {
       colors: {
@@ -75,7 +86,33 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      transitionProperty: {
+        'varfonts': 'font-style, font-optical-sizing, font-weight, font-stretch',
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '85ch',
+            a: {
+              fontWeight: 'inherit',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    plugin(function({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'stretch': (value) => ({
+            'font-stretch': value
+          }),
+        },
+        { values: theme('stretch') }
+      )
+    })
+  ],
 }

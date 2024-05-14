@@ -12,7 +12,8 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   flags: {
     DEV_SSR: false,
-    FAST_DEV: true
+    FAST_DEV: true,
+    DETECT_NODE_MUTATIONS: false
   },
   plugins: [
     "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts", 
