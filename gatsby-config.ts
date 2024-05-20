@@ -13,7 +13,7 @@ const config: GatsbyConfig = {
   flags: {
     DEV_SSR: false,
     FAST_DEV: true,
-    DETECT_NODE_MUTATIONS: false
+    DETECT_NODE_MUTATIONS: false // Do not enable this in production builds, it will cause it to fail!
   },
   plugins: [
     "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts", 
@@ -21,80 +21,87 @@ const config: GatsbyConfig = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [{
-          resolve: 'gatsby-remark-vscode',
+          resolve: "gatsby-remark-vscode",
           options: {
             theme: {
-              default: 'Light+ (default light)',
-              dark: 'Dark+ (default dark)'
+              default: "Light+ (default light)",
+              dark: "Dark+ (default dark)"
             }
           }
         }]
       }
     }, "gatsby-transformer-sharp", {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "media",
         "path": "static"
       },
       __key: "media"
     }, {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "pages",
         "path": "src/pages"
       },
       __key: "pages"
     }, {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "posts",
         "path": "posts"
       },
       __key: "posts"
     }, {
-      resolve: 'gatsby-plugin-nprogress',
+      resolve: "gatsby-plugin-nprogress",
       options: {
-        color: '#ff5e27',
+        color: "#ff5e27",
         showSpinner: false
       }
     }, {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: "gatsby-plugin-manifest",
       options: {
-        name: 'riley.technology',
-        short_name: 'riley.technology',
-        start_url: '/',
-        background_color: '#ffffff',
-        theme_color: '#663399',
-        display: 'standalone',
-        icon: 'static/images/icon.png'
+        name: "riley.technology",
+        short_name: "riley.technology",
+        start_url: "/",
+        background_color: "#ffffff",
+        theme_color: "#663399",
+        display: "standalone",
+        icon: "static/images/icon.png"
       }
     }, {
-      resolve: 'gatsby-plugin-sharp',
+      resolve: "gatsby-plugin-sharp",
       options: {
         defaults: {
-          formats: ['webp'],
-          placeholder: 'blurred',
+          formats: ["webp"],
+          placeholder: "blurred",
           breakpoints: [480, 720, 1080, 1366, 1920, 2560, 3840],
-          backgroundColor: 'transparent'
+          backgroundColor: "transparent"
         }
       }
     }, {
-      resolve: 'gatsby-plugin-purgecss',
+      resolve: "gatsby-plugin-purgecss",
       options: {
         printRejected: false,
         tailwind: true,
         //develop: true,
         purgeCSSOptions: {
           content: [
-            path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx,md,mdx}'),
+            path.join(process.cwd(), "src/**/!(*.d).{ts,js,jsx,tsx,md,mdx}"),
 
             // This will absolutely nuke build performance.
-            //path.join(process.cwd(), 'node_modules/**/!(*.d).{ts,js,jsx,tsx,md,mdx}'),
+            //path.join(process.cwd(), "node_modules/**/!(*.d).{ts,js,jsx,tsx,md,mdx}"),
           ],
           safelist: [
-            'material-symbols'
+            "material-symbols"
           ]
         }
+      }
+    }, {
+      resolve: "gatsby-plugin-posthog",
+      options: {
+        apiKey: "phc_FznuSwNvDr8kZemdu5laB3UmGx9Qx2pglYxsgUDnghR",
+        head: true,
+        isEnabledDevMode: false
       }
     }
   ]
