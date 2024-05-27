@@ -18,17 +18,20 @@ const config: GatsbyConfig = {
   plugins: [
     "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts", 
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        plugins: [{
-          resolve: "gatsby-remark-vscode",
-          options: {
-            theme: {
-              default: "Light+ (default light)",
-              dark: "Dark+ (default dark)"
+        extensions: [".md", ".mdx"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-vscode",
+            options: {
+              theme: {
+                default: "Light+ (default light)",
+                dark: "Dark+ (default dark)"
+              }
             }
-          }
-        }]
+          }, 
+        ]
       }
     }, "gatsby-transformer-sharp", {
       resolve: "gatsby-source-filesystem",
