@@ -1,6 +1,8 @@
 import type { GatsbyConfig } from "gatsby";
 import path from "path";
 
+//import gatsbyRemarkVScode from "gatsby-remark-vscode";
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `riley.technology`,
@@ -20,8 +22,8 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-        extensions: [".md", ".mdx"],
-        gatsbyRemarkPlugins: [
+        //extensions: [".md", ".mdx"],
+        /*gatsbyRemarkPlugins: [
           {
             resolve: "gatsby-remark-vscode",
             options: {
@@ -31,7 +33,17 @@ const config: GatsbyConfig = {
               }
             }
           }, 
-        ]
+        ]*/
+        mdxOptions: {
+          remarkPlugins: [
+            [require("gatsby-remark-vscode").remarkPlugin, {
+              theme: {
+                default: "Light+ (default light)",
+                dark: "Dark+ (default dark)"
+              }
+            }]
+          ]
+        }
       }
     }, "gatsby-transformer-sharp", {
       resolve: "gatsby-source-filesystem",
