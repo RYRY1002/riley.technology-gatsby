@@ -17,7 +17,7 @@ exports.createPages = ({ graphql, actions }) => {
 
   return graphql(`
     query nodeQuery {
-      allMarkdownRemark(sort: {frontmatter: {date: DESC}}, limit: 1000) {
+      allMdx(sort: {frontmatter: {date: DESC}}, limit: 1000) {
         edges {
           node {
             id
@@ -38,6 +38,9 @@ exports.createPages = ({ graphql, actions }) => {
             fields {
               slug
             }
+            internal {
+              contentFilePath
+            }
           }
         }
       }
@@ -49,7 +52,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     // Create homepage w/ pagination
     {
-      const posts = result.data.allMarkdownRemark.edges;
+      const posts = result.data.allMdx.edges;
       const postsPerPage = 2;
       const numPages = Math.ceil(posts.length / postsPerPage);
   
@@ -69,14 +72,15 @@ exports.createPages = ({ graphql, actions }) => {
 
     // Create post pages
     {
-      const posts = result.data.allMarkdownRemark.edges;
+      const posts = result.data.allMdx.edges;
+      const component = path.resolve("./src/templates/post.tsx");
       posts.forEach(({ node }, index) => {
         const previous = index === posts.length - 1 ? null : posts[index + 1].node;
         const next = index === 0 ? null : posts[index - 1].node;
 
         createPage({
           path: "/project" + node.fields.slug,
-          component: path.resolve("./src/templates/post.tsx"),
+          component: `${component}?__contentFilePath=${node.internal.contentFilePath}`,
           context: {
             id: node.id,
             slug: node.fields.slug,
@@ -98,7 +102,7 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const value = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,

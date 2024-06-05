@@ -8,9 +8,8 @@ import 'react-material-symbols/outlined';
 
 import Footer from '@/components/footer';
 
-export default function BlogPost({ data }) {
-  const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter, html } = markdownRemark
+export default function BlogPost({ data: { mdx }, children }) {
+  const { frontmatter } = mdx
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <main className="relative z-[1] bg-background">
@@ -24,9 +23,9 @@ export default function BlogPost({ data }) {
             <h4 className="!m-0">{frontmatter.date}</h4>
           </div>
         </div>
-        <div className="relative pb-1 mx-[12.5%] lg:mx-auto prose-sm prose-zinc lg:prose dark:prose-invert link-styling"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <div className="relative pb-1 mx-[12.5%] lg:mx-auto prose-sm prose-zinc lg:prose dark:prose-invert link-styling">
+          {children}
+        </div>
         <div id="footer-gradient-deco" className="absolute -bottom-[2vw] z-0 h-[2vw] w-full bg-gradient-to-b from-background to-[#ffffff00]"/>
       </main>
       <Footer/>
@@ -36,8 +35,7 @@ export default function BlogPost({ data }) {
 
 export const pageQuery = graphql`
   query($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      html
+    mdx(id: { eq: $id }) {
       frontmatter {
         date(formatString: "DD MMMM, YYYY")
         slug

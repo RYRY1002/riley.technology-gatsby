@@ -27,7 +27,7 @@ import { MaterialSymbol } from 'react-material-symbols';
 import 'react-material-symbols/outlined';
 
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
-  const posts = data.allMarkdownRemark.edges;
+  const posts = data.allMdx.edges;
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
@@ -190,7 +190,7 @@ export default BlogIndex
 
 export const pageQuery = graphql`
   query BlogPageQuery($limit: Int!, $skip: Int!) {
-    allMarkdownRemark(
+    allMdx(
       sort: {frontmatter: {date: DESC}}, 
       limit: $limit, 
       skip: $skip
@@ -217,6 +217,12 @@ export const pageQuery = graphql`
           id
         }
       }
+      group(
+          field: {frontmatter: {tags: SELECT}}
+        ) {
+          fieldValue
+          totalCount
+        }
     }
   }
 `
