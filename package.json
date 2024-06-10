@@ -73,7 +73,7 @@
     "react-hook-form": "^7.51.5",
     "react-material-symbols": "^4.4.0",
     "react-resizable-panels": "^2.0.19",
-    "remark-gfm": "^3.0.1",
+    "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
