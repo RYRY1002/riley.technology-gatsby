@@ -1,7 +1,10 @@
-import type { GatsbyConfig } from "gatsby";
+//import type { GatsbyConfig } from "gatsby";
 import path from "path";
 
-const config: GatsbyConfig = {
+import gatsbyRemarkVSCode from "gatsby-remark-vscode";
+import remarkGfm from "remark-gfm";
+
+const config = {
   siteMetadata: {
     title: `riley.technology`,
     siteUrl: `https://riley.technology`
@@ -22,12 +25,13 @@ const config: GatsbyConfig = {
       options: {
         mdxOptions: {
           remarkPlugins: [
-            [require("gatsby-remark-vscode").remarkPlugin, {
+            [gatsbyRemarkVSCode.remarkPlugin, {
               theme: {
                 default: "Light+ (default light)",
                 dark: "Dark+ (default dark)"
               }
-            }]
+            }],
+            remarkGfm
           ]
         }
       }
