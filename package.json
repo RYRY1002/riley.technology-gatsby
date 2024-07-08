@@ -18,7 +18,7 @@
     "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.6.0",
+    "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -45,7 +45,7 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@splinetool/react-spline": "^3.1.0",
-    "@splinetool/runtime": "^1.8.2",
+    "@splinetool/runtime": "^1.8.9",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -70,11 +70,11 @@
     "postcss": "^8.4.39",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.0",
+    "react-hook-form": "^7.52.1",
     "react-material-symbols": "^4.4.0",
-    "react-resizable-panels": "^2.0.19",
+    "react-resizable-panels": "^2.0.20",
     "remark-gfm": "^3.0.1",
-    "tailwind-merge": "^2.3.0",
+    "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.4",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.1",
@@ -83,10 +83,10 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
     "@types/jquery": "^3.5.30",
-    "@types/node": "^20.14.9",
+    "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "npm-check": "^6.0.1",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   }
 }
