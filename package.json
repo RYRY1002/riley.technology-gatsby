@@ -70,7 +70,6 @@
     "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
     "jquery": "^4.0.0-beta",
-    "katex": "^0.13.24",
     "next-themes": "^0.3.0",
     "patch-package": "^8.0.0",
     "postcss": "^8.4.39",
