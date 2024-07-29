@@ -9,7 +9,13 @@ updates:
       interval: "weekly"
     groups:
       gatsby:
-        applies-to: version-updates
+        applies-to: "version-updates"
         update-types:
         - "minor"
         - "patch"
+      security:
+        applies-to: "security-updates"
+        update-types:
+        - "minor"
+        - "patch"
+        - "major"
