@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { Link, PageProps, graphql } from 'gatsby';
+import * as React from "react";
+import { Link, PageProps, graphql } from "gatsby";
 
 
-import ThemeProvider from '@/components/ui/theme-provider';
-import ThemeToggleButton from '@/components/theme-toggle-button';
+import ThemeProvider from "@/components/ui/theme-provider";
+import ThemeToggleButton from "@/components/theme-toggle-button";
 
 import v4loop from "../../static/videos/v4_loop.mp4";
 
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import {
   Pagination,
@@ -20,82 +20,82 @@ import {
   PaginationLast
 } from "@/components/ui/pagination"
 
-import { remapValue } from '@/lib/utils';
+import { remapValue } from "@/lib/utils";
 
-import Footer from '@/components/footer';
-import { MaterialSymbol } from 'react-material-symbols';
-import 'react-material-symbols/outlined';
+import Footer from "@/components/footer";
+import { MaterialSymbol } from "react-material-symbols";
+import "react-material-symbols/outlined";
 
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   const posts = data.allMdx.edges;
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
-  const prevPage = currentPage - 1 === 1 ? '/' : '/' + (currentPage - 1).toString();
-  const nextPage = '/' + (currentPage + 1).toString();
+  const prevPage = currentPage - 1 === 1 ? "/" : "/" + (currentPage - 1).toString();
+  const nextPage = "/" + (currentPage + 1).toString();
 
   // This is to prevent builds from messing up, nodejs doesn't have access to window as it doesn't load it in a browser
   // It seems a bit out of place for JS, checks like this are usually reserved for well made programs in good languages. This is necessary for it to build though.
   if (typeof window !== "undefined") {
-    import('jquery').then((jQuery) => {
+    import("jquery").then((jQuery) => {
       const $ = jQuery.default;
       {
         // Makes the socials sticky after the hero text is hidden
-        $(window).on('scroll load', function() {
-          var currentScroll = $(window).scrollTop();
-          var socialTop = $('#hero-text').offset().top;
-          var socialBottom = socialTop + $('#hero-text').height();
+        $(window).on("scroll load", function() {
+          let currentScroll = $(window).scrollTop();
+          let socialTop = $("#hero-text").offset().top;
+          let socialBottom = socialTop + $("#hero-text").height();
 
           if ( currentScroll >= socialBottom ) {
-            $('#socials').addClass('sticky');
-            $('#socials').removeClass('relative');
-            $('#socials').addClass('top-5');
-            $('#hero-text').css('margin-bottom', $('#socials').height() + "!important");
+            $("#socials").addClass("sticky");
+            $("#socials").removeClass("relative");
+            $("#socials").addClass("top-5");
+            $("#hero-text").css("margin-bottom", $("#socials").height() + "!important");
           } else {
-            $('#socials').removeClass('sticky');
-            $('#socials').addClass('relative');
-            $('#socials').removeClass('top-5');
-            $('#hero-text').css('margin-bottom', 0 + "!important");
+            $("#socials").removeClass("sticky");
+            $("#socials").addClass("relative");
+            $("#socials").removeClass("top-5");
+            $("#hero-text").css("margin-bottom", 0 + "!important");
           }
         });
       }
       {
-        $(window).on('scroll load', function() {
+        $(window).on("scroll load", function() {
           let viewportHeight = $(window).height();
           let viewportWidth = $(window).width();
           let currentScroll = $(window).scrollTop();
           currentScroll = currentScroll + viewportHeight - (viewportWidth * 0.03);
-          let mainHeight = $('main').height();
+          let mainHeight = $("main").height();
 
           if (currentScroll >= mainHeight) {
-            $('#bg-video').addClass('!absolute');
-            $('#bg-video').addClass('h-screen');
-            $('#bg-video').addClass('!-bottom-[3vw]');
-            $('#bg-video').removeClass('fixed');
-            $('#bg-video').removeClass('h-full');
-            //$('#bg-video').css('height', '100vh');
+            $("#bg-video").addClass("!absolute");
+            $("#bg-video").addClass("h-screen");
+            $("#bg-video").addClass("!-bottom-[3vw]");
+            $("#bg-video").removeClass("fixed");
+            $("#bg-video").removeClass("h-full");
+            $("#bg-video").css("mask-image", "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)");
           } else {
-            $('#bg-video').removeClass('!absolute');
-            $('#bg-video').removeClass('h-screen');
-            $('#bg-video').removeClass('!-bottom-[3vw]');
-            $('#bg-video').addClass('fixed');
-            $('#bg-video').addClass('h-full');
-            //$('#bg-video').css('height', '100%');
+            $("#bg-video").removeClass("!absolute");
+            $("#bg-video").removeClass("h-screen");
+            $("#bg-video").removeClass("!-bottom-[3vw]");
+            $("#bg-video").addClass("fixed");
+            $("#bg-video").addClass("h-full");
+            $("#bg-video").css("mask-image", "");
           }
         });
       }
       {
         // Blurs the background video when scrolling
-        $(window).on('scroll load', function() {
-          var currentScroll = $(window).scrollTop();
-          var heroBottom = $('#hero-text').offset().top + $('#hero-text').height();
+        $(window).on("scroll load", function() {
+          let currentScroll = $(window).scrollTop();
+          let heroBottom = $("#hero-text").offset().top + $("#hero-text").height();
   
           if (currentScroll >= heroBottom) {
-            $('#bg-video').css('filter', 
-            'blur(' + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + 'px) ' + 
-            'brightness(' + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ')');
+            $("#bg-video").css("filter", 
+            "blur(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + "px) " + 
+            "brightness(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ")");
           } else {
-            $('#bg-video').css('filter', '');
+            $("#bg-video").css("filter", "");
           }
         });
       }
@@ -105,7 +105,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <main className="relative z-[1] bg-background">
-        <video id="bg-video" className="fixed bottom-0 left-0 w-full h-full object-cover -z-[1]" autoPlay loop muted style={{maskImage: "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)"}}>
+        <video id="bg-video" className="fixed bottom-0 left-0 w-full h-full object-cover -z-[1]" autoPlay loop muted>
             <source src={v4loop} type="video/mp4"/>
         </video>
         <div id="hero" className="px-20 pt-12 h-[89vh] w-full">

@@ -14,7 +14,7 @@ module.exports = {
       //serif: ["Noto Serif", "serif"],
       mono: [
         ["JetBrains Mono", "monospace"],
-        { fontFeatureSettings: "'calt' 0, 'zero', 'ss19', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20'" },
+        { fontFeatureSettings: "'zero', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20'" }, // TODO: Disable a bunch of code-specific ligatures
       ],
       //noto: ["Noto Sans", "sans-serif"],
     },
@@ -96,6 +96,10 @@ module.exports = {
             a: {
               fontWeight: 'inherit',
             },
+            'blockquote p:first-of-type::before': false,
+            'blockquote p:last-of-type::after': false,
+            'code::before': false,
+            'code::after': false,
           },
         },
       },
@@ -112,6 +116,16 @@ module.exports = {
           }),
         },
         { values: theme('stretch') }
+      )
+    }),
+    plugin(function({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'weight': (value) => ({
+            'font-weight': value
+          }),
+        },
+        { values: theme('weight') }
       )
     })
   ],

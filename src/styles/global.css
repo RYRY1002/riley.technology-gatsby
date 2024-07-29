@@ -1,3 +1,4 @@
+/* Fonts */
 @font-face {
   src: url(fonts/jetbrains-mono-var.woff2) format('woff2-variations');
   font-family: 'JetBrains Mono';
@@ -32,10 +33,12 @@
   font-display: swap;
 }
 
+/* Tailwind setup */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
  
+/* Tailwind theme */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -100,6 +103,8 @@
   }
 }
  
+/* Not sure what this is, but it generated when Tailwind was installed, so it'll stay for now
+   Shouldn't cause any performance issues at build time as PurgeCSS is installed */
 @layer base {
   * {
     @apply border-border;
@@ -109,6 +114,7 @@
   }
 }
 
+/* Link styling */
 @layer base {
   :any-link.link-styling, *.link-styling :any-link {
     @apply font-mono;
@@ -135,6 +141,7 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
 }
 /* purgecss end ignore */
 
+/* Math styling */
 @layer base {
   span.katex {
     @apply p-2;

@@ -1,12 +1,12 @@
 import * as React from "react"
 import { Link, PageProps, graphql } from "gatsby"
 
-import ThemeProvider from '@/components/ui/theme-provider';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { MaterialSymbol } from 'react-material-symbols';
-import 'react-material-symbols/outlined';
+import ThemeProvider from "@/components/ui/theme-provider";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { MaterialSymbol } from "react-material-symbols";
+import "react-material-symbols/outlined";
 
-import Footer from '@/components/footer';
+import Footer from "@/components/footer";
 
 require("katex/dist/katex.min.css")
 
