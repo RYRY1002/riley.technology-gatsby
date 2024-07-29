@@ -135,3 +135,27 @@ All headers automatically have a link button next to them. You can link to a hea
 For example `#header-links` will link to the header above. You can link to it using the regular markdown link syntax and the the header id as the url. So you can link to the above header with [#header-links](#header-links).
 
 You can link to a header on another page too, like the `#second-version-jekyll` header on the `project/website` page. So, you can link to it with [/project/website#second-version-jekyll](/project/website#second-version-jekyll).
+
+### Math with $\LaTeX$
+
+You can write math and have it rendered in-line by surrounding the math with single $ signs.
+
+For example, $x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$ is the quadratic formula.
+
+In-line math is very useful since you can use it anywhere. Headers (yes; like the one above), quotes, tables, lists, etc. 
+
+Note that there are some exceptions.
+1. Code (in-line or blocks), since code styling will override the math styling.
+2. Bold, italic and strikethrough markdown modifiers, since the math will override the styling of these modifiers.
+
+You can also write math in a separate paragraph and have it centered by surrounding the math with two $ signs ($$). For example,
+
+$$
+x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+$$
+
+Note that it's good practice to have each of the two $$ signs on their own line. This will make it easier to read the math when editing the markdown.
+
+Also, having two $$ signs on the same line _will_ cause it to be treated as math, even if it's used in text. I've had to seperate this line and the line above to avoid this.
+
+You should preview your math and make sure it renders correctly before saving. You can use an [online LaTeX editor](https://latexeditor.lagrida.com/) to do so.

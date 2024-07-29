@@ -8,6 +8,8 @@ import 'react-material-symbols/outlined';
 
 import Footer from '@/components/footer';
 
+require("katex/dist/katex.min.css")
+
 export default function BlogPost({ data: { mdx }, children }) {
   const { frontmatter } = mdx
   return (

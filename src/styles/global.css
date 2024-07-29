@@ -134,3 +134,11 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
   @apply visible;
 }
 /* purgecss end ignore */
+
+@layer base {
+  span.katex {
+    @apply p-2;
+    @apply bg-card;
+    @apply rounded-sm;
+  }
+}
