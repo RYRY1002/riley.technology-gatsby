@@ -91,8 +91,8 @@ export default function Footer(this: any) {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger className="cursor-not-allowed z-[1]">Home</TooltipTrigger>
-                  <TooltipContent>
-                    <p>You're already here</p>
+                  <TooltipContent className="z-10">
+                    You're already here
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -116,8 +116,8 @@ export default function Footer(this: any) {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger className="cursor-not-allowed z-[1]">{item}</TooltipTrigger>
-                        <TooltipContent>
-                          <p>You're already here</p>
+                        <TooltipContent className="z-10">
+                          You're already here
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>

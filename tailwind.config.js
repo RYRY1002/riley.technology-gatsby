@@ -4,8 +4,8 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   darkMode: "class",
   content: [
-    //'./src/**/!(*.d).{ts,tsx}',
-    './src/{components,lib,pages,posts,styles,templates}/**/!(*.d).{ts,tsx,js,jsx}'
+    "./src/{components,lib,pages,posts,styles,templates}/**/!(*.d).{ts,tsx,js,jsx}",
+    "./posts/**/*.{md,mdx}"
   ],
   prefix: "",
   theme: {
@@ -66,6 +66,12 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        chart1: "hsl(var(--chart-1))",
+        chart2: "hsl(var(--chart-2))",
+        chart3: "hsl(var(--chart-3))",
+        chart4: "hsl(var(--chart-4))",
+        chart5: "hsl(var(--chart-5))",
+        chart6: "hsl(var(--chart-6))"
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -25,7 +25,7 @@ export default function BlogPost({ data: { mdx }, children }) {
             <h4 className="!m-0">{frontmatter.date}</h4>
           </div>
         </div>
-        <div className="relative pb-1 mx-[12.5%] lg:mx-auto prose-sm prose-zinc lg:prose dark:prose-invert link-styling">
+        <div className="relative pb-8 mx-[12.5%] lg:mx-auto prose-sm prose-zinc lg:prose dark:prose-invert link-styling">
           {children}
         </div>
         <div id="footer-gradient-deco" className="absolute -bottom-[2vw] z-0 h-[2vw] w-full bg-gradient-to-b from-background to-[#ffffff00]"/>
