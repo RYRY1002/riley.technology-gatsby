@@ -138,12 +138,15 @@ export default function Footer(this: any) {
             })}
           </BreadcrumbList>
         </Breadcrumb>
-        <small className="text-muted-foreground text-xs">
+        <small className="text-muted-foreground text-xs z-[1] relative">
           Page last compiled {buildTime}
         </small>
       </div>
       <div id="footer-copyright-deco" className="h-[14vw] relative overflow-hidden -mt-8">
-        <h1 id="footer-massive-copyright" style={{fontSize: "calc((100vw - 12rem) / (1088 / 208))"}} className="select-none absolute bottom-0 left-0 translate-y-[14%] align-text-bottom !leading-[0.78] font-bold text-nowrap bg-gradient-to-b from-[#00000000] to-foreground bg-clip-text text-transparent">{"© " + romanize(new Date().getFullYear())}</h1>
+        <h1 
+          id="footer-massive-copyright" 
+          style={{fontSize: "calc((100vw - 12rem) / (1088 / 208))"}} 
+          className="select-none absolute bottom-0 left-0 translate-y-[14%] align-text-bottom !leading-[0.78] font-bold text-nowrap bg-gradient-to-b from-[#00000000] to-foreground bg-clip-text text-transparent">{"© " + romanize(new Date().getFullYear())}</h1>
       </div>
     </footer>
   )

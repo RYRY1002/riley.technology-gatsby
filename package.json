@@ -2,8 +2,7 @@
   "name": "riley.technology",
   "version": "1.0.0",
   "private": true,
-  "description": "riley.technology",
-  "author": "RYRY1002",
+  "author": "RYRY1002 <riley@riley.technology> (https://links.riley.technology)",
   "keywords": [
     "gatsby"
   ],
@@ -69,7 +68,7 @@
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
-    "jquery": "^4.0.0-beta",
+    "jquery": "^4.0.0-beta.2",
     "lucide-react": "^0.441.0",
     "next-themes": "^0.3.0",
     "patch-package": "^8.0.0",

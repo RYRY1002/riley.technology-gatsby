@@ -129,19 +129,12 @@
 /* Link styling */
 @layer base {
   :any-link.link-styling, *.link-styling :any-link {
-    @apply font-mono;
-    @apply hover:font-extrabold;
-    @apply transition-varfonts;
-    @apply duration-100;
+    @apply font-mono hover:font-extrabold transition-varfonts duration-100;
   }
 }
 
 h1 .anchor.before, h2 .anchor.before, h3 .anchor.before, h4 .anchor.before, h5 .anchor.before, h6 .anchor.before {
-  @apply fill-[var(--tw-prose-headings)];
-  @apply absolute;
-  @apply top-1/2;
-  @apply -translate-x-full -translate-y-1/2;
-  @apply pr-1.5;
+  @apply fill-[var(--tw-prose-headings)] absolute top-1/2 -translate-x-full -translate-y-1/2 pr-1.5;
 }
 h1 .anchor svg, h2 .anchor svg, h3 .anchor svg, h4 .anchor svg, h5 .anchor svg, h6 .anchor svg {
   @apply invisible;
@@ -154,27 +147,13 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
 /* Math styling */
 @layer base {
   span.katex {
-    @apply p-2;
-    @apply bg-card;
-    @apply rounded-sm;
+    @apply p-2 bg-card rounded-sm;
   }
 }
 
 /* Charts */
 @layer base{
   .prose > div.chart-wrapper, .prose-sm > div.chart-wrapper {
-    @apply relative;
-    @apply flex;
-    @apply flex-row;
-    @apply flex-wrap;
-    @apply items-start;
-    @apply justify-center;
-    @apply grow;
-    @apply gap-6;
-    @apply w-[85vw];
-    @apply max-w-[calc(100%+35vw)];
-    @apply left-1/2;
-    @apply -translate-x-1/2;
-    @apply [&>*]:grow;
+    @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 [&>*]:grow;
   }
 }

@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../react-devicons"
 		}
 	],
 	"settings": {
@@ -9,6 +12,43 @@
 		"typescript.tsdk": "node_modules\\typescript\\lib",
 		"github-actions.workflows.pinned.workflows": [
 			".github/workflows/gatsby.yml"
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Gatsby develop",
+				"type": "node",
+				"request": "launch",
+				"program": "${workspaceRoot:gatsby}/node_modules/.bin/gatsby",
+				"windows": {
+					"program": "${workspaceRoot:gatsby}/node_modules/gatsby/dist/bin/gatsby"
+				},
+				"args": ["develop"],
+				"env": {
+					"PARCEL_WORKERS": "0",
+					"GATSBY_CPU_COUNT": "1",
+				},
+				"runtimeArgs": ["--nolazy"],
+				"console": "integratedTerminal"
+			},
+			{
+				"name": "Gatsby build",
+				"type": "node",
+				"request": "launch",
+				"program": "${workspaceRoot:gatsby}/node_modules/.bin/gatsby",
+				"windows": {
+					"program": "${workspaceRoot:gatsby}/node_modules/gatsby/dist/bin/gatsby"
+				},
+				"args": ["build"],
+				"env": {
+					"PARCEL_WORKERS": "0",
+					"GATSBY_CPU_COUNT": "1",
+				},
+				"runtimeArgs": ["--nolazy"],
+				"console": "integratedTerminal"
+			}
 		]
 	}
 }
