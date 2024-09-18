@@ -1,5 +1,10 @@
 import * as React from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis
+} from "recharts";
 import {
   Card,
   CardContent,
@@ -107,7 +112,7 @@ export function InteractiveBarChart() {
     { date: "2024-06-28", desktop: 149, mobile: 200 },
     { date: "2024-06-29", desktop: 103, mobile: 160 },
     { date: "2024-06-30", desktop: 446, mobile: 400 },
-  ]
+  ];
   const chartConfig = {
     views: {
       label: "Page Views",
@@ -120,10 +125,10 @@ export function InteractiveBarChart() {
       label: "Mobile",
       color: "hsl(var(--chart-2))",
     },
-  }
+  } satisfies ChartConfig;
 
   const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>("desktop")
+    React.useState<keyof typeof chartConfig>("desktop");
 
   const total = React.useMemo(
     () => ({
@@ -131,7 +136,7 @@ export function InteractiveBarChart() {
       mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),
     }),
     []
-  )
+  );
 
   return (
     <Card>
@@ -173,7 +178,7 @@ export function InteractiveBarChart() {
             data={chartData}
             margin={{
               left: 12,
-              right: 12,
+              right: 12
             }}
           >
             <CartesianGrid vertical={false} />
@@ -187,13 +192,14 @@ export function InteractiveBarChart() {
                 const date = new Date(value)
                 return date.toLocaleDateString("en-US", {
                   month: "short",
-                  day: "numeric",
+                  day: "numeric"
                 })
               }}
             />
             <ChartTooltip
               content={
                 <ChartTooltipContent
+                  indicator="line"
                   nameKey="views"
                   labelFormatter={(value) => {
                     return new Date(value).toLocaleDateString("en-US", {

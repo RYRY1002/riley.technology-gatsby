@@ -291,10 +291,7 @@ export function StepCounter() {
       <CardHeader className="space-y-0 pb-2">
         <CardDescription>Today</CardDescription>
         <CardTitle className="text-4xl font-mono font-extrabold tabular-nums">
-          12,584{" "}
-          <span className="font-sans text-sm font-normal tracking-normal text-muted-foreground">
-            steps
-          </span>
+          12,584 <span className="font-sans text-sm font-normal tracking-normal text-muted-foreground">steps</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -931,13 +928,19 @@ export function AdvancedTooltipChart() {
 Some charts, usually interactive ones (like the one below), tend to not work when you put all their code in an `mdx` file.
 I think this is because the MDX compiler which turns `mdx` files into `js` files doesn't support some React specific syntax.
 
-One workaround is to put the code for the chart in a separate `tsx` file and import it in the `mdx` file as a componen - as has been done below.
+One workaround is to put the code for the chart in a separate `tsx` file and import it in the `mdx` file as a component - as has been done below.
 Whilst not particularly elegant, it does the job well enough.
 
-import { InteractiveBarChart } from "@/components/charts/InteractiveBarChart";
+{/*import { InteractiveBarChart } from "@/components/charts/InteractiveBarChart-DesktopVsMobile";
 
 <div className="not-prose chart-wrapper">
   <InteractiveBarChart/>
+</div>*/}
+
+import { InteractiveChart } from "@/components/charts/InteractiveChart-DesktopMobilePageviews";
+
+<div className="not-prose chart-wrapper">
+  <InteractiveChart/>
 </div>
 
 Note: The chart `tsx` file from shadcn/ui has been forked from the original, so some of the related documentation might not be accurate.
