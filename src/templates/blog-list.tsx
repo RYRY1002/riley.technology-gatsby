@@ -136,7 +136,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
             return (
               <article id={node.id} className="transition-transform duration-150 ease-in-out grow shrink-0 bg-cover bg-center h-[35vmin] min-w-min max-w-full rounded-lg relative overflow-hidden hover:scale-[1.075]">
                 <GatsbyImage image={image} alt={title} className="!absolute w-full h-full pointer-events-none object-fill z-[-1]"/>
-                <Link to={"/project" + node.fields.slug} className="p-8 relative w-full h-full inline-block -top-1.5">
+                <Link to={"/project/" + node.frontmatter.slug} className="p-8 relative w-full h-full inline-block -top-1.5">
                   <h2 className="text-3xl font-bold leading-none">{title}</h2>
                   <small className="italic text-sm" style={{fontStretch: 85 + "%"}}>{node.frontmatter.date}</small>
                 </Link>
@@ -191,16 +191,24 @@ export default BlogIndex
 export const pageQuery = graphql`
   query BlogPageQuery($limit: Int!, $skip: Int!) {
     allMdx(
-      sort: {frontmatter: {date: DESC}}, 
-      limit: $limit, 
-      skip: $skip
-    ) {
+        sort: {
+          frontmatter: {
+            date: DESC
+          }
+        }
+        limit: $limit
+        skip: $skip
+        filter: {
+          internal: {
+            contentFilePath: {
+              regex: "/posts\\/(?:[^\\/]+\\/)?post\\.mdx$|posts\\/[^\\/]+\\.mdx$/gm"
+            }
+          }
+        }
+      ) {
       edges {
         node {
           excerpt
-          fields {
-            slug
-          }
           frontmatter {
             date(formatString: "DD MMM, YYYY")
             title
@@ -213,6 +221,7 @@ export const pageQuery = graphql`
                   })
               }
             }
+            slug
           }
           id
         }

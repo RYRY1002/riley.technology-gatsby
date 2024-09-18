@@ -17,12 +17,26 @@ exports.createPages = ({ graphql, actions }) => {
 
   return graphql(`
     query nodeQuery {
-      allMdx(sort: {frontmatter: {date: DESC}}, limit: 1000) {
+      allMdx(
+        sort: {frontmatter: {date: DESC}}
+        limit: 1000
+        filter: {frontmatter: {type: {eq: "post"}}}
+      ) {
         edges {
           node {
             id
             frontmatter {
+              slug
+              date(formatString: "DD MMM, YYYY")
               title
+              subtitle
+              links {
+                title
+                url
+              }
+              image {
+                relativePath
+              }
               video {
                 relativePath
               }
@@ -30,17 +44,12 @@ exports.createPages = ({ graphql, actions }) => {
                 relativePath
               }
               tags
-              date(formatString: "DD MMM, YYYY")
-              image {
-                relativePath
-              }
-            }
-            fields {
-              slug
             }
             internal {
               contentFilePath
             }
+            excerpt
+            tableOfContents
           }
         }
       }
@@ -50,9 +59,9 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
+    const posts = result.data.allMdx.edges;
     // Create homepage w/ pagination
     {
-      const posts = result.data.allMdx.edges;
       const postsPerPage = 2;
       const numPages = Math.ceil(posts.length / postsPerPage);
   
@@ -72,24 +81,27 @@ exports.createPages = ({ graphql, actions }) => {
 
     // Create post pages
     {
-      const posts = result.data.allMdx.edges;
       const component = path.resolve("./src/templates/post.tsx");
       posts.forEach(({ node }, index) => {
         const previous = index === posts.length - 1 ? null : posts[index + 1].node;
         const next = index === 0 ? null : posts[index - 1].node;
 
         createPage({
-          path: "/project" + node.fields.slug,
+          path: "/project" + "/" + node.frontmatter.slug,
           component: `${component}?__contentFilePath=${node.internal.contentFilePath}`,
           context: {
             id: node.id,
-            slug: node.fields.slug,
-            title: node.frontmatter.title,
-            tags: node.frontmatter.tags,
+            slug: node.frontmatter.slug,
             date: node.frontmatter.date,
-            imageUrl: node.frontmatter.image.relativePath,
+            title: node.frontmatter.title,
+            subtitle: node.frontmatter.subtitle,
+            links: node.frontmatter.links,
+            imageUrl: node.frontmatter.image?.relativePath,
             videoUrl: node.frontmatter.video?.relativePath,
             videoLoopingUrl: node.frontmatter.videoLooping?.relativePath,
+            tags: node.frontmatter.tags,
+            excerpt: node.excerpt,
+            tableOfContents: node.tableOfContents,
             previous,
             next,
           },
