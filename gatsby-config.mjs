@@ -1,8 +1,18 @@
 //import type { GatsbyConfig } from "gatsby";
 import path from "path";
 
-import gatsbyRemarkVSCode from "gatsby-remark-vscode";
 import remarkGfm from "remark-gfm";
+import rehypeShiki from "@shikijs/rehype";
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationFocus,
+  transformerNotationErrorLevel,
+  transformerRemoveNotationEscape
+} from "@shikijs/transformers";
+import { transformerMetaLineNumbers } from "./src/shiki/transformers/line-numbers.js";
 
 const config = {
   siteMetadata: {
@@ -20,10 +30,10 @@ const config = {
   },
   plugins: [
     "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts",
-    /* We really shouldn't have gatsby-transformer-remark still here as we're using MDX now
-       Unfortunately, gatsby-plugin-mdx doesn't seem to execute gatsby-ssr.js in any of the gatsbyRemarkPlugins you give it
-       though gatsby-transformer-remark does. gatsby-remark-autolink-headers does all of its stuff in the gatsby-ssr.js file
-       and so we need to have this here for the plugin to work. Thanks, I hate it. */
+    /* We really shouldn't have gatsby-transformer-remark still here as we're using MDX now.
+       Unfortunately, gatsby-plugin-mdx doesn't seem to execute gatsby-ssr.js in any of the gatsbyRemarkPlugins you give it while gatsby-transformer-remark does.
+       gatsby-remark-autolink-headers does all of its stuff in the gatsby-ssr.js file and so we need to have this here for the plugin to work.
+       Thanks, I hate it. */
     {
       resolve: "gatsby-transformer-remark",
       options: {
@@ -47,7 +57,8 @@ const config = {
       resolve: "gatsby-plugin-mdx",
       options: {
         gatsbyRemarkPlugins: [
-          /* As explained earlier, this does nothing. It is here for completeness and my gut tells me it will stop working if we remove it here. */
+          /* This needs to be here so that the markdown in mdx files still gets converted into MarkdownAST nodes that gatsby-transformer-remark can use with it's plugins.
+             We might not need to list the plugins here, but my gut tells something will not work if we don't. */
           {
             resolve: "gatsby-remark-autolink-headers",
             options: {
@@ -63,13 +74,26 @@ const config = {
         ],
         mdxOptions: {
           remarkPlugins: [
-            [gatsbyRemarkVSCode.remarkPlugin, {
-              theme: {
-                default: "Light+ (default light)",
-                dark: "Dark+ (default dark)"
-              }
-            }],
             remarkGfm
+          ],
+          rehypePlugins: [
+            [rehypeShiki, {
+              themes: {
+                dark: "dark-plus",
+                light: "light-plus"
+              },
+              inline: "tailing-curly-colon",
+              transformers: [
+                transformerNotationDiff(),
+                transformerNotationHighlight(),
+                transformerMetaHighlight(),
+                transformerMetaWordHighlight(),
+                transformerNotationFocus(),
+                transformerNotationErrorLevel(),
+                transformerRemoveNotationEscape(),
+                transformerMetaLineNumbers()
+              ]
+            }]
           ]
         }
       }

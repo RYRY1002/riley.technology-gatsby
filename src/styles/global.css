@@ -157,3 +157,57 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
     @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 [&>*]:grow;
   }
 }
+
+/* Code blocks */
+@layer base {
+  /*pre.shiki,
+  pre.shiki > code,
+  pre.shiki > code span {
+    @apply !text-[var(--shiki-light)] !bg-[var(--shiki-light-bg)];
+    --shiki-light-highlight-bg: 0, 0, 0, 0.05;
+  }*/
+  
+  .dark pre.shiki, [data-theme="dark"] pre.shiki,
+  .dark pre.shiki > code, [data-theme="dark"] pre.shiki > code,
+  .dark pre.shiki > code > span.line, [data-theme="dark"] pre.shiki > code > span.line,
+  .dark pre.shiki > code > span.line > span, [data-theme="dark"] pre.shiki > code > span.line > span {
+    @apply !text-[var(--shiki-dark)] !bg-[var(--shiki-dark-bg)];
+  }
+  .dark span.shiki, [data-theme="dark"] span.shiki,
+  .dark span.shiki > code, [data-theme="dark"] span.shiki > code,
+  .dark span.shiki > code > span.line, [data-theme="dark"] span.shiki > code > span.line,
+  .dark span.shiki > code > span.line > span, [data-theme="dark"] span.shiki > code > span.line > span {
+    @apply !text-[var(--shiki-dark)] !bg-[var(--shiki-dark-bg)];
+  }
+
+  .dark pre.shiki, [data-theme="dark"] pre.shiki, pre.shiki {
+    @apply overflow-auto relative !py-4 !rounded-lg !leading-[1.4];
+  }
+  .dark span.shiki, [data-theme="dark"] span.shiki, span.shiki {
+    @apply overflow-x-scroll overflow-y-visible relative !py-4 ps-[1em] pe-[1em] !rounded-lg !leading-[1.4];
+  }
+  .dark pre.shiki.line-numbers > code, [data-theme="dark"] pre.shiki.line-numbers > code, pre.shiki.line-numbers > code {
+    @apply table;
+  }
+  pre.shiki.line-numbers > code > span.line {
+    @apply table-row;
+  }
+  pre.shiki.line-numbers > code > span.line::before {
+    @apply content-[counter(line-number)] text-background text-right text-[gray] select-none pr-4 [counter-increment:line-number] table-cell;
+  }
+  /*pre.shiki > code > span.line.highlighted:not(.diff) > :first-child::before {
+    @apply content-['_'] absolute w-[calc(100%-1rem)] overflow-hidden bg-white bg-opacity-10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
+  }*/
+  pre.shiki > code > span.line.highlighted:not(.diff)::after {
+    @apply content-['_'] absolute w-[calc(100%-4px)] left-1 overflow-hidden bg-white bg-opacity-10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
+  }
+  pre.shiki > code > span.line.diff:not(.highlighted)::after {
+    @apply content-['_'] absolute w-[calc(100%-4px)] left-1 overflow-hidden select-none;
+  }
+  pre.shiki > code > span.line.diff.add:not(.highlighted)::after {
+    @apply bg-[rgb(0,255,60)] bg-opacity-20 shadow-[-4px_0_rgba(0,255,60,0.5)];
+  }
+  pre.shiki > code > span.line.diff.remove:not(.highlighted)::after {
+    @apply bg-[rgb(255,0,20)] bg-opacity-20 shadow-[-4px_0_rgba(255,0,20,0.5)];
+  }
+}

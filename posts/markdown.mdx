@@ -79,21 +79,47 @@ import { AAPtest } from "@/components/drawer-sheet";
 
 > This is another blockquote following header 3
 
-```js {numberLines}
-// JavaScript with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require("./lang/" + l);
-  return true;
-};
+```ts title="example-file.js" showLineNumbers=4
+import { createHighlighterCore } from 'shiki/core'
+
+const highlighter = await createHighlighterCore({})
+const a = 1
+const b = 1 // [!code warning]
+const c = 1 // [!code error]
+}
 ```
 
-```ruby
+```ruby showLineNumbers title="example-file.rb" {3}
 # Ruby with syntax highlighting
 GitHubPages::Dependencies.gems.each do |gem, version|
-# highlight-next-line
-  s.add_dependency(gem, "= #{version}")
+  s.add_dependency(gem, "= #{version}") # This line is highlighted
 end
 ```
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+
+   int num_int;
+   double num_double = 9.99;
+
+   // implicit conversion // [!code ++]
+   // assigning a double value to an int variable // [!code --]
+   num_int = num_double;
+
+   cout << "num_int = " << num_int << endl;
+   cout << "num_double = " << num_double << endl;
+
+   return 0;
+}
+```
+
+You can also highlight inline code
+
+`var fun = "bruh"{:js}`
+`console.log("Test"){:js}`
 
 #### Header 4
 
