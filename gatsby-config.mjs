@@ -26,7 +26,8 @@ const config = {
   flags: {
     DEV_SSR: false,
     FAST_DEV: true,
-    DETECT_NODE_MUTATIONS: false // Do not enable this in production builds, it will cause it to fail!
+    DETECT_NODE_MUTATIONS: false, // Do not enable this in production builds, it will cause it to fail!
+    PARTIAL_HYDRATION: false
   },
   plugins: [
     "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts",
@@ -139,28 +140,14 @@ const config = {
       resolve: "gatsby-plugin-sharp",
       options: {
         defaults: {
-          formats: ["webp"],
+          formats: ["avif", "webp"],
           placeholder: "blurred",
           breakpoints: [480, 720, 1080, 1366, 1920, 2560, 3840],
-          backgroundColor: "transparent"
-        }
-      }
-    }, {
-      resolve: "gatsby-plugin-purgecss",
-      options: {
-        printRejected: false,
-        tailwind: true,
-        //develop: true,
-        purgeCSSOptions: {
-          content: [
-            path.join(process.cwd(), "src/**/!(*.d).{ts,js,jsx,tsx,md,mdx}"),
-
-            // This will absolutely nuke build performance.
-            //path.join(process.cwd(), "node_modules/**/!(*.d).{ts,js,jsx,tsx,md,mdx}"),
-          ],
-          safelist: [
-            "material-symbols"
-          ]
+          backgroundColor: "transparent",
+          blurredOptions: {
+            toFormat: "webp",
+            width: 48
+          }
         }
       }
     }, {

@@ -40,6 +40,19 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
     import("jquery").then((jQuery) => {
       const $ = jQuery.default;
       {
+        // Pauses videos not currently in viewport for performance
+        require("is-in-viewport");
+        $(window).on("scroll", function() {
+          $("video").each(function() {
+            if ($(this).is(":in-viewport")) {
+              $(this).get(0).play();
+            } else {
+              $(this).get(0).pause();
+            }
+          })
+        })
+      }
+      {
         // Makes the socials sticky after the hero text is hidden
         $(window).on("scroll load", function() {
           let currentScroll = $(window).scrollTop();
@@ -131,13 +144,11 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
         </div>
         <div id="articles" className="flex grow shrink-0 flex-wrap justify-center content-center flex-row gap-[0.65rem] m-16">
           {posts.map(({ node }) => {
-            const title = node.frontmatter.title;
-            const image = getImage(node.frontmatter.image?.childImageSharp?.gatsbyImageData);
             return (
               <article id={node.id} className="transition-transform duration-150 ease-in-out grow shrink-0 bg-cover bg-center h-[35vmin] min-w-min max-w-full rounded-lg relative overflow-hidden hover:scale-[1.075]">
-                <GatsbyImage image={image} alt={title} className="!absolute w-full h-full pointer-events-none object-fill z-[-1]"/>
+                <GatsbyImage image={getImage(node.frontmatter.image)} alt={node.frontmatter.title} className="!absolute w-full h-full pointer-events-none object-fill z-[-1]"/>
                 <Link to={"/project/" + node.frontmatter.slug} className="p-8 relative w-full h-full inline-block -top-1.5">
-                  <h2 className="text-3xl font-bold leading-none">{title}</h2>
+                  <h2 className="text-3xl font-bold leading-none">{node.frontmatter.title}</h2>
                   <small className="italic text-sm" style={{fontStretch: 85 + "%"}}>{node.frontmatter.date}</small>
                 </Link>
               </article>
@@ -215,10 +226,8 @@ export const pageQuery = graphql`
             image {
               childImageSharp {
                 gatsbyImageData(
-                  layout: FULL_WIDTH, 
-                  blurredOptions: {
-                    width: 48
-                  })
+                  layout: FULL_WIDTH
+                )
               }
             }
             slug

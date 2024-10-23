@@ -67,6 +67,7 @@
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
+    "is-in-viewport": "^3.0.4",
     "jquery": "^4.0.0-beta.2",
     "lucide-react": "^0.441.0",
     "next-themes": "^0.3.0",
