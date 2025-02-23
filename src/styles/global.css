@@ -171,13 +171,13 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
   .dark pre.shiki > code, [data-theme="dark"] pre.shiki > code,
   .dark pre.shiki > code > span.line, [data-theme="dark"] pre.shiki > code > span.line,
   .dark pre.shiki > code > span.line > span, [data-theme="dark"] pre.shiki > code > span.line > span {
-    @apply !text-[var(--shiki-dark)] !bg-[var(--shiki-dark-bg)];
+    @apply !text-[var(--shiki-dark)] !bg-[var(--tw-prose-pre-bg)];
   }
   .dark span.shiki, [data-theme="dark"] span.shiki,
   .dark span.shiki > code, [data-theme="dark"] span.shiki > code,
   .dark span.shiki > code > span.line, [data-theme="dark"] span.shiki > code > span.line,
   .dark span.shiki > code > span.line > span, [data-theme="dark"] span.shiki > code > span.line > span {
-    @apply !text-[var(--shiki-dark)] !bg-[var(--shiki-dark-bg)];
+    @apply !text-[var(--shiki-dark)] !bg-[var(--tw-prose-pre-bg)];
   }
 
   .dark pre.shiki, [data-theme="dark"] pre.shiki, pre.shiki {

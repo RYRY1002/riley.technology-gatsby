@@ -1,4 +1,6 @@
 const plugin = require('tailwindcss/plugin')
+const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -95,7 +97,7 @@ module.exports = {
       transitionProperty: {
         'varfonts': 'font-style, font-optical-sizing, font-weight, font-stretch',
       },
-      typography: {
+      typography: ({theme}) => ({
         DEFAULT: {
           css: {
             maxWidth: '85ch',
@@ -106,9 +108,26 @@ module.exports = {
             'blockquote p:last-of-type::after': false,
             'code::before': false,
             'code::after': false,
+            code: {
+              borderRadius: defaultTheme.borderRadius.lg,
+              fontWeight: false,
+              backgroundColor: 'var(--tw-prose-pre-bg)',
+              padding: '.2em .4em'
+            },
+            '--tw-prose-code': 'var(--tw-prose-invert-code)'
           },
         },
-      },
+        invert: {
+          css: {
+            '--tw-prose-pre-bg': false
+          }
+        },
+        neutral: {
+          css: {
+            '--tw-prose-pre-bg': colors.neutral[900],
+          }
+        }
+      }),
     },
   },
   plugins: [
@@ -133,6 +152,26 @@ module.exports = {
         },
         { values: theme('weight') }
       )
+    }),
+    plugin(function({ matchVariant }) {
+      matchVariant(
+        'childnum',
+        (value) => {
+          return [
+            `&:first-child:nth-last-child(${value})`,
+            `&:first-child:nth-last-child(${value}) ~ *`
+          ]
+        },
+        {
+          values: {
+            2: '2',
+            3: '3',
+            4: '4',
+            5: '5',
+            6: '6'
+          }
+        }, 
+      );
     })
   ],
 }

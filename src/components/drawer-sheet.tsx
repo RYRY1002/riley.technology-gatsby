@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
@@ -27,7 +29,10 @@ import { Button, buttonVariants } from "@/components/ui/button";
 
 export function AAPtest({ title, subtitle, image, children }: { title?: string, subtitle?: string, image?: File, children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
-  const isDesktop = window.innerWidth > 768;
+  let isDesktop = false;
+  if (typeof window != "undefined") {
+    isDesktop = window.innerWidth > 768;
+  }
 
   let gatsbyImageData;
   {
@@ -76,7 +81,7 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
               </DialogHeader>
             }
             {children && 
-              <div className="relative mx-[12.5%] lg:mx-auto prose-sm prose-zinc lg:prose dark:prose-invert link-styling">
+              <div className="relative mx-[12.5%] lg:mx-auto prose-sm !prose-neutral lg:prose dark:!prose-invert link-styling">
                 {children}
               </div>
             }
@@ -108,7 +113,7 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
           </DrawerHeader>
         }
         {children && 
-          <div className="relative mx-[12.5%] lg:mx-auto prose-sm prose-zinc lg:prose dark:prose-invert link-styling">
+          <div className="relative mx-[12.5%] lg:mx-auto prose-sm !prose-neutral lg:prose dark:!prose-invert link-styling">
             {children}
           </div>
         }
