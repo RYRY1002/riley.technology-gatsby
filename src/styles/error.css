@@ -1,0 +1,41 @@
+error.ERROR-FIX-ME, error#ERROR-FIX-ME {
+  /* The color of the tiles.*/
+  --color-1: #ff00ff;
+  --color-2: black;
+  /* Width and height of every tile */
+  --width:  15px;
+  --height: 15px;
+
+  /* The gradient for the checkerboard */
+  /* We use 24.9% and 75.1% to avoid rendering precision issues */
+  --gradient: linear-gradient(to top left, var(--color-1) 25.1%, transparent 0, transparent 74.9%, var(--color-1) 0);
+
+  display: inline-block;
+  font-size: inherit;
+  font-family: sans-serif;
+  outline: none;
+  border: none;
+}
+
+error.ERROR-FIX-ME:not(.centered), error#ERROR-FIX-ME:not(.centered) {
+  background:
+    var(--gradient) 0 0 / var(--width) var(--height),
+    var(--gradient) calc(var(--width) / 2) calc(var(--height) / 2) / var(--width) var(--height),
+    var(--color-2);
+}
+
+error.ERROR-FIX-ME.centered, error#ERROR-FIX-ME.centered {
+  background:
+    var(--gradient) 50% 50% / var(--width) var(--height),
+    var(--gradient) calc(var(--width) / 2 + 50%) calc(var(--height) / 2 + 50%) / var(--width) var(--height),
+    var(--color-2);
+}
+
+error.ERROR-FIX-ME p, error#ERROR-FIX-ME p {
+  /* You can override the color of any text inside the element here */
+  margin: 2px 4px;
+  font-weight: 900;
+  color: blue;
+  filter: invert(1);
+  mix-blend-mode: difference;
+}

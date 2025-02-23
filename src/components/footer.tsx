@@ -83,14 +83,14 @@ export default function Footer(this: any) {
         <Separator orientation="vertical"/>
         <h2 className="text-4xl font-bold">Website built with Gatsby, a really fast React framework.</h2>
       </div>
-      <div id="footer-pageinfo" className="z-[1] px-[10vw]">
+      <div id="footer-pageinfo" className="z-1 px-[10vw]">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
             {currentPath === "/" ? (
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger className="cursor-not-allowed z-[1]">Home</TooltipTrigger>
+                  <TooltipTrigger className="cursor-not-allowed z-1">Home</TooltipTrigger>
                   <TooltipContent className="z-10">
                     You're already here
                   </TooltipContent>
@@ -98,13 +98,13 @@ export default function Footer(this: any) {
               </TooltipProvider>
             ) : (
               <BreadcrumbLink asChild>
-                <Link to="/" className="z-[1]">Home</Link>
+                <Link to="/" className="z-1">Home</Link>
               </BreadcrumbLink>
             )}
             </BreadcrumbItem>
             <BreadcrumbSeparator className="h-[15px] w-[13px] relative">
               {/*<MaterialSymbol icon="filter_alt" size={20} fill className="-rotate-90"/>*/}
-              <svg width="15" height="13" viewBox="0 0 15 15" fill="none" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+              <svg width="15" height="13" viewBox="0 0 15 15" fill="none" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
             </BreadcrumbSeparator>
             {urlArray.map((item, index) => {
               breadcrumbUrl = breadcrumbUrl + "/" + item;
@@ -115,7 +115,7 @@ export default function Footer(this: any) {
                   {breadcrumbUrl + "/" === currentPath ? (
                     <TooltipProvider>
                       <Tooltip>
-                        <TooltipTrigger className="cursor-not-allowed z-[1]">{item}</TooltipTrigger>
+                        <TooltipTrigger className="cursor-not-allowed z-1">{item}</TooltipTrigger>
                         <TooltipContent className="z-10">
                           You're already here
                         </TooltipContent>
@@ -123,14 +123,14 @@ export default function Footer(this: any) {
                     </TooltipProvider>
                   ) : (
                     <BreadcrumbLink asChild>
-                      <Link to={breadcrumbUrl} className="z-[1]">{item}</Link>
+                      <Link to={breadcrumbUrl} className="z-1">{item}</Link>
                     </BreadcrumbLink>
                   )}
                   </BreadcrumbItem>
                   {index !== urlArray.length - 1 && (
                     <BreadcrumbSeparator className="h-[15px] w-[13px] relative">
                       {/*<MaterialSymbol icon="filter_alt" size={20} fill className="-rotate-90"/>*/}
-                      <svg width="15" height="13" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                      <svg width="15" height="13" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
                     </BreadcrumbSeparator>
                   )}
                 </>
@@ -138,14 +138,14 @@ export default function Footer(this: any) {
             })}
           </BreadcrumbList>
         </Breadcrumb>
-        <small className="text-muted-foreground text-xs z-[1] relative">
+        <small className="text-muted-foreground text-xs z-1 relative">
           Page last compiled {buildTime}
         </small>
       </div>
       <div id="footer-copyright-deco" className="h-[14vw] relative overflow-hidden -mt-8 w-[99vw] left-1/2 -translate-x-1/2">
         <h1 
           id="footer-massive-copyright" 
-          className="select-none absolute bottom-0 translate-y-[14%] align-text-bottom !leading-[0.78] font-bold text-nowrap bg-gradient-to-b from-[#00000000] to-foreground bg-clip-text text-transparent text-[calc((100vw-12rem)/(1088/208))] w-full text-center"
+          className="select-none absolute bottom-0 translate-y-[14%] align-text-bottom leading-[0.78]! font-bold text-nowrap bg-linear-to-b from-[#00000000] to-foreground bg-clip-text text-transparent text-[calc((100vw-12rem)/(1088/208))] w-full text-center"
         >
           {"© " + romanize(new Date().getFullYear())}
         </h1>

@@ -27,7 +27,7 @@ const NotFoundPage: React.FC<PageProps> = () => {
               </div>
             </div>
             <section id="cta" className="m-auto">
-              <a className="cursor-pointer text-3xl text-[#ff5e27] dark:text-[#27c8ff] font-medium text-center !font-sans hover:font-extrabold transition-varfonts duration-100" onClick={() => navigate(-1)}>
+              <a className="cursor-pointer text-3xl text-[#ff5e27] dark:text-[#27c8ff] font-medium text-center font-sans! hover:font-extrabold transition-varfonts duration-100" onClick={() => navigate(-1)}>
                 Let's head back
               </a>
             </section>

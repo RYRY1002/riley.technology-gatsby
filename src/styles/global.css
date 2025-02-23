@@ -1,122 +1,169 @@
 /* Fonts */
-@font-face {
-  src: url(fonts/jetbrains-mono-var.woff2) format('woff2-variations');
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 100 800;
-  font-display: swap;
-  font-feature-settings: 'calt' 0, 'zero', 'ss19', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20';
-}
-@font-face {
-  src: url(fonts//jetbrains-mono-var_italic.woff2) format('woff2-variations');
-  font-family: 'JetBrains Mono';
-  font-style: italic;
-  font-weight: 100 800;
-  font-display: swap;
-  font-feature-settings: 'calt' 0, 'zero', 'ss19', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20';
+@import 'tailwindcss' source(none);
+@config "../../tailwind.config.js";
+
+@source "../../src/components/";
+@source "../../src/lib/";
+@source "../../src/pages/";
+@source "../../src/posts/";
+@source "../../src/styles/";
+@source "../../src/templates/";
+
+@source "../../posts/"
+
+@plugin 'tailwindcss-animate';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-*: initial;
+  --font-sans: IBM Plex Sans, sans-serif;
+
+  --font-mono: JetBrains Mono, monospace;
+
+  --font-mono--font-feature-settings:
+    'zero', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20';
+
+  --font-mono-length: 2;
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-chart1: var(--chart-1);
+  --color-chart2: var(--chart-2);
+  --color-chart3: var(--chart-3);
+  --color-chart4: var(--chart-4);
+  --color-chart5: var(--chart-5);
+  --color-chart6: var(--chart-6);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  --transition-property-varfonts:
+    font-style, font-optical-sizing, font-weight, font-stretch;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
 }
 
-@font-face {
-  src: url(fonts/ibm-plex-sans-var_roman.woff2) format('woff2-variations');
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: 100 700;
-  font-stretch: 85% 100%;
-  font-display: swap;
-}
-@font-face {
-  src: url(fonts/ibm-plex-sans-var_italic.woff2) format('woff2-variations');
-  font-family: 'IBM Plex Sans';
-  font-style: italic;
-  font-weight: 100 700;
-  font-stretch: 85% 100%;
-  font-display: swap;
-}
-
-/* Tailwind setup */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
- 
-/* Tailwind theme */
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so these compatibility styles have been added to make sure everything
+  still looks the same as it did with Tailwind CSS v3.
+*/
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
- 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
- 
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
- 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
- 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
- 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
- 
-    --radius: 0.5rem;
-
-    --chart-1: 173 58% 39%;
-    --chart-2: 12 76% 61%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
- 
-  .dark, [data-theme="dark"] {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
- 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
- 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
- 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
- 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
- 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
- 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
- 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-
-    --chart-1: 220 70% 50%;
-    --chart-2: 340 75% 55%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 160 60% 45%;
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
   }
 }
- 
+
+@layer base {
+  @font-face {
+    src: url(fonts/jetbrains-mono-var.woff2) format('woff2-variations');
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 100 800;
+    font-display: swap;
+    font-feature-settings:
+      'calt' 0,
+      'zero',
+      'ss19',
+      'cv07',
+      'cv11',
+      'cv14',
+      'cv16',
+      'cv18',
+      'cv19',
+      'cv20';
+  }
+  @font-face {
+    src: url(fonts//jetbrains-mono-var_italic.woff2) format('woff2-variations');
+    font-family: 'JetBrains Mono';
+    font-style: italic;
+    font-weight: 100 800;
+    font-display: swap;
+    font-feature-settings:
+      'calt' 0,
+      'zero',
+      'ss19',
+      'cv07',
+      'cv11',
+      'cv14',
+      'cv16',
+      'cv18',
+      'cv19',
+      'cv20';
+  }
+
+  @font-face {
+    src: url(fonts/ibm-plex-sans-var_roman.woff2) format('woff2-variations');
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 100 700;
+    font-stretch: 85% 100%;
+    font-display: swap;
+  }
+  @font-face {
+    src: url(fonts/ibm-plex-sans-var_italic.woff2) format('woff2-variations');
+    font-family: 'IBM Plex Sans';
+    font-style: italic;
+    font-weight: 100 700;
+    font-stretch: 85% 100%;
+    font-display: swap;
+  }
+
+
+}
+
 /* Not sure what this is, but it generated when Tailwind was installed, so it'll stay for now
-   Shouldn't cause any performance issues at build time as PurgeCSS is installed */
+Shouldn't cause any performance issues at build time as PurgeCSS is installed */
 @layer base {
   * {
     @apply border-border;
@@ -126,22 +173,120 @@
   }
 }
 
+ 
+/* Tailwind theme */
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(240 10% 3.9%);
+
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 10% 3.9%);
+
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 10% 3.9%);
+
+  --primary: hsl(240 5.9% 10%);
+  --primary-foreground: hsl(0 0% 98%);
+
+  --secondary: hsl(240 4.8% 95.9%);
+  --secondary-foreground: hsl(240 5.9% 10%);
+
+  --muted: hsl(240 4.8% 95.9%);
+  --muted-foreground: hsl(240 3.8% 46.1%);
+
+  --accent: hsl(240 4.8% 95.9%);
+  --accent-foreground: hsl(240 5.9% 10%);
+
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 98%);
+
+  --border: hsl(240 5.9% 90%);
+  --input: hsl(240 5.9% 90%);
+  --ring: hsl(240 10% 3.9%);
+
+  --radius: 0.5rem;
+
+  --chart-1: hsl(173 58% 39%);
+  --chart-2: hsl(12 76% 61%);
+  --chart-3: hsl(197 37% 24%);
+  --chart-4: hsl(43 74% 66%);
+  --chart-5: hsl(27 87% 67%);
+}
+
+.dark, [data-theme="dark"] {
+  --background: hsl(240 10% 3.9%);
+  --foreground: hsl(0 0% 98%);
+
+  --card: hsl(240 10% 3.9%);
+  --card-foreground: hsl(0 0% 98%);
+
+  --popover: hsl(240 10% 3.9%);
+  --popover-foreground: hsl(0 0% 98%);
+
+  --primary: hsl(0 0% 98%);
+  --primary-foreground: hsl(240 5.9% 10%);
+
+  --secondary: hsl(240 3.7% 15.9%);
+  --secondary-foreground: hsl(0 0% 98%);
+
+  --muted: hsl(240 3.7% 15.9%);
+  --muted-foreground: hsl(240 5% 64.9%);
+
+  --accent: hsl(240 3.7% 15.9%);
+  --accent-foreground: hsl(0 0% 98%);
+
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(0 0% 98%);
+
+  --border: hsl(240 3.7% 15.9%);
+  --input: hsl(240 3.7% 15.9%);
+  --ring: hsl(240 4.9% 83.9%);
+
+  --chart-1: hsl(220 70% 50%);
+  --chart-2: hsl(340 75% 55%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(160 60% 45%);
+}
+
 /* Link styling */
 @layer base {
   :any-link.link-styling, *.link-styling :any-link {
-    @apply font-mono hover:font-extrabold transition-varfonts duration-100;
+    @apply font-mono hover:font-extrabold! transition-varfonts duration-100;
   }
 }
 
-h1 .anchor.before, h2 .anchor.before, h3 .anchor.before, h4 .anchor.before, h5 .anchor.before, h6 .anchor.before {
-  @apply fill-[var(--tw-prose-headings)] absolute top-1/2 -translate-x-full -translate-y-1/2 pr-1.5;
-}
-h1 .anchor svg, h2 .anchor svg, h3 .anchor svg, h4 .anchor svg, h5 .anchor svg, h6 .anchor svg {
-  @apply invisible;
-}
-h1:hover .anchor svg, h2:hover .anchor svg, h3:hover .anchor svg, h4:hover .anchor svg, h5:hover .anchor svg, h6:hover .anchor svg,
-h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:focus svg, h5 .anchor:focus svg, h6 .anchor:focus svg {
-  @apply visible;
+@layer utilities {
+  h1 .anchor.before,
+  h2 .anchor.before,
+  h3 .anchor.before,
+  h4 .anchor.before,
+  h5 .anchor.before,
+  h6 .anchor.before {
+    @apply fill-[var(--tw-prose-headings)] absolute top-1/2 -translate-x-full -translate-y-1/2 pr-1.5;
+  }
+  h1 .anchor svg,
+  h2 .anchor svg,
+  h3 .anchor svg,
+  h4 .anchor svg,
+  h5 .anchor svg,
+  h6 .anchor svg {
+    @apply invisible;
+  }
+  h1:hover .anchor svg,
+  h2:hover .anchor svg,
+  h3:hover .anchor svg,
+  h4:hover .anchor svg,
+  h5:hover .anchor svg,
+  h6:hover .anchor svg,
+  h1 .anchor:focus svg,
+  h2 .anchor:focus svg,
+  h3 .anchor:focus svg,
+  h4 .anchor:focus svg,
+  h5 .anchor:focus svg,
+  h6 .anchor:focus svg {
+    @apply visible;
+  }
 }
 
 /* Math styling */
@@ -154,7 +299,7 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
 /* Charts */
 @layer base{
   .prose > div.chart-wrapper, .prose-sm > div.chart-wrapper {
-    @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 [&>*]:grow;
+    @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 *:grow;
   }
 }
 
@@ -171,20 +316,20 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
   .dark pre.shiki > code, [data-theme="dark"] pre.shiki > code,
   .dark pre.shiki > code > span.line, [data-theme="dark"] pre.shiki > code > span.line,
   .dark pre.shiki > code > span.line > span, [data-theme="dark"] pre.shiki > code > span.line > span {
-    @apply !text-[var(--shiki-dark)] !bg-[var(--tw-prose-pre-bg)];
+    @apply text-(--shiki-dark)! bg-(--tw-prose-pre-bg)!;
   }
   .dark span.shiki, [data-theme="dark"] span.shiki,
   .dark span.shiki > code, [data-theme="dark"] span.shiki > code,
   .dark span.shiki > code > span.line, [data-theme="dark"] span.shiki > code > span.line,
   .dark span.shiki > code > span.line > span, [data-theme="dark"] span.shiki > code > span.line > span {
-    @apply !text-[var(--shiki-dark)] !bg-[var(--tw-prose-pre-bg)];
+    @apply text-(--shiki-dark)! bg-(--tw-prose-pre-bg)!;
   }
 
   .dark pre.shiki, [data-theme="dark"] pre.shiki, pre.shiki {
-    @apply overflow-auto relative !py-4 !rounded-lg !leading-[1.4];
+    @apply overflow-auto relative py-4! rounded-lg! leading-[1.4]!;
   }
   .dark span.shiki, [data-theme="dark"] span.shiki, span.shiki {
-    @apply overflow-x-scroll overflow-y-visible relative !py-4 ps-[1em] pe-[1em] !rounded-lg !leading-[1.4];
+    @apply overflow-x-scroll overflow-y-visible relative py-4! ps-[1em] pe-[1em] rounded-lg! leading-[1.4]!;
   }
   .dark pre.shiki.line-numbers > code, [data-theme="dark"] pre.shiki.line-numbers > code, pre.shiki.line-numbers > code {
     @apply table;
@@ -193,21 +338,21 @@ h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:foc
     @apply table-row;
   }
   pre.shiki.line-numbers > code > span.line::before {
-    @apply content-[counter(line-number)] text-background text-right text-[gray] select-none pr-4 [counter-increment:line-number] table-cell;
+    @apply content-[counter(line-number)] text-right text-[gray] select-none pr-4 [counter-increment:line-number] table-cell;
   }
   /*pre.shiki > code > span.line.highlighted:not(.diff) > :first-child::before {
-    @apply content-['_'] absolute w-[calc(100%-1rem)] overflow-hidden bg-white bg-opacity-10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
+    @apply content-['_'] absolute w-[calc(100%-1rem)] overflow-hidden bg-white/10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
   }*/
   pre.shiki > code > span.line.highlighted:not(.diff)::after {
-    @apply content-['_'] absolute w-[calc(100%-4px)] left-1 overflow-hidden bg-white bg-opacity-10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
+    @apply content-['_'] absolute w-[calc(100%-4px)] left-1 overflow-hidden bg-white/10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
   }
   pre.shiki > code > span.line.diff:not(.highlighted)::after {
     @apply content-['_'] absolute w-[calc(100%-4px)] left-1 overflow-hidden select-none;
   }
   pre.shiki > code > span.line.diff.add:not(.highlighted)::after {
-    @apply bg-[rgb(0,255,60)] bg-opacity-20 shadow-[-4px_0_rgba(0,255,60,0.5)];
+    @apply bg-[rgb(0,255,60)]/20 shadow-[-4px_0_rgba(0,255,60,0.5)];
   }
   pre.shiki > code > span.line.diff.remove:not(.highlighted)::after {
-    @apply bg-[rgb(255,0,20)] bg-opacity-20 shadow-[-4px_0_rgba(255,0,20,0.5)];
+    @apply bg-[rgb(255,0,20)]/20 shadow-[-4px_0_rgba(255,0,20,0.5)];
   }
 }

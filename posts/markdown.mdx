@@ -16,6 +16,8 @@ tags:
   - Test
   - Tag
 images:
+  hero: 
+    - src: ../static/images/v4.jpg
   remote:
     - https://picsum.photos/1366/768
     - https://picsum.photos/1200/400 
@@ -259,7 +261,7 @@ export function BedStatFullscreen() {
           config={{
             time: {
               label: "Time",
-              color: "hsl(var(--chart-2))",
+              color: "var(--chart-2)",
             },
             timeInBed: {
               label: "Time in bed"
@@ -362,7 +364,7 @@ export function StepCounter() {
           config={{
             steps: {
               label: "Steps",
-              color: "hsl(var(--chart-1))",
+              color: "var(--chart-1)",
             },
           }}
         >
@@ -439,7 +441,7 @@ export function StepCounter() {
             />
             <ReferenceLine
               y={1200}
-              stroke="hsl(var(--muted-foreground))"
+              stroke="var(--muted-foreground)"
               strokeDasharray="3 3"
               strokeWidth={1}
             >
@@ -447,13 +449,13 @@ export function StepCounter() {
                 position="insideBottomLeft"
                 value="Average Steps"
                 offset={10}
-                fill="hsl(var(--foreground))"
+                fill="var(--foreground)"
               />
               <Label
                 position="insideTopLeft"
                 value="12,343"
                 className="text-lg font-mono font-extrabold"
-                fill="hsl(var(--foreground))"
+                fill="var(--foreground)"
                 offset={10}
                 startOffset={100}
               />
@@ -497,7 +499,7 @@ export function ProgressStat() {
             config={{
               steps: {
                 label: "Steps",
-                color: "hsl(var(--chart-1))",
+                color: "var(--chart-1)",
               },
             }}
             className="aspect-auto h-[32px] w-full"
@@ -548,7 +550,7 @@ export function ProgressStat() {
             config={{
               steps: {
                 label: "Steps",
-                color: "hsl(var(--muted))",
+                color: "var(--muted)",
               },
             }}
             className="aspect-auto h-[32px] w-full"
@@ -580,7 +582,7 @@ export function ProgressStat() {
                   dataKey="date"
                   offset={8}
                   fontSize={12}
-                  fill="hsl(var(--muted-foreground))"
+                  fill="var(--muted-foreground)"
                 />
               </Bar>
               <YAxis dataKey="date" type="category" tickCount={1} hide />
@@ -622,7 +624,7 @@ export function HeartrateChart() {
           config={{
             resting: {
               label: "Resting",
-              color: "hsl(var(--chart-1))",
+              color: "var(--chart-1)",
             },
           }}
           className="w-full"
@@ -668,7 +670,7 @@ export function HeartrateChart() {
             <CartesianGrid
               strokeDasharray="4 4"
               vertical={false}
-              stroke="hsl(var(--muted-foreground))"
+              stroke="var(--muted-foreground)"
               strokeOpacity={0.5}
             />
             <YAxis hide domain={["dataMin - 10", "dataMax + 10"]} />
@@ -739,7 +741,7 @@ export function WalkingDistanceChart() {
           config={{
             steps: {
               label: "Steps",
-              color: "hsl(var(--chart-1))",
+              color: "var(--chart-1)",
             },
           }}
           className="ml-auto w-[72px]"
@@ -843,15 +845,15 @@ export function MovementGoalsChart() {
           config={{
             move: {
               label: "Move",
-              color: "hsl(var(--chart-1))",
+              color: "var(--chart-1)",
             },
             exercise: {
               label: "Exercise",
-              color: "hsl(var(--chart-2))",
+              color: "var(--chart-2)",
             },
             stand: {
               label: "Stand",
-              color: "hsl(var(--chart-3))",
+              color: "var(--chart-3)",
             },
           }}
           className="mx-auto w-full max-w-[80%]"
@@ -913,11 +915,11 @@ export function AdvancedTooltipChart() {
   const chartConfig = {
     running: {
       label: "Running",
-      color: "hsl(var(--chart-1))",
+      color: "var(--chart-1)",
     },
     swimming: {
       label: "Swimming",
-      color: "hsl(var(--chart-2))",
+      color: "var(--chart-2)",
     },
   }
 

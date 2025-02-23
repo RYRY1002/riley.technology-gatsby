@@ -157,11 +157,11 @@ export function IndexHousePriceVsIndexDisposableIncome() {
   const chartConfig = {
     housePrice: {
       label: "Indexed house price",
-      color: "hsl(var(--chart-1))",
+      color: "var(--chart-1)",
     },
     disposableIncome: {
       label: "Indexed household disposable income per capita",
-      color: "hsl(var(--chart-2))",
+      color: "var(--chart-2)",
     }
   } //satisfies ChartConfig;
 
@@ -278,7 +278,7 @@ export function IndexHousePriceVsIndexDisposableIncome() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex w-full items-start gap-2 text-sm justify-between">
-        <CardDescription className="text-[hsl(var(--muted-foreground))] hover:text-[var(--tw-prose-links)]">
+        <CardDescription className="text-[var(--muted-foreground)] hover:text-[var(--tw-prose-links)]">
           <CSVLink
             data={chartData}
             headers={[
@@ -336,11 +336,11 @@ export function IncreaseInCapitalGainAfterHalving() {
   const chartConfig = {
     capitalGain: {
       label: "Capital gains tax revenue",
-      color: "hsl(var(--chart-1))",
+      color: "var(--chart-1)",
     },
     rentalLoss: {
       label: "Rental losses",
-      color: "hsl(var(--chart-2))",
+      color: "var(--chart-2)",
     }
   } satisfies ChartConfig;
 
@@ -448,7 +448,7 @@ export function IncreaseInCapitalGainAfterHalving() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex w-full items-start gap-2 text-sm justify-between">
-        <CardDescription className="text-[hsl(var(--muted-foreground))] hover:text-[var(--tw-prose-links)]">
+        <CardDescription className="text-[var(--muted-foreground)] hover:text-[var(--tw-prose-links)]">
           <CSVLink
             data={chartData}
             headers={[
@@ -488,11 +488,11 @@ export function BeneficiariesOfCapitalGainsByIncomeDecile() {
   const chartConfig = {
     capitalGain: {
       label: "Capital gains tax discount",
-      color: "hsl(var(--chart-1))",
+      color: "var(--chart-1)",
     },
     negativeGearing: {
       label: "Negative gearing",
-      color: "hsl(var(--chart-2))",
+      color: "var(--chart-2)",
     }
   } satisfies ChartConfig;
 
@@ -590,7 +590,7 @@ export function BeneficiariesOfCapitalGainsByIncomeDecile() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex w-full items-start gap-2 text-sm justify-between">
-        <CardDescription className="text-[hsl(var(--muted-foreground))] hover:text-[var(--tw-prose-links)]">
+        <CardDescription className="text-[var(--muted-foreground)] hover:text-[var(--tw-prose-links)]">
           <CSVLink
             data={chartData}
             headers={[

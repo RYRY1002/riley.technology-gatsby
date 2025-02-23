@@ -133,11 +133,11 @@ export function InlineCarousel(
       <Carousel setApi={setApi} className="2xl:w-[300%] lg:w-[200%] w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2" opts={{startIndex: startIndex}}>
         <CarouselContent>
           {queriedImages.map((image, index) => (
-            <CarouselItem key={index} className="h-[60vmin] md:!basis-2/3 childnum-2:basis-1/2 childnum-3:basis-[45%] cursor-grab active:cursor-grabbing select-none pl-4">
+            <CarouselItem key={index} className="h-[60vmin] md:basis-2/3! cursor-grab active:cursor-grabbing select-none pl-4">
               <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
               {perImageAlt && (
                 <div className="absolute md:w-[calc(66.666667%-1rem)] lg:w-[calc(45%-1rem)] h-full bottom-0 object-cover rounded-xl">
-                  <p className="absolute !m-0 left-8 top-5 w-[85%] drop-shadow">{image.alt}</p>
+                  <p className="absolute m-0! left-8 top-5 w-[85%] drop-shadow-sm">{image.alt}</p>
                 </div>
               )}
             </CarouselItem>
@@ -145,7 +145,7 @@ export function InlineCarousel(
         </CarouselContent>
         {!perImageAlt && (
           <div className="absolute left-6 top-5">
-            <p className="!m-0 drop-shadow">{alt}</p>
+            <p className="m-0! drop-shadow-sm">{alt}</p>
           </div>
         )}
         <DialogTrigger asChild>
@@ -166,15 +166,15 @@ export function InlineCarousel(
             {queriedImages.map((image, index) => (
               <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] h-screen cursor-grab active:cursor-grabbing select-none">
                 <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-full" objectFit="contain"/>
-                <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose-sm !prose-neutral lg:prose dark:!prose-invert link-styling">
+                <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
                   <div>
                     <p className="not-prose"><strong>{index + 1}</strong> of <strong>{queriedImages.length}</strong></p>
                     <Separator orientation="horizontal" className="mt-2"/>
                     <p>{perImageAlt ? image.alt : alt}</p>
                   </div>
                   <div>
-                    <a href={"/" + image.relativePath} className="!no-underline">Download the original</a>
-                    <p className="!m-0 text-xs">
+                    <a href={"/" + image.relativePath} className="no-underline!">Download the original</a>
+                    <p className="m-0! text-xs">
                       {image.original.width}x{image.original.height} {image.prettySize}
                     </p>
                   </div>
@@ -266,7 +266,7 @@ export function MarkdownImage(
     <Dialog>
       <div className="relative 2xl:w-[300%] lg:w-[200%] w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2 h-[50vmin] rounded-xl">
         <GatsbyImage image={getImage(queriedImage.src)} alt={queriedImage.alt} className={`object-cover h-[50vmin] rounded-xl ${className}`}/>
-        <p className="absolute !m-0 left-8 top-5 w-max max-w-[75%] drop-shadow">{queriedImage.alt}</p>
+        <p className="absolute m-0! left-8 top-5 w-max max-w-[75%] drop-shadow-sm">{queriedImage.alt}</p>
         <DialogTrigger asChild>
           <Button variant="outline" size="icon" className="absolute h-8 w-8 rounded-full right-6 top-5">
             <MaterialSymbol icon="open_in_full" weight={300} grade={-25} size={16}/>
@@ -276,13 +276,13 @@ export function MarkdownImage(
       <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
         <div className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%]">
           <GatsbyImage image={getImage(queriedImage.src)} alt={queriedImage.alt} className={`object-cover h-full ${className}`} objectFit="contain"/>
-          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose-sm !prose-neutral lg:prose dark:!prose-invert link-styling">
+          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
             <div>
               <p>{queriedImage.alt}</p>
             </div>
             <div>
-              <a href={"/" + queriedImage.relativePath} className="!no-underline">Download the original</a>
-              <p className="!m-0 text-xs">
+              <a href={"/" + queriedImage.relativePath} className="no-underline!">Download the original</a>
+              <p className="m-0! text-xs">
                 {queriedImage.original.width}x{queriedImage.original.height} {queriedImage.prettySize}
               </p>
             </div>
@@ -312,13 +312,13 @@ export function AllAccessPass(
     <Dialog>
       <DialogTrigger className="w-full h-fit" asChild>
         <Button variant="outline" className="h-[6em]">
-          <h1 className="!m-0">{readMore ? readMore : "Read more about" + title}</h1>
+          <h1 className="m-0!">{readMore ? readMore : "Read more about" + title}</h1>
           <MaterialSymbol icon="open_in_new" weight={300} grade={200} size={25} className="ml-4"/>
         </Button>
       </DialogTrigger>
       <DialogContent className="min-w-[85vw]">
         <ScrollArea className="h-[85vh] w-full">
-          <div className="mx-auto prose-sm !prose-neutral lg:prose dark:!prose-invert link-styling">
+          <div className="mx-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
             {children}
           </div>
         </ScrollArea>

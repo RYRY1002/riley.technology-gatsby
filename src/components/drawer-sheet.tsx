@@ -62,7 +62,7 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger className={buttonVariants({ variant: "outline" })}>Open</DialogTrigger>
-        <DialogContent className="!p-0 min-w-[85vw] min-h-[85vh]">
+        <DialogContent className="p-0! min-w-[85vw] min-h-[85vh]">
           <ScrollArea className="rounded-[var(--radius)] h-[85vh]">
             {(title || subtitle || image) && 
               <DialogHeader className="relative">
@@ -81,7 +81,7 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
               </DialogHeader>
             }
             {children && 
-              <div className="relative mx-[12.5%] lg:mx-auto prose-sm !prose-neutral lg:prose dark:!prose-invert link-styling">
+              <div className="relative mx-[12.5%] lg:mx-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
                 {children}
               </div>
             }
@@ -95,9 +95,9 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger className={buttonVariants({ variant: "outline" })}>Open</DrawerTrigger>
-      <DrawerContent className="!p-0 min-w-[85vw] min-h-[85vh]">
+      <DrawerContent className="p-0! min-w-[85vw] min-h-[85vh]">
         {(title || subtitle || image) && 
-          <DrawerHeader className="relative !p-0 -translate-y-6">
+          <DrawerHeader className="relative p-0! -translate-y-6">
             {image &&
               <>
                 <GatsbyImage image={gatsbyImageData} alt={title ? title : "Hero image"} className="relative w-full h-72 object-cover rounded-t-[var(--radius)]"/>
@@ -113,7 +113,7 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
           </DrawerHeader>
         }
         {children && 
-          <div className="relative mx-[12.5%] lg:mx-auto prose-sm !prose-neutral lg:prose dark:!prose-invert link-styling">
+          <div className="relative mx-[12.5%] lg:mx-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
             {children}
           </div>
         }
