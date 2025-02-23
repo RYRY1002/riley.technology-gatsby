@@ -15,6 +15,10 @@ videoLooping: ../static/videos/v4_loop.mp4
 tags:
   - Test
   - Tag
+images:
+  remote:
+    - https://picsum.photos/1366/768
+    - https://picsum.photos/1200/400 
 ---
 
 Text can be **bold**, _italic_, ~~strikethrough~~ or `keyword`
@@ -990,16 +994,18 @@ I think this is because the MDX compiler which turns `mdx` files into `js` files
 One workaround is to put the code for the chart in a separate `tsx` file and import it in the `mdx` file as a component - as has been done below.
 Whilst not particularly elegant, it does the job well enough.
 
-{/*import { InteractiveBarChart } from "@/components/charts/InteractiveBarChart-DesktopVsMobile";
-
-<div className="not-prose chart-wrapper">
-  <InteractiveBarChart/>
-</div>*/}
-
 import { InteractiveChart } from "@/components/charts/InteractiveChart-DesktopMobilePageviews";
+import {
+  IndexHousePriceVsIndexDisposableIncome,
+  IncreaseInCapitalGainAfterHalving,
+  BeneficiariesOfCapitalGainsByIncomeDecile
+} from "@/components/charts/housing-crisis";
 
 <div className="not-prose chart-wrapper">
   <InteractiveChart/>
+  <IndexHousePriceVsIndexDisposableIncome/>
+  <IncreaseInCapitalGainAfterHalving/>
+  <BeneficiariesOfCapitalGainsByIncomeDecile/>
 </div>
 
 Note: The chart `tsx` file from shadcn/ui has been forked from the original, so some of the related documentation might not be accurate.
