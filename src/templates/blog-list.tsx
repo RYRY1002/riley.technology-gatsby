@@ -5,7 +5,7 @@ import { Link, PageProps, graphql } from "gatsby";
 import ThemeProvider from "@/components/ui/theme-provider";
 import ThemeToggleButton from "@/components/theme-toggle-button";
 
-import v4loop from "../../static/videos/v4_loop.mp4";
+import v4loop from "@/static/videos/v4_loop.mp4";
 
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 

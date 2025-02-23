@@ -63,6 +63,7 @@
     "gatsby-plugin-sharp": "^5.14.0",
     "gatsby-plugin-sitemap": "^6.14.0",
     "gatsby-remark-autolink-headers": "^6.14.0",
+    "gatsby-remark-images": "^7.13.2",
     "gatsby-remark-katex": "^7.14.0",
     "gatsby-source-filesystem": "^5.14.0",
     "gatsby-transformer-remark": "^6.14.0",
@@ -74,6 +75,7 @@
     "patch-package": "^8.0.0",
     "postcss": "^8.5.2",
     "react": "^18.3.1",
+    "react-csv": "^2.2.2",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
     "react-material-symbols": "^4.4.0",
@@ -89,6 +91,7 @@
   },
   "devDependencies": {
     "@shikijs/rehype": "^1.22.2",
+    "@shikijs/transformers": "^1.22.2",
     "@tailwindcss/typography": "^0.5.16",
     "@types/jquery": "^3.5.32",
     "@types/node": "^22.13.4",

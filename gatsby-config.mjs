@@ -125,7 +125,7 @@ const config = {
         color: "#ff5e27",
         showSpinner: false
       }
-    }, {
+    }, /*{
       resolve: "gatsby-plugin-manifest",
       options: {
         name: "riley.technology",
@@ -136,18 +136,20 @@ const config = {
         display: "standalone",
         icon: "static/images/icon.png"
       }
-    }, {
+    }, */{
       resolve: "gatsby-plugin-sharp",
       options: {
         defaults: {
-          formats: ["avif", "webp"],
+          //formats: ["avif", "webp"],
+          formats: ["webp"],
           placeholder: "blurred",
-          breakpoints: [480, 720, 1080, 1366, 1920, 2560, 3840],
+          breakpoints: [720, 1080, 1366, 1920, 2560, 3840],
           backgroundColor: "transparent",
           blurredOptions: {
             toFormat: "webp",
             width: 48
-          }
+          },
+          quality: 85
         }
       }
     }, {

@@ -1,5 +1,5 @@
 import * as path from "path"
-import { createFilePath } from "gatsby-source-filesystem"
+import { createFilePath, createRemoteFileNode } from "gatsby-source-filesystem"
 
 export const onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -15,9 +15,22 @@ export const onCreateWebpackConfig = ({ actions }) => {
   })
 }
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes, printTypeDefinitions } = actions;
+  /*createTypes(`
+    type MdxFrontmatterImages {
+      remoteProcessed: [File] @link(from: "remote")
+    }
+  `)*/
+  createTypes(`
+    type Mdx implements Node {
+      remoteImages: [File] @link(from: "fields.remoteImagesId")
+    }`)
 
+  printTypeDefinitions({ });
+}
+
+exports.createPages = ({ graphql, actions: { createPage } }) => {
   return graphql(`
     query nodeQuery {
       allMdx(
@@ -114,15 +127,48 @@ exports.createPages = ({ graphql, actions }) => {
   })
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-
-  if (node.internal.type === `Mdx`) {
+exports.onCreateNode = async ({ node, createNodeId, actions: { createNodeField, createNode }, getNode, getCache }) => {
+  /*if (node.internal.type === `Mdx`) {
     const value = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,
       node,
       value,
     })
-  }
+  }*/
+
+  if (node.internal.type === "Mdx" && node.frontmatter.images) {
+    if (node.frontmatter.images.remote) {
+      let remoteImages = await Promise.all(
+        node.frontmatter.images.remote.map(async (url: string) => {
+          try {
+            return createRemoteFileNode({
+              url,
+              parentNodeId: node.id,
+              createNode,
+              createNodeId,
+              getCache
+            });
+          } catch (error) {
+            console.error(`Failed to fetch ${url}`, error);
+          };
+        })
+      );
+      if (remoteImages.length > 0) {
+        createNodeField({
+          node,
+          name: "remoteImagesId",
+          value: remoteImages.map((fileNode) => fileNode.id)
+        });
+        console.info(`Downloaded remote images for ${node.frontmatter.title}`);
+      };
+    };
+    /*if (node.frontmatter.images.local) {
+      createNodeField({
+        node,
+        name: "localImagesId",
+        value: node.frontmatter.images.local.id.map((fileNode) => fileNode.id)
+      }); // This is just here for parity with remote images. It's not used anywhere.
+    }*/
+  };
 }

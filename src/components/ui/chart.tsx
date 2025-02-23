@@ -1,9 +1,10 @@
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
-import {
+import type {
   NameType,
   Payload,
   ValueType,
+  Formatter
 } from "recharts/types/component/DefaultTooltipContent"
 import { Separator } from "@/components/ui/separator"
 
@@ -104,8 +105,6 @@ ${colorConfig
   )
 }
 
-const ChartTooltip = RechartsPrimitive.Tooltip
-
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
@@ -113,9 +112,10 @@ const ChartTooltipContent = React.forwardRef<
       hideLabel?: boolean
       hideIndicator?: boolean
       indicator?: "line" | "dot" | "dashed"
+      valueFormatter?: Formatter<ValueType, NameType>
       nameKey?: string
       labelKey?: string
-      unit?: string
+      unit?: { before: string, after: string } | string
       showTotal?: boolean
     }
 >(
@@ -131,6 +131,7 @@ const ChartTooltipContent = React.forwardRef<
       labelFormatter,
       labelClassName,
       formatter,
+      valueFormatter,
       color,
       nameKey,
       labelKey,
@@ -248,10 +249,19 @@ const ChartTooltipContent = React.forwardRef<
                       </div>
                       {item.value && (
                         <span className="font-mono font-medium tabular-nums text-foreground ml-8">
-                          {item.value.toLocaleString()}
-                            {unit && (
-                              <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
-                            )}
+                          {(typeof unit === "object" && unit.before) && (
+                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.before}</span>
+                          )}
+                          {(typeof unit === "string" && (unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
+                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
+                          )}
+                          {valueFormatter ? valueFormatter(item.value, item.name, item, index, item.payload) : item.value.toLocaleString()}
+                          {(typeof unit === "object" && unit.after ) && (
+                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.after}</span>
+                          )}
+                          {(typeof unit === "string" && !(unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
+                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
+                          )}
                         </span>
                       )}
                     </div>
@@ -280,8 +290,17 @@ const ChartTooltipContent = React.forwardRef<
                     </div>
                     {item.value && (
                       <span className="font-mono font-medium tabular-nums text-foreground ml-8">
-                        {payload.reduce((acc, curr) => acc + curr.value, 0).toLocaleString()}
-                          {unit && (
+                          {(typeof unit === "object" && unit.before) && (
+                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.before}</span>
+                          )}
+                          {(typeof unit === "string" && (unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
+                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
+                          )}
+                          {payload.reduce((total, item) => total + Number(item.value), 0).toString()}
+                          {(typeof unit === "object" && unit.after ) && (
+                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.after}</span>
+                          )}
+                          {(typeof unit === "string" && !(unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
                             <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
                           )}
                       </span>
@@ -297,8 +316,6 @@ const ChartTooltipContent = React.forwardRef<
   }
 )
 ChartTooltipContent.displayName = "ChartTooltip"
-
-const ChartLegend = RechartsPrimitive.Legend
 
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
@@ -358,6 +375,142 @@ const ChartLegendContent = React.forwardRef<
 )
 ChartLegendContent.displayName = "ChartLegend"
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { MaterialSymbol } from "react-material-symbols";
+import "react-material-symbols/outlined";
+
+function ChartExplanation(
+  {
+    tooltip: tooltipContent,
+    dialog: {
+      title: dialogTitle,
+      subtitle: dialogSubtitle,
+      content: dialogContent,
+      button: dialogCloseButton
+    }
+  }: {
+    tooltip?: string,
+    dialog?: {
+      title?: string,
+      subtitle?: string,
+      content?: React.ReactNode,
+      button?: string
+    }
+  }
+) {
+  const dialog = ((dialogTitle || dialogContent) || dialogContent) ? true : false;
+  if (!tooltipContent && !dialog) {
+    throw new Error("ChartExplanation must have either a tooltip or a dialog.", { cause: "tooltip and dialog props are both undefined." });
+  };
+
+  return <>
+    {tooltipContent ? <>
+      {dialog ? (
+        <Dialog>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger className="ml-1">
+                <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+              </TooltipTrigger>
+              <TooltipContent>
+                {tooltipContent}
+                <DialogTrigger>
+                  <MaterialSymbol icon="help" weight={400} grade={200} size={14}/>
+                </DialogTrigger>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                {dialogTitle}
+              </DialogTitle>
+              <DialogDescription>
+                {dialogSubtitle}
+              </DialogDescription>
+            </DialogHeader>
+            {dialogContent}
+            {dialogCloseButton && (
+              <DialogFooter>
+                <DialogClose>
+                  <Button>
+                    {dialogCloseButton}
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            )}
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="ml-1">
+              <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+            </TooltipTrigger>
+            <TooltipContent>
+              {tooltipContent}
+              <DialogTrigger>
+                <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+              </DialogTrigger>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      )}
+    </> : (
+      <Dialog>
+        <DialogTrigger className="ml-1">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+              </TooltipTrigger>
+              <TooltipContent>
+                Learn more about this chart and what you can learn from it
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {dialogTitle}
+            </DialogTitle>
+            <DialogDescription>
+              {dialogSubtitle}
+            </DialogDescription>
+          </DialogHeader>
+          {dialogContent}
+          {dialogCloseButton && (
+            <DialogFooter>
+              <DialogClose>
+                <Button>
+                  {dialogCloseButton}
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          )}
+        </DialogContent>
+      </Dialog>
+    )}
+  </>
+}
+
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
@@ -397,11 +550,15 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config]
 }
 
+const ChartTooltip = RechartsPrimitive.Tooltip;
+const ChartLegend = RechartsPrimitive.Legend;
+export { ChartTooltip, ChartLegend };
+export * from "recharts";
+
 export {
   ChartContainer,
-  ChartTooltip,
   ChartTooltipContent,
-  ChartLegend,
   ChartLegendContent,
   ChartStyle,
-}
+  ChartExplanation
+};
