@@ -29,6 +29,7 @@ const config = {
     DETECT_NODE_MUTATIONS: false, // Do not enable this in production builds, it will cause it to fail!
     PARTIAL_HYDRATION: false
   },
+  trailingSlash: "never",
   plugins: [
     {
       resolve: "gatsby-plugin-postcss",

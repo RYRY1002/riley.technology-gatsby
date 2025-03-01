@@ -1,3 +1,5 @@
+import "./src/styles/global.css"
+
 import "./src/styles/tailwind-typography/prose.css"
 import "./src/styles/tailwind-typography/sizes/sm.css"
 import "./src/styles/tailwind-typography/sizes/base.css"
@@ -9,5 +11,3 @@ import "./src/styles/tailwind-typography/colors/slate.css"
 import "./src/styles/tailwind-typography/colors/zinc.css"
 import "./src/styles/tailwind-typography/colors/neutral.css"
 import "./src/styles/tailwind-typography/colors/stone.css"
-
-import "./src/styles/global.css"

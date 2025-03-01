@@ -142,11 +142,8 @@ export default function Footer(this: any) {
           Page last compiled {buildTime}
         </small>
       </div>
-      <div id="footer-copyright-deco" className="h-[14vw] relative overflow-hidden -mt-8 w-[99vw] left-1/2 -translate-x-1/2">
-        <h1 
-          id="footer-massive-copyright" 
-          className="select-none absolute bottom-0 translate-y-[14%] align-text-bottom leading-[0.78]! font-bold text-nowrap bg-linear-to-b from-[#00000000] to-foreground bg-clip-text text-transparent text-[calc((100vw-12rem)/(1088/208))] w-full text-center"
-        >
+      <div id="footer-copyright-deco">
+        <h1 id="footer-massive-copyright">
           {"© " + romanize(new Date().getFullYear())}
         </h1>
       </div>

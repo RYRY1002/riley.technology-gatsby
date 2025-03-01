@@ -138,13 +138,14 @@
     code {
       @variant not-not-prose {
         font-size: calc(18em/20);
+        border-radius: calc(8rem/16);
       }
     }
   
-    pre {
+    pre, span.shiki {
       @variant not-not-prose {
         font-size: calc(18em/20);
-        line-height: calc(32/18);
+        /* line-height: calc(32/18); */
         margin-top: calc(36em/18);
         margin-bottom: calc(36em/18);
         border-radius: calc(8rem/16);

@@ -1,6 +1,5 @@
 /* Fonts */
 @import 'tailwindcss';
-@config "../../tailwind.config.js";
 
 @custom-variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
 
@@ -124,10 +123,6 @@
   --color-chart5: var(--chart-5);
   --color-chart6: var(--chart-6);
 
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -152,19 +147,11 @@
   }
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so these compatibility styles have been added to make sure everything
-  still looks the same as it did with Tailwind CSS v3.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+@theme {
+  --breakpoint-3xl: 120rem;
+  --breakpoint-4xl: 160rem;
+  --breakpoint-5xl: 200rem;
+  --breakpoint-6xl: 240rem;
 }
 
 @layer base {
@@ -229,7 +216,7 @@
 Shouldn't cause any performance issues at build time as PurgeCSS is installed */
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border!;
   }
   body {
     @apply bg-background text-foreground;
@@ -237,7 +224,7 @@ Shouldn't cause any performance issues at build time as PurgeCSS is installed */
 }
 
 /* Link styling */
-@layer base {
+@layer utilities {
   :any-link.link-styling, *.link-styling :any-link {
     @apply font-mono hover:font-extrabold! transition-varfonts duration-100;
   }
@@ -248,7 +235,7 @@ Shouldn't cause any performance issues at build time as PurgeCSS is installed */
   }
 }
 
-@layer utilities {
+@layer prose {
   h1 .anchor.before,
   h2 .anchor.before,
   h3 .anchor.before,
@@ -263,7 +250,7 @@ Shouldn't cause any performance issues at build time as PurgeCSS is installed */
   h4 .anchor svg,
   h5 .anchor svg,
   h6 .anchor svg {
-    @apply invisible;
+    @apply opacity-0 transition-opacity;
   }
   h1:hover .anchor svg,
   h2:hover .anchor svg,
@@ -277,86 +264,24 @@ Shouldn't cause any performance issues at build time as PurgeCSS is installed */
   h4 .anchor:focus svg,
   h5 .anchor:focus svg,
   h6 .anchor:focus svg {
-    @apply visible;
+    @apply opacity-100 duration-300 shadow-sm;
   }
 }
 
 /* Math styling */
-@layer base {
-  span.katex {
-    @apply p-2 bg-card rounded-sm;
-  }
+span.katex {
+  @apply p-2 bg-card rounded-sm;
 }
 
 /* Charts */
-@layer base{
-  .prose > div.chart-wrapper, .prose-sm > div.chart-wrapper {
-    @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 *:grow;
-  }
+.prose > div.chart-wrapper, .prose-sm > div.chart-wrapper {
+  @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 *:grow;
 }
 
-/* Code blocks */
-@layer shiki {
-  /*pre.shiki,
-  pre.shiki > code,
-  pre.shiki > code span {
-    @apply !text-[var(--shiki-light)] !bg-[var(--shiki-light-bg)];
-    --shiki-light-highlight-bg: 0, 0, 0, 0.05;
-  }*/
-  
-  .dark pre.shiki, [data-theme="dark"] pre.shiki,
-  .dark pre.shiki > code, [data-theme="dark"] pre.shiki > code,
-  .dark pre.shiki > code > span.line, [data-theme="dark"] pre.shiki > code > span.line,
-  .dark pre.shiki > code > span.line > span, [data-theme="dark"] pre.shiki > code > span.line > span {
-    @apply text-(--shiki-dark)! bg-(--tw-prose-pre-bg)!;
-  }
-  .dark span.shiki, [data-theme="dark"] span.shiki,
-  .dark span.shiki > code, [data-theme="dark"] span.shiki > code,
-  .dark span.shiki > code > span.line, [data-theme="dark"] span.shiki > code > span.line,
-  .dark span.shiki > code > span.line > span, [data-theme="dark"] span.shiki > code > span.line > span {
-    @apply text-(--shiki-dark)! bg-(--tw-prose-pre-bg)!;
-  }
-
-  .dark pre.shiki, [data-theme="dark"] pre.shiki, pre.shiki {
-    @apply overflow-auto relative py-4! rounded-lg! leading-[1.4]!;
-  }
-  .dark span.shiki, [data-theme="dark"] span.shiki, span.shiki {
-    @apply overflow-x-scroll overflow-y-visible relative py-4! ps-[1em] pe-[1em] rounded-lg! leading-[1.4]!;
-  }
-  .dark pre.shiki.line-numbers > code, [data-theme="dark"] pre.shiki.line-numbers > code, pre.shiki.line-numbers > code {
-    @apply table;
-  }
-  pre.shiki.line-numbers > code > span.line {
-    @apply table-row;
-  }
-  pre.shiki.line-numbers > code > span.line::before {
-    @apply content-[counter(line-number)] text-right text-[gray] select-none pr-4 [counter-increment:line-number] table-cell;
-  }
-  /*pre.shiki > code > span.line.highlighted:not(.diff) > :first-child::before {
-    @apply content-['_'] absolute w-[calc(100%-1rem)] overflow-hidden bg-white/10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
-  }*/
-  pre.shiki > code > span.line.highlighted:not(.diff)::after {
-    @apply content-['_'] absolute w-[calc(100%-4px)] left-1 overflow-hidden bg-white/10 shadow-[-4px_0_rgba(255,255,255,0.5)] select-none;
-  }
-  pre.shiki > code > span.line.diff:not(.highlighted)::after {
-    @apply content-['_'] absolute w-[calc(100%-4px)] left-1 overflow-hidden select-none;
-  }
-  pre.shiki > code > span.line.diff.add:not(.highlighted)::after {
-    @apply bg-[rgb(0,255,60)]/20 shadow-[-4px_0_rgba(0,255,60,0.5)];
-  }
-  pre.shiki > code > span.line.diff.remove:not(.highlighted)::after {
-    @apply bg-[rgb(255,0,20)]/20 shadow-[-4px_0_rgba(255,0,20,0.5)];
-  }
+/* footer */
+footer > #footer-copyright-deco {
+  @apply h-[14vw] relative overflow-hidden -mt-8 w-[99vw] left-1/2 -translate-x-1/2;
 }
-
-@reference "./tailwind-typography/colors/neutral.css";
-@reference "./tailwind-typography/sizes/sm.css";
-@reference "./tailwind-typography/sizes/base.css";
-@reference "./tailwind-typography/sizes/lg.css";
-@reference "./tailwind-typography/sizes/xl.css";
-@reference "./tailwind-typography/sizes/2xl.css";
-
-/* prose customizations */
-.prose {
-  @apply prose-neutral md:prose-sm lg:prose-base xl:prose-base 2xl:prose-lg mx-auto max-w-[85ch] link-styling;
+footer > #footer-copyright-deco > #footer-massive-copyright {
+  @apply select-none absolute bottom-0 translate-y-[14%] align-text-bottom leading-[0.78]! font-bold text-nowrap bg-linear-to-b from-[#00000000] to-foreground bg-clip-text text-transparent text-[calc((100vw-12rem)/(1088/208))] w-full text-center;
 }

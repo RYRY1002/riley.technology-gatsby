@@ -138,13 +138,14 @@
     code {
       @variant not-not-prose {
         font-size: calc(12em/14);
+        border-radius: calc(4rem/16);
       }
     }
 
-    pre {
+    pre, span.shiki {
       @variant not-not-prose {
         font-size: calc(12em/14);
-        line-height: calc(20/12);
+        /* line-height: calc(20/12); */
         margin-top: calc(20em/12);
         margin-bottom: calc(20em/12);
         border-radius: calc(4rem/16);
@@ -152,6 +153,16 @@
         padding-inline-end: calc(12em/12);
         padding-bottom: calc(8em/12);
         padding-inline-start: calc(12em/12);
+      }
+
+      > code > span.line {
+        &.diff, &.highlighted {
+          &::after {
+            @variant not-not-prose {
+              font-size: calc(14em/12);
+            }
+          }
+        }
       }
     }
 
