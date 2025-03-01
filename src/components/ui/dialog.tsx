@@ -3,7 +3,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Cross2Icon } from "@radix-ui/react-icons"
 
 import { cn } from "@/lib/utils"
-import { MaterialSymbol } from "react-material-symbols"
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 const Dialog = DialogPrimitive.Root
 
@@ -44,7 +44,7 @@ const DialogContent = React.forwardRef<
     >
       {children}
       <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <MaterialSymbol icon="close" weight={300} grade={-25} size={20}/>
+        <MaterialSymbol symbol="close" weight={300} grade={-25} size={20}/>
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

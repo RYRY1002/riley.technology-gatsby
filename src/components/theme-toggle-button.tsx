@@ -11,8 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MaterialSymbol } from 'react-material-symbols';
-import 'react-material-symbols/outlined';
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 import { UseThemeProps } from "next-themes/dist/types";
 
@@ -24,8 +23,8 @@ export default function ThemeToggleButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon" className="fixed top-2 right-2">
-          <MaterialSymbol icon="light_mode" size={20} fill className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"/>
-          <MaterialSymbol icon="dark_mode" size={20} fill className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"/>
+          <MaterialSymbol symbol="light_mode" size={20} fill className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"/>
+          <MaterialSymbol symbol="dark_mode" size={20} fill className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"/>
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>

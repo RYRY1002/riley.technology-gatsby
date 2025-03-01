@@ -392,8 +392,7 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { MaterialSymbol } from "react-material-symbols";
-import "react-material-symbols/outlined";
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 function ChartExplanation(
   {
@@ -426,12 +425,12 @@ function ChartExplanation(
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger className="ml-1">
-                <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+                <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
               </TooltipTrigger>
               <TooltipContent>
                 {tooltipContent}
                 <DialogTrigger>
-                  <MaterialSymbol icon="help" weight={400} grade={200} size={14}/>
+                  <MaterialSymbol symbol="help" weight={400} grade={200} size={14}/>
                 </DialogTrigger>
               </TooltipContent>
             </Tooltip>
@@ -461,12 +460,12 @@ function ChartExplanation(
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger className="ml-1">
-              <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+              <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
             </TooltipTrigger>
             <TooltipContent>
               {tooltipContent}
               <DialogTrigger>
-                <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+                <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
               </DialogTrigger>
             </TooltipContent>
           </Tooltip>
@@ -478,7 +477,7 @@ function ChartExplanation(
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <MaterialSymbol icon="help" weight={400} grade={-25} size={16}/>
+                <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
               </TooltipTrigger>
               <TooltipContent>
                 Learn more about this chart and what you can learn from it

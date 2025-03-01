@@ -9,8 +9,7 @@ import {
 import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 
-import { MaterialSymbol } from 'react-material-symbols';
-import 'react-material-symbols/outlined';
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -77,7 +76,7 @@ const PaginationFirst = ({
     className={cn("", className)}
     {...props}
   >
-    <MaterialSymbol icon="first_page" size={20} fill/>
+    <MaterialSymbol symbol="first_page" size={20} fill/>
   </PaginationLink>
 )
 PaginationFirst.displayName = "PaginationFirst"
@@ -92,7 +91,7 @@ const PaginationPrevious = ({
     className={cn("", className)}
     {...props}
   >
-    <MaterialSymbol icon="chevron_left" size={20} fill/>
+    <MaterialSymbol symbol="chevron_left" size={20} fill/>
     <span>Previous</span>
   </PaginationLink>
 )
@@ -109,7 +108,7 @@ const PaginationNext = ({
     {...props}
   >
     <span>Next</span>
-    <MaterialSymbol icon="chevron_right" size={20} fill/>
+    <MaterialSymbol symbol="chevron_right" size={20} fill/>
   </PaginationLink>
 )
 PaginationNext.displayName = "PaginationNext"
@@ -124,7 +123,7 @@ const PaginationLast = ({
     className={cn("", className)}
     {...props}
   >
-    <MaterialSymbol icon="last_page" size={20} fill/>
+    <MaterialSymbol symbol="last_page" size={20} fill/>
   </PaginationLink>
 )
 PaginationLast.displayName = "PaginationLast"

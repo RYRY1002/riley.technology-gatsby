@@ -26,8 +26,7 @@ import { Separator } from "@/components/ui/separator";
 
 import ThemeProvider from "@/components/ui/theme-provider";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { MaterialSymbol } from "react-material-symbols";
-import "react-material-symbols/outlined";
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 import Footer from "@/components/footer";
 
@@ -115,14 +114,14 @@ export default function BlogPost({ data: { mdx }, children }) {
                   </CarouselContent>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="icon" className="absolute h-8 w-8 rounded-full right-6 top-5">
-                      <MaterialSymbol icon="open_in_full" weight={300} grade={-25} size={16}/>
+                      <MaterialSymbol symbol="open_in_full" weight={300} grade={-25} size={16}/>
                     </Button>
                   </DialogTrigger>
                   <CarouselPrevious>
-                    <MaterialSymbol icon="arrow_back" weight={300} grade={-25} size={16}/>
+                    <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
                   </CarouselPrevious>
                   <CarouselNext>
-                    <MaterialSymbol icon="arrow_forward" weight={300} grade={-25} size={16}/>
+                    <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
                   </CarouselNext> 
                 </Carousel>
                 <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
@@ -148,10 +147,10 @@ export default function BlogPost({ data: { mdx }, children }) {
                       ))}
                     </CarouselContent>
                     <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2">
-                      <MaterialSymbol icon="arrow_back" weight={300} grade={-25} size={16}/>
+                      <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
                     </CarouselPrevious>
                     <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2">
-                      <MaterialSymbol icon="arrow_forward" weight={300} grade={-25} size={16}/>
+                      <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
                     </CarouselNext>
                   </Carousel>
                 </DialogContent>

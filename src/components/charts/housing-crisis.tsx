@@ -2,8 +2,7 @@ import * as React from "react";
 import { CartesianGrid, XAxis, YAxis, Rectangle, ReferenceLine, ReferenceArea, Label } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
-import { MaterialSymbol } from "react-material-symbols";
-import "react-material-symbols/outlined";
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 import { Separator } from "@/components/ui/separator";
 import { CSVLink } from "react-csv";
 
@@ -378,7 +377,7 @@ export function IncreaseInCapitalGainAfterHalving() {
                   {chartType === "capitalGain" ? "Capital gains tax revenue" : "Rental losses"}
                 </span>
                 <span className="text-lg font-mono font-extrabold leading-none sm:text-3xl">
-                  {chartType === "capitalGain" ? "668%" : "220%*"}<MaterialSymbol icon="trending_up" fill grade={-25} className="pl-1 text-lg sm:text-3xl"/>
+                  {chartType === "capitalGain" ? "668%" : "220%*"}<MaterialSymbol symbol="trending_up" fill grade={-25} className="pl-1 text-lg sm:text-3xl"/>
                 </span>
               </button>
             )

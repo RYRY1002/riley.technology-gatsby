@@ -42,8 +42,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { MaterialSymbol } from 'react-material-symbols';
-//import 'react-material-symbols/outlined';
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 function romanize (num: number) {
   if (isNaN(num))
@@ -103,7 +102,7 @@ export default function Footer(this: any) {
             )}
             </BreadcrumbItem>
             <BreadcrumbSeparator className="h-[15px] w-[13px] relative">
-              {/*<MaterialSymbol icon="filter_alt" size={20} fill className="-rotate-90"/>*/}
+              {/*<MaterialSymbol symbol="filter_alt" size={20} fill className="-rotate-90"/>*/}
               <svg width="15" height="13" viewBox="0 0 15 15" fill="none" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
             </BreadcrumbSeparator>
             {urlArray.map((item, index) => {
@@ -129,7 +128,7 @@ export default function Footer(this: any) {
                   </BreadcrumbItem>
                   {index !== urlArray.length - 1 && (
                     <BreadcrumbSeparator className="h-[15px] w-[13px] relative">
-                      {/*<MaterialSymbol icon="filter_alt" size={20} fill className="-rotate-90"/>*/}
+                      {/*<MaterialSymbol symbol="filter_alt" size={20} fill className="-rotate-90"/>*/}
                       <svg width="15" height="13" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
                     </BreadcrumbSeparator>
                   )}

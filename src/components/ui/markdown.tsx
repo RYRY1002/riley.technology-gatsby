@@ -28,8 +28,7 @@ import {
   GatsbyImageProps,
   StaticImage
 } from "gatsby-plugin-image";
-import { MaterialSymbol } from "react-material-symbols";
-import "react-material-symbols/outlined";
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 export function InlineCarousel(
   {
@@ -150,14 +149,14 @@ export function InlineCarousel(
         )}
         <DialogTrigger asChild>
           <Button variant="outline" size="icon" className="absolute h-8 w-8 rounded-full right-6 top-5">
-            <MaterialSymbol icon="open_in_full" weight={300} grade={-25} size={16}/>
+            <MaterialSymbol symbol="open_in_full" weight={300} grade={-25} size={16}/>
           </Button>
         </DialogTrigger>
         <CarouselPrevious>
-          <MaterialSymbol icon="arrow_back" weight={300} grade={-25} size={16}/>
+          <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
         </CarouselPrevious>
         <CarouselNext>
-          <MaterialSymbol icon="arrow_forward" weight={300} grade={-25} size={16}/>
+          <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
         </CarouselNext> 
       </Carousel>
       <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
@@ -183,10 +182,10 @@ export function InlineCarousel(
             ))}
           </CarouselContent>
           <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2">
-            <MaterialSymbol icon="arrow_back" weight={300} grade={-25} size={16}/>
+            <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
           </CarouselPrevious>
           <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2">
-            <MaterialSymbol icon="arrow_forward" weight={300} grade={-25} size={16}/>
+            <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
           </CarouselNext>
         </Carousel>
       </DialogContent>
@@ -269,7 +268,7 @@ export function MarkdownImage(
         <p className="absolute m-0! left-8 top-5 w-max max-w-[75%] drop-shadow-sm">{queriedImage.alt}</p>
         <DialogTrigger asChild>
           <Button variant="outline" size="icon" className="absolute h-8 w-8 rounded-full right-6 top-5">
-            <MaterialSymbol icon="open_in_full" weight={300} grade={-25} size={16}/>
+            <MaterialSymbol symbol="open_in_full" weight={300} grade={-25} size={16}/>
           </Button>
         </DialogTrigger>
       </div>
@@ -313,7 +312,7 @@ export function AllAccessPass(
       <DialogTrigger className="w-full h-fit" asChild>
         <Button variant="outline" className="h-[6em]">
           <h1 className="m-0!">{readMore ? readMore : "Read more about" + title}</h1>
-          <MaterialSymbol icon="open_in_new" weight={300} grade={200} size={25} className="ml-4"/>
+          <MaterialSymbol symbol="open_in_new" weight={300} grade={200} size={25} className="ml-4"/>
         </Button>
       </DialogTrigger>
       <DialogContent className="min-w-[85vw]">

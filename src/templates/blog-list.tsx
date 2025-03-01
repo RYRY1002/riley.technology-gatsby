@@ -23,8 +23,7 @@ import {
 import { remapValue } from "@/lib/utils";
 
 import Footer from "@/components/footer";
-import { MaterialSymbol } from "react-material-symbols";
-import "react-material-symbols/outlined";
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   const posts = data.allMdx.edges;
@@ -140,7 +139,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
         </div>
         <div id="acticles-header" className="mx-16 -mb-4 flex flex-wrap">
           <h2 className="text-4xl font-bold">Things I've made</h2>
-          <MaterialSymbol icon="arrow_outward" size={40} fill className="ml-2"/>
+          <MaterialSymbol symbol="arrow_outward" size={40} fill className="ml-2"/>
         </div>
         <div id="articles" className="flex grow shrink-0 flex-wrap justify-center content-center flex-row gap-[0.65rem] m-16">
           {posts.map(({ node }) => {

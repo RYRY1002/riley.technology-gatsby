@@ -1,8 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { MaterialSymbol } from 'react-material-symbols';
-import 'react-material-symbols/outlined';
+import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -93,7 +92,7 @@ export default function NavMenu() {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-hidden focus:shadow-md"
                     href="/"
                   >
-                    <MaterialSymbol icon="grass" size={24} fill weight={600} className="h-6 w-6"/>
+                    <MaterialSymbol symbol="grass" size={24} fill weight={600} className="h-6 w-6"/>
                     <div className="mb-2 mt-4 text-lg font-medium">
                       shadcn/ui
                     </div>

@@ -161,6 +161,11 @@ const config = {
         }
       }
     }, {
+      resolve: "gatsby-plugin-material-symbols",
+      options: {
+        verbose: true
+      }
+    }, {
       resolve: "gatsby-plugin-posthog",
       options: {
         apiKey: "phc_FznuSwNvDr8kZemdu5laB3UmGx9Qx2pglYxsgUDnghR",
