@@ -81,7 +81,7 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
               </DialogHeader>
             }
             {children && 
-              <div className="relative mx-[12.5%] lg:mx-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
+              <div className="relative mx-[12.5%] prose">
                 {children}
               </div>
             }
@@ -113,7 +113,7 @@ export function AAPtest({ title, subtitle, image, children }: { title?: string, 
           </DrawerHeader>
         }
         {children && 
-          <div className="relative mx-[12.5%] lg:mx-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
+          <div className="relative mx-[12.5%] prose">
             {children}
           </div>
         }

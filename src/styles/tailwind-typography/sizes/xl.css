@@ -1,0 +1,361 @@
+@reference "../utils.css";
+
+@utility prose-xl {
+  @layer prose {
+    @variant not-not-prose {
+      font-size: calc(20rem/16);
+      line-height: calc(36/20);
+    }
+  
+    p {
+      @variant not-not-prose {
+        margin-top: calc(24em/20);
+        margin-bottom: calc(24em/20);
+      }
+    }
+    
+    [class~="lead"] {
+      @variant not-not-prose {
+        font-size: calc(24em/20);
+        line-height: calc(36/24);
+        margin-top: calc(24em/24);
+        margin-bottom: calc(24em/24);
+      }
+    }
+  
+    blockquote {
+      @variant not-not-prose {
+        margin-top: calc(48em/30);
+        margin-bottom: calc(48em/30);
+        padding-inline-start: calc(32em/30);
+      }
+    }
+  
+    h1 {
+      @variant not-not-prose {
+        font-size: calc(56em/20);
+        margin-top: 0;
+        margin-bottom: calc(48em/56);
+        line-height: calc(56/56);
+      }
+    }
+    
+    h2 {
+      @variant not-not-prose {
+        font-size: calc(36em/20);
+        margin-top: calc(56em/36);
+        margin-bottom: calc(32em/36);
+        line-height: calc(40/36);
+      }
+  
+      code {
+        @variant not-not-prose {
+          font-size: calc(31em/36);
+        }
+      }
+  
+      + * {
+        @variant not-not-prose {
+          margin-top: 0;
+        }
+      }
+    }
+  
+    h3 {
+      @variant not-not-prose {
+        font-size: calc(30em/20);
+        margin-top: calc(48em/30);
+        margin-bottom: calc(20em/30);
+        line-height: calc(40/30);
+      }
+  
+      code {
+        @variant not-not-prose {
+          font-size: calc(27em/30);
+        }
+      }
+  
+      + * {
+        @variant not-not-prose {
+          margin-top: 0;
+        }
+      }
+    }
+  
+    h4 {
+      @variant not-not-prose {
+        margin-top: calc(36em/20);
+        margin-bottom: calc(12em/20);
+        line-height: calc(32/20);
+      }
+  
+      + * {
+        @variant not-not-prose {
+          margin-top: 0;
+        }
+      }
+    }
+  
+    img {
+      @variant not-not-prose {
+        margin-top: calc(40em/20);
+        margin-bottom: calc(40em/20);
+      }
+    }
+  
+    picture {
+      @variant not-not-prose {
+        margin-top: calc(40em/20);
+        margin-bottom: calc(40em/20);
+      }
+  
+      > img {
+        @variant not-not-prose {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+  
+    video {
+      @variant not-not-prose {
+        margin-top: calc(40em/20);
+        margin-bottom: calc(40em/20);
+      }
+    }
+  
+    kbd {
+      @variant not-not-prose {
+        font-size: calc(18em/20);
+        border-radius: calc(5rem/16);
+        padding-top: calc(5em/20);
+        padding-inline-end: calc(8em/20);
+        padding-bottom: calc(5em/20);
+        padding-inline-start: calc(8em/20);
+      }
+    }
+  
+    code {
+      @variant not-not-prose {
+        font-size: calc(18em/20);
+      }
+    }
+  
+    pre {
+      @variant not-not-prose {
+        font-size: calc(18em/20);
+        line-height: calc(32/18);
+        margin-top: calc(36em/18);
+        margin-bottom: calc(36em/18);
+        border-radius: calc(8rem/16);
+        padding-top: calc(20em/18);
+        padding-inline-end: calc(24em/18);
+        padding-bottom: calc(20em/18);
+        padding-inline-start: calc(24em/18);
+      }
+    }
+  
+    ol {
+      @variant not-not-prose {
+        margin-top: calc(24em/20);
+        margin-bottom: calc(24em/20);
+        padding-inline-start: calc(32em/20);
+      }
+  
+      > li {
+        @variant not-not-prose {
+          padding-inline-start: calc(8em/20);
+        }
+      }
+  
+      ul, ol {
+        @variant not-not-prose {
+          margin-top: calc(16em/20);
+          margin-bottom: calc(16em/20);
+        }
+      }
+    }
+  
+    ul {
+      @variant not-not-prose {
+        margin-top: calc(24em/20);
+        margin-bottom: calc(24em/20);
+        padding-inline-start: calc(32em/20);
+      }
+      
+      > li {
+        @variant not-not-prose {
+          padding-inline-start: calc(8em/20);
+        }
+      }
+  
+      ul, ol {
+        @variant not-not-prose {
+          margin-top: calc(16em/20);
+          margin-bottom: calc(16em/20);
+        }
+      }
+    }
+  
+    li {
+      @variant not-not-prose {
+        margin-top: calc(12em/20);
+        margin-bottom: calc(12em/20);
+      }
+    }
+  
+    > ul > li {
+      p {
+        @variant not-not-prose {
+          margin-top: calc(16em/20);
+          margin-bottom: calc(16em/20);
+        }
+      }
+  
+      > p {
+        &:first-child {
+          @variant not-not-prose {
+            margin-top: calc(24em/20);
+          }
+        }
+  
+        &:last-child {
+          @variant not-not-prose {
+            margin-bottom: calc(24em/20);
+          }
+        }
+      }
+    }
+  
+    > ol > li > p {
+      &:first-child {
+        @variant not-not-prose {
+          margin-top: calc(24em/20);
+        }
+      }
+  
+      &:last-child {
+        @variant not-not-prose {
+          margin-bottom: calc(24em/20);
+        }
+      }
+    }
+  
+    dl {
+      @variant not-not-prose {
+        margin-top: calc(24em/20);
+        margin-bottom: calc(24em/20);
+      }
+    }
+  
+    dt {
+      @variant not-not-prose {
+        margin-top: calc(24em/20);
+      }
+    }
+  
+    dd {
+      @variant not-not-prose {
+        margin-top: calc(12em/20);
+        padding-inline-start: calc(32em/20);
+      }
+    }
+  
+    hr {
+      @variant not-not-prose {
+        margin-top: calc(56em/20);
+        margin-bottom: calc(56em/20);
+      }
+  
+      + * {
+        @variant not-not-prose {
+          margin-top: 0;
+        }
+      }
+    }
+  
+    table {
+      @variant not-not-prose {
+        font-size: calc(18em/20);
+        line-height: calc(28/18);
+      }
+    }
+  
+    thead th {
+      @variant not-not-prose {
+        padding-inline-end: calc(12em/18);
+        padding-bottom: calc(16em/18);
+        padding-inline-start: calc(12em/18);
+      }
+  
+      &:first-child {
+        @variant not-not-prose {
+          padding-inline-start: 0;
+        }
+      }
+  
+      &:last-child {
+        @variant not-not-prose {
+          padding-inline-end: 0;
+        }
+      }
+    }
+  
+    tbody, tfoot {
+      td {
+        @variant not-not-prose {
+          padding-top: calc(16em/18);
+          padding-inline-end: calc(12em/18);
+          padding-bottom: calc(16em/18);
+          padding-inline-start: calc(12em/18);
+        }
+  
+        &:first-child {
+          @variant not-not-prose {
+            padding-inline-start: 0;
+          }
+        }
+  
+        &:last-child {
+          @variant not-not-prose {
+            padding-inline-end: 0;
+          }
+        }
+      }
+    }
+  
+    figure {
+      @variant not-not-prose {
+        margin-top: calc(40em/20);
+        margin-bottom: calc(40em/20);
+      }
+  
+      > * {
+        @variant not-not-prose {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+  
+    figcaption {
+      @variant not-not-prose {
+        font-size: calc(18em/20);
+        line-height: calc(28/18);
+        margin-top: calc(18em/18);
+      }
+    }
+  
+    > :first-child {
+      @variant not-not-prose {
+        margin-top: 0;
+      }
+    }
+  
+    > :last-child {
+      @variant not-not-prose {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

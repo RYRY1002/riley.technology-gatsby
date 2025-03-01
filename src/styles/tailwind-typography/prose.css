@@ -1,0 +1,365 @@
+@import 'tailwindcss';
+@reference "./utils.css";
+
+@utility prose {
+  @layer prose {
+    @variant not-not-prose {
+      color: var(--tw-prose-body);
+      max-width: 65ch;
+    }
+
+    [class~="lead"] {
+      @variant not-not-prose {
+        color: var(--tw-prose-lead);
+      }
+    }
+
+    a {
+      @variant not-not-prose {
+        color: var(--tw-prose-links);
+        text-decoration: underline;
+        font-weight: 500;
+      }
+    }
+
+    strong {
+      @variant not-not-prose {
+        color: var(--tw-prose-bold);
+        font-weight: 600;
+      }
+    }
+
+    a strong, blockquote strong, thead th strong, a code, h1 code, h2 code, h3 code, h4 code, blockquote code, thread th code {
+      @variant not-not-prose {
+        color: inherit;
+      }
+    }
+
+    ol {
+      @variant not-not-prose {
+        list-style: decimal;
+      }
+
+      > li::marker {
+        @variant not-not-prose {
+          font-weight: 400;
+          color: var(--tw-prose-counters);
+        }
+      }
+
+      &[type="A"] {
+        @variant not-not-prose {
+          list-style: upper-alpha;
+        }
+      }
+
+      &[type="a"] {
+        @variant not-not-prose {
+          list-style: lower-alpha;
+        }
+      }
+
+      &[type="A" s] {
+        @variant not-not-prose {
+          list-style: upper-alpha;
+        }
+      }
+
+      &[type="a" s] {
+        @variant not-not-prose {
+          list-style: lower-alpha;
+        }
+      }
+
+      &[type="I"] {
+        @variant not-not-prose {
+          list-style: upper-roman;
+        }
+      }
+
+      &[type="i"] {
+        @variant not-not-prose {
+          list-style: lower-roman;
+        }
+      }
+
+      &[type="I" s] {
+        @variant not-not-prose {
+          list-style: upper-roman;
+        }
+      }
+
+      &[type="i" s] {
+        @variant not-not-prose {
+          list-style: lower-roman;
+        }
+      }
+
+      &[type="1"] {
+        @variant not-not-prose {
+          list-style: decimal;
+        }
+      }
+    }
+
+    ul {
+      @variant not-not-prose {
+        list-style: disc;
+      }
+
+      > li::marker {
+        @variant not-not-prose {
+          color: var(--tw-prose-bullets);
+        }
+      }
+    }
+
+    dt {
+      @variant not-not-prose {
+        color: var(--tw-prose-headings);
+        font-weight: 600;
+      }
+    }
+
+    hr {
+      @variant not-not-prose {
+        border-color: var(--tw-prose-hr);
+        border-top-width: 1;
+      }
+    }
+
+    blockquote {
+      @variant not-not-prose {
+        font-weight: 500;
+        font-style: italic;
+        color: var(--tw-prose-quotes);
+        border-inline-start-width: 0.25rem;
+        border-inline-start-color: var(--tw-prose-quote-borders);
+        quotes: "\201C" "\201D" "\2018" "\2019";
+      }
+
+      p:first-of-type::before {
+        @variant not-not-prose {
+          content: open-quote;
+        }
+      }
+
+      p:last-of-type::after {
+        @variant not-not-prose {
+          content: close-quote;
+        }
+      }
+
+      code {
+        @variant not-not-prose {
+          color: inherit;
+        }
+      }
+    }
+
+    h1 {
+      @variant not-not-prose {
+        color: var(--tw-prose-headings);
+        font-weight: 800;
+      }
+
+      strong {
+        @variant not-not-prose {
+          color: inherit;
+          font-weight: 900;
+        }
+      }
+
+      code {
+        @variant not-not-prose {
+          color: inherit;
+        }
+      }
+    }
+
+    h2 {
+      @variant not-not-prose {
+        color: var(--tw-prose-headings);
+        font-weight: 700;
+      }
+
+      strong {
+        @variant not-not-prose {
+          color: inherit;
+          font-weight: 800;
+        }
+      }
+
+      code {
+        @variant not-not-prose {
+          color: inherit;
+        }
+      }
+    }
+    
+    h3 {
+      @variant not-not-prose {
+        color: var(--tw-prose-headings);
+        font-weight: 600;
+      }
+
+      strong {
+        @variant not-not-prose {
+          color: inherit;
+          font-weight: 700;
+        }
+      }
+
+      code {
+        @variant not-not-prose {
+          color: inherit;
+        }
+      }
+    }
+
+    h4 {
+      @variant not-not-prose {
+        color: var(--tw-prose-headings);
+        font-weight: 600;
+      }
+
+      strong {
+        @variant not-not-prose {
+          color: inherit;
+          font-weight: 700;
+        }
+      }
+
+      code {
+        @variant not-not-prose {
+          color: inherit;
+        }
+      }
+    }
+
+    picture {
+      @variant not-not-prose {
+        display: block;
+      }
+    }
+
+    kbd {
+      @variant not-not-prose {
+        font-weight: 500;
+        font-family: inherit;
+        color: var(--tw-prose-kbd);
+        box-shadow: 0 0 0 1px rgb(var(--tw-prose-kbd-shadows) / 10%), 0 3px 0 rgb(var(--tw-prose-kbd-shadows) / 10%);
+      }
+    }
+
+    code {
+      @variant not-not-prose {
+        color: var(--tw-prose-code);
+        font-weight: 600;
+
+        &::before, &::after {
+          @variant not-not-prose {
+            content: "`";
+          }
+        }
+      }
+    }
+
+    pre {
+      @variant not-not-prose {
+        color: var(--tw-prose-pre-code);
+        background-color: var(--tw-prose-pre-bg);
+        overflow-x: auto;
+        font-weight: 400;
+      }
+
+      code {
+        @variant not-not-prose {
+          background-color: transparent;
+          border-width: 0;
+          border-radius: 0;
+          padding: 0;
+          font-weight: inherit;
+          color: inherit;
+          font-size: inherit;
+          font-family: inherit;
+          line-height: inherit;
+        }
+
+        &::before, &::after {
+          @variant not-not-prose {
+            content: none;
+          }
+        }
+      }
+    }
+
+    table {
+      @variant not-not-prose {
+        width: 100%;
+        table-layout: auto;
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+    }
+
+    thead {
+      @variant not-not-prose {
+        border-bottom-width: 1px;
+        border-bottom-color: var(--tw-prose-th-borders);
+      }
+
+      th {
+        @variant not-not-prose {
+          color: var(--tw-prose-headings);
+          font-weight: 600;
+          vertical-align: bottom;
+        }
+      }
+    }
+
+    tbody tr {
+      @variant not-not-prose {
+        border-bottom-width: 1px;
+        border-bottom-color: var(--tw-prose-td-borders);
+      }
+
+      &:last-child {
+        @variant not-not-prose {
+          border-bottom-width: 0;
+        }
+      }
+    }
+
+    tbody td {
+      @variant not-not-prose {
+        vertical-align: baseline;
+      }
+    }
+
+    tfoot {
+      @variant not-not-prose {
+        border-top-width: 1px;
+        border-top-color: var(--tw-prose-th-borders);
+      }
+
+      td {
+        @variant not-not-prose {
+          vertical-align: top;
+        }
+      }
+    }
+
+    th, td {
+      @variant not-not-prose {
+        text-align: start;
+      }
+    }
+    
+    figcaption {
+      @variant not-not-prose {
+        color: var(--tw-prose-captions);
+      }
+    }
+  }
+}

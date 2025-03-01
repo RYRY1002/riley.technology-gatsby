@@ -1,0 +1,13 @@
+@import "./tailwind-typography/prose.css" layer(prose);
+
+@import "./tailwind-typography/sizes/sm.css" layer(prose);
+@import "./tailwind-typography/sizes/base.css" layer(prose);
+@import "./tailwind-typography/sizes/lg.css" layer(prose);
+@import "./tailwind-typography/sizes/xl.css" layer(prose);
+@import "./tailwind-typography/sizes/2xl.css" layer(prose);
+
+@import "./tailwind-typography/colors/gray.css" layer(prose);
+@import "./tailwind-typography/colors/slate.css" layer(prose);
+@import "./tailwind-typography/colors/zinc.css" layer(prose);
+@import "./tailwind-typography/colors/neutral.css" layer(prose);
+@import "./tailwind-typography/colors/stone.css" layer(prose);

@@ -1,0 +1,5 @@
+@custom-variant not-not-prose {
+  &:not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @slot;
+  }
+}

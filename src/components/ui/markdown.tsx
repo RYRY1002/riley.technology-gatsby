@@ -166,7 +166,7 @@ export function InlineCarousel(
             {queriedImages.map((image, index) => (
               <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] h-screen cursor-grab active:cursor-grabbing select-none">
                 <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-full" objectFit="contain"/>
-                <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
+                <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose">
                   <div>
                     <p className="not-prose"><strong>{index + 1}</strong> of <strong>{queriedImages.length}</strong></p>
                     <Separator orientation="horizontal" className="mt-2"/>
@@ -276,7 +276,7 @@ export function MarkdownImage(
       <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
         <div className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%]">
           <GatsbyImage image={getImage(queriedImage.src)} alt={queriedImage.alt} className={`object-cover h-full ${className}`} objectFit="contain"/>
-          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
+          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose">
             <div>
               <p>{queriedImage.alt}</p>
             </div>
@@ -318,7 +318,7 @@ export function AllAccessPass(
       </DialogTrigger>
       <DialogContent className="min-w-[85vw]">
         <ScrollArea className="h-[85vh] w-full">
-          <div className="mx-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
+          <div className="prose">
             {children}
           </div>
         </ScrollArea>

@@ -9,33 +9,42 @@ module.exports = {
     extend: {
       typography: ({theme}) => ({
         DEFAULT: {
-          css: {
-            maxWidth: '85ch',
-            a: {
-              fontWeight: 'inherit',
+          css: [
+            {
+              maxWidth: '85ch',
+              a: {
+                fontWeight: 'inherit',
+              },
+              'blockquote p:first-of-type::before': false,
+              'blockquote p:last-of-type::after': false,
+              code: {
+                borderRadius: defaultTheme.borderRadius.lg,
+                fontWeight: false,
+                padding: '.2em .4em',
+                '&::before': false,
+                '&::after': false,
+              }
             },
-            'blockquote p:first-of-type::before': false,
-            'blockquote p:last-of-type::after': false,
-            'code::before': false,
-            'code::after': false,
-            code: {
-              borderRadius: defaultTheme.borderRadius.lg,
-              fontWeight: false,
-              backgroundColor: 'var(--tw-prose-pre-bg)',
-              padding: '.2em .4em'
-            },
-            '--tw-prose-code': 'var(--tw-prose-invert-code)'
-          },
+            false
+          ]
         },
-        invert: {
-          css: {
-            '--tw-prose-pre-bg': colors.neutral[900],
-          }
+        slate: {
+          css: false
+        },
+        gray: {
+          css: false
+        },
+        zinc: {
+          css: false
         },
         neutral: {
-          css: {
-            '--tw-prose-pre-bg': colors.neutral[900],
-          }
+          css: false
+        },
+        stone: {
+          css: false
+        },
+        invert: {
+          css: false
         }
       }),
     },

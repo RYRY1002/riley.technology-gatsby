@@ -1,22 +1,85 @@
 /* Fonts */
-@import 'tailwindcss' source(none);
+@import 'tailwindcss';
 @config "../../tailwind.config.js";
 
-@source "../../src/components/";
-@source "../../src/lib/";
-@source "../../src/pages/";
-@source "../../src/posts/";
-@source "../../src/styles/";
-@source "../../src/templates/";
+@custom-variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
 
-@source "../../posts/"
+/* Tailwind theme */
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(240 10% 3.9%);
 
-@plugin 'tailwindcss-animate';
-@plugin '@tailwindcss/typography';
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 10% 3.9%);
 
-@custom-variant dark (&:is(.dark *));
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 10% 3.9%);
 
-@theme {
+  --primary: hsl(240 5.9% 10%);
+  --primary-foreground: hsl(0 0% 98%);
+
+  --secondary: hsl(240 4.8% 95.9%);
+  --secondary-foreground: hsl(240 5.9% 10%);
+
+  --muted: hsl(240 4.8% 95.9%);
+  --muted-foreground: hsl(240 3.8% 46.1%);
+
+  --accent: hsl(240 4.8% 95.9%);
+  --accent-foreground: hsl(240 5.9% 10%);
+
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 98%);
+
+  --border: hsl(240 5.9% 90%);
+  --input: hsl(240 5.9% 90%);
+  --ring: hsl(240 10% 3.9%);
+
+  --radius: 0.5rem;
+
+  --chart-1: hsl(173 58% 39%);
+  --chart-2: hsl(12 76% 61%);
+  --chart-3: hsl(197 37% 24%);
+  --chart-4: hsl(43 74% 66%);
+  --chart-5: hsl(27 87% 67%);
+
+  @variant dark {
+    --background: hsl(240 10% 3.9%);
+    --foreground: hsl(0 0% 98%);
+  
+    --card: hsl(240 10% 3.9%);
+    --card-foreground: hsl(0 0% 98%);
+  
+    --popover: hsl(240 10% 3.9%);
+    --popover-foreground: hsl(0 0% 98%);
+  
+    --primary: hsl(0 0% 98%);
+    --primary-foreground: hsl(240 5.9% 10%);
+  
+    --secondary: hsl(240 3.7% 15.9%);
+    --secondary-foreground: hsl(0 0% 98%);
+  
+    --muted: hsl(240 3.7% 15.9%);
+    --muted-foreground: hsl(240 5% 64.9%);
+  
+    --accent: hsl(240 3.7% 15.9%);
+    --accent-foreground: hsl(0 0% 98%);
+  
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(0 0% 98%);
+  
+    --border: hsl(240 3.7% 15.9%);
+    --input: hsl(240 3.7% 15.9%);
+    --ring: hsl(240 4.9% 83.9%);
+  
+    --chart-1: hsl(220 70% 50%);
+    --chart-2: hsl(340 75% 55%);
+    --chart-3: hsl(30 80% 55%);
+    --chart-4: hsl(280 65% 60%);
+    --chart-5: hsl(160 60% 45%);
+  }
+}
+
+@theme inline {
   --font-*: initial;
   --font-sans: IBM Plex Sans, sans-serif;
 
@@ -173,85 +236,14 @@ Shouldn't cause any performance issues at build time as PurgeCSS is installed */
   }
 }
 
- 
-/* Tailwind theme */
-:root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 3.9%);
-
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 10% 3.9%);
-
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 10% 3.9%);
-
-  --primary: hsl(240 5.9% 10%);
-  --primary-foreground: hsl(0 0% 98%);
-
-  --secondary: hsl(240 4.8% 95.9%);
-  --secondary-foreground: hsl(240 5.9% 10%);
-
-  --muted: hsl(240 4.8% 95.9%);
-  --muted-foreground: hsl(240 3.8% 46.1%);
-
-  --accent: hsl(240 4.8% 95.9%);
-  --accent-foreground: hsl(240 5.9% 10%);
-
-  --destructive: hsl(0 84.2% 60.2%);
-  --destructive-foreground: hsl(0 0% 98%);
-
-  --border: hsl(240 5.9% 90%);
-  --input: hsl(240 5.9% 90%);
-  --ring: hsl(240 10% 3.9%);
-
-  --radius: 0.5rem;
-
-  --chart-1: hsl(173 58% 39%);
-  --chart-2: hsl(12 76% 61%);
-  --chart-3: hsl(197 37% 24%);
-  --chart-4: hsl(43 74% 66%);
-  --chart-5: hsl(27 87% 67%);
-}
-
-.dark, [data-theme="dark"] {
-  --background: hsl(240 10% 3.9%);
-  --foreground: hsl(0 0% 98%);
-
-  --card: hsl(240 10% 3.9%);
-  --card-foreground: hsl(0 0% 98%);
-
-  --popover: hsl(240 10% 3.9%);
-  --popover-foreground: hsl(0 0% 98%);
-
-  --primary: hsl(0 0% 98%);
-  --primary-foreground: hsl(240 5.9% 10%);
-
-  --secondary: hsl(240 3.7% 15.9%);
-  --secondary-foreground: hsl(0 0% 98%);
-
-  --muted: hsl(240 3.7% 15.9%);
-  --muted-foreground: hsl(240 5% 64.9%);
-
-  --accent: hsl(240 3.7% 15.9%);
-  --accent-foreground: hsl(0 0% 98%);
-
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(0 0% 98%);
-
-  --border: hsl(240 3.7% 15.9%);
-  --input: hsl(240 3.7% 15.9%);
-  --ring: hsl(240 4.9% 83.9%);
-
-  --chart-1: hsl(220 70% 50%);
-  --chart-2: hsl(340 75% 55%);
-  --chart-3: hsl(30 80% 55%);
-  --chart-4: hsl(280 65% 60%);
-  --chart-5: hsl(160 60% 45%);
-}
-
 /* Link styling */
 @layer base {
   :any-link.link-styling, *.link-styling :any-link {
+    @apply font-mono hover:font-extrabold! transition-varfonts duration-100;
+  }
+}
+@utility link-styling {
+  &:any-link {
     @apply font-mono hover:font-extrabold! transition-varfonts duration-100;
   }
 }
@@ -304,7 +296,7 @@ Shouldn't cause any performance issues at build time as PurgeCSS is installed */
 }
 
 /* Code blocks */
-@layer base {
+@layer shiki {
   /*pre.shiki,
   pre.shiki > code,
   pre.shiki > code span {
@@ -355,4 +347,16 @@ Shouldn't cause any performance issues at build time as PurgeCSS is installed */
   pre.shiki > code > span.line.diff.remove:not(.highlighted)::after {
     @apply bg-[rgb(255,0,20)]/20 shadow-[-4px_0_rgba(255,0,20,0.5)];
   }
+}
+
+@reference "./tailwind-typography/colors/neutral.css";
+@reference "./tailwind-typography/sizes/sm.css";
+@reference "./tailwind-typography/sizes/base.css";
+@reference "./tailwind-typography/sizes/lg.css";
+@reference "./tailwind-typography/sizes/xl.css";
+@reference "./tailwind-typography/sizes/2xl.css";
+
+/* prose customizations */
+.prose {
+  @apply prose-neutral md:prose-sm lg:prose-base xl:prose-base 2xl:prose-lg mx-auto max-w-[85ch] link-styling;
 }

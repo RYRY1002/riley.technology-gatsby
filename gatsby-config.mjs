@@ -30,7 +30,14 @@ const config = {
     PARTIAL_HYDRATION: false
   },
   plugins: [
-    "gatsby-plugin-postcss", "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts",
+    {
+      resolve: "gatsby-plugin-postcss",
+      options: {
+        postCssPlugins: {
+          '@tailwindcss/postcss': {},
+        }
+      }
+    }, "gatsby-plugin-image", "gatsby-plugin-sitemap", "gatsby-plugin-preload-fonts",
     /* We really shouldn't have gatsby-transformer-remark still here as we're using MDX now.
        Unfortunately, gatsby-plugin-mdx doesn't seem to execute gatsby-ssr.js in any of the gatsbyRemarkPlugins you give it while gatsby-transformer-remark does.
        gatsby-remark-autolink-headers does all of its stuff in the gatsby-ssr.js file and so we need to have this here for the plugin to work.

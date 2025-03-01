@@ -131,7 +131,7 @@ export default function BlogPost({ data: { mdx }, children }) {
                       {frontmatter.images.hero.map((image, index) => (
                         <CarouselItem key={index} className="grid grid-cols-[1fr_320px] h-screen cursor-grab active:cursor-grabbing select-none">
                           <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-full" objectFit="contain"/>
-                          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
+                          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose">
                             <div>
                               <p className="not-prose"><strong>{index + 1}</strong> of <strong>{frontmatter.images.hero.length}</strong></p>
                               <Separator orientation="horizontal" className="mt-2"/>
@@ -157,12 +157,12 @@ export default function BlogPost({ data: { mdx }, children }) {
                 </DialogContent>
               </Dialog>
             )}
-            <div id="hero-text" className="absolute bottom-7 left-10 prose prose-neutral! lg:prose-lg dark:prose-invert!">
+            <div id="hero-text" className="absolute bottom-7 left-10 prose">
               <h1 className="m-0!">{frontmatter.title}</h1>
               <h4 className="m-0!">{frontmatter.date}</h4>
             </div>
           </div>
-          <div className="relative pb-8 mx-auto prose-sm prose-neutral! lg:prose dark:prose-invert! link-styling">
+          <div className="relative pb-8 prose">
             <MDXProvider components={mdxComponents}>
               {children}
             </MDXProvider>
