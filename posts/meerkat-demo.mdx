@@ -9,17 +9,211 @@ links:
     url: https://youtu.be/RWbbao0E0A0
   - title: Meerkat demo documentation
     url: https://docs.unrealengine.com/5.3/meerkat-sample-project-for-unreal-engine/
-image: ../../static/images/meerkat.png
-video: ../../static/videos/v4.mp4
-videoLooping: ../../static/videos/v4_loop.mp4
+image: ../static/images/meerkat/meerkat-1.png
+video: ../static/videos/v4.mp4
+videoLooping: ../static/videos/v4_loop.mp4
 tags:
   - Video
   - Unreal Engine
   - Demo
   - Graphics Programming
   - C++
+images:
+  hero:
+    - src: ../static/images/meerkat/meerkat-1.png
+      alt: Snapshot of the frame which the YouTube thumbnail is based on. A meerkat investigates the outside of a large egg
+    - src: ../static/images/meerkat/meerkat-2.png
+      alt: A meerkat balances atop a large egg in a desert
+    - src: ../static/images/meerkat/meerkat-13.png
+      alt: A meerkat gets ready to pounce from its burrow
+    - src: ../static/images/meerkat/meerkat-0.png
+      alt: A large egg sits alone in a desert
+    - src: ../static/images/meerkat/meerkat-6.png
+      alt: A meerkat whose head is poking through a hole in a large egg
+    - src: ../static/images/meerkat/meerkat-7.png
+      alt: A meerkat in its lookout position, searching the source of an eagle call
+    - src: ../static/images/meerkat/meerkat-12.png
+      alt: A bird flies in the sky, with a lens flare behind it
+    - src: ../static/images/meerkat/meerkat-14.png
+      alt: An eagle flies at a high rate of speed, attempting to pick up a meerkat with its talons
+    - src: ../static/images/meerkat/meerkat-20.png
+      alt: A meerkat shakes in fear, deep inside its burrow as an eagle's beak pokes through the entrance
+    - src: ../static/images/meerkat/meerkat-21.png
+      alt: An eagle's beak pokes through a hole in a large egg in comedic fashion
+    - src: ../static/images/meerkat/meerkat-22.png
+      alt: An eagle attempts to free its beak from a hole in a large egg
+    - src: ../static/images/meerkat/meerkat-26.png
+      alt: A meerkat searches the skies for the location of an eagle, with an egg beside it
+    - src: ../static/images/meerkat/meerkat-28.png
+      alt: A meerkat burrow's entrance is covered by a large egg
+importance: 4
 ---
 
-This will be a written blog post at some point. Allegedly.
+<MarkdownVideoPlayer video="videos/meerkat-demo"/>
 
-I might even start styling the blog post page before I go to Uni.
+After several years using Unreal, I finally said enough is enough and vowed to replace Unreal's chromatic aberration & lens flare effects with far superior implementations.
+
+A few weeks of tinkering later and a small demo video to show off my work, voila.
+
+## Why though?
+Anyone with an attentive eye who's played around with a Post Process Volume knows about Unreal's crappy [chromatic aberration](https://github.com/EpicGames/UnrealEngine/blob/40eea367040d50aadd9f030ed5909fc890c159c2/Engine/Shaders/Private/PostProcessTonemap.usf#L294) & [lens flare](https://github.com/EpicGames/UnrealEngine/blob/40eea367040d50aadd9f030ed5909fc890c159c2/Engine/Shaders/Private/PostProcessLensFlares.usf) effects, largely unchanged since they were [first](https://github.com/EpicGames/UnrealEngine/blob/324683ce78dc07f6bcea067e13fa1200dbf90ed0/Engine/Shaders/PostProcessSceneColorFringe.usf) [committed](https://github.com/EpicGames/UnrealEngine/blob/324683ce78dc07f6bcea067e13fa1200dbf90ed0/Engine/Shaders/PostProcessLensFlares.usf) to the Unreal Engine repo 10 years ago.
+
+## Chromatic Aberration
+Out of the box, Unreal's chromatic aberration effect just samples the scene 3 times (for red, green & blue) at 3 different offsets, then appends each of the sampled channels back into one final image. Yes really, it's that simple.
+
+![Unreal Engine's out-of-the-box chromatic aberration effect, as shown on the official Unreal Engine documentation](images/meerkat/scenefringe_1.png)
+
+Whilst very performant, it doesn't look great. In fact, it looks so not great that any user with a *very* fundamental knowledge of how computer graphics works can easily pick apart exactly how the effect works just by looking at it. And that just so happens to be the point where I deem an effect needs to be updated.
+
+Of course, there's no need to reinvent the wheel on something as popular as chromatic aberration, so I went looking for chromatic aberration shaders that I could implement into Unreal (which consists of launching RDR2 with a trainer and ReShade installed and going through shaders on GitHub until I find something performant & beautiful).
+
+A few hours later, I settled on [Prism](https://github.com/Fubaxiusz/fubax-shaders/blob/982c61f09322f54235c86579a77aa0d9c437c586/Shaders/Prism.fx) by [Jakub Maksymilian Fober](https://github.com/Fubaxiusz).
+
+<InlineCarousel images={[
+  "images/meerkat/prismtest0-2.png",
+  "images/meerkat/prismtest1-2.png",
+	"images/meerkat/prismtest2-2.png"
+]} alt="Prism in Red Dead Redemption 2" startIndex={1}/>
+
+Like most chromatic aberration shaders, it samples the scene $n$ times, each at a different offset, then multiplies the sample by a color determined by the offset. Take a look:
+
+```hlsl showLineNumbers title="Prism.fx © 2018-2023 Jakub Maksymilian Fober"
+float3 Spectrum(float hue)
+{
+	float3 hueColor;
+	hue *= 4f; // slope
+	hueColor.rg = hue - float2(1f, 2f);
+	hueColor.rg = saturate(1.5 - abs(hueColor.rg));
+	hueColor.r += saturate(hue - 3.5);
+	hueColor.b = 1f - hueColor.r;
+	return hueColor;
+}
+
+void ChromaticAberrationPS(
+	float4 pixelPos  : SV_Position,
+	float2 viewCoord : TEXCOORD,
+	out float3 color : SV_Target
+)
+{
+	// Get radius at increasing even powers
+	float4 pow_radius;
+	pow_radius[0] = dot(viewCoord, viewCoord);     // r²
+	pow_radius[1] = pow_radius[0] * pow_radius[0]; // r⁴
+	pow_radius[2] = pow_radius[1] * pow_radius[0]; // r⁶
+	pow_radius[3] = pow_radius[2] * pow_radius[0]; // r⁸
+	// Brown-Conrady division model distortion
+	float2 distortion = viewCoord * (rcp(1f + dot(K, pow_radius)) - 1f) / normalize(BUFFER_SCREEN_SIZE) * 0.5; // radial distortion
+	// Get texture coordinates
+	viewCoord = pixelPos.xy * BUFFER_PIXEL_SIZE;
+	// Get maximum number of samples allowed
+	uint evenSampleCount = min(ChromaticSamplesLimit - ChromaticSamplesLimit % 2, CHROMATIC_ABERRATION_MAX_SAMPLES); // clamp value
+	// Get total offset in pixels for automatic sample amount
+	uint totalPixelOffset = uint(ceil(length(distortion * BUFFER_SCREEN_SIZE)));
+	// Set dynamic even number sample count, limited in range
+	evenSampleCount = clamp(totalPixelOffset + totalPixelOffset % 2, 4, evenSampleCount);
+
+	// Sample background with multiple color filters at multiple offsets
+	color = 0f; // initialize color
+	for (uint i = 0; i < evenSampleCount; i++)
+	{
+		float progress = i / float(evenSampleCount - 1u) - 0.5;
+		progress = lerp(progress, 0.5 - abs(progress), AchromatAmount);
+		color +=
+			// Manual gamma correction
+			GammaConvert::to_linear(
+				tex2Dlod(
+					BackBuffer, // image source
+					float4(
+						progress // aberration offset
+						* distortion // distortion coordinates
+						+ viewCoord, // original coordinates
+					0f, 0f)).rgb
+			)
+			* Spectrum(i / float(evenSampleCount)); // blur layer color
+	}
+	// Preserve brightness
+	color *= 2f / evenSampleCount;
+	color = GammaConvert::to_display(color); // linear workflow
+	color = BlueNoise::dither(color, uint2(pixelPos.xy)); // dither
+}
+```
+
+It's self-contained and quite small. A great candidate for a quick implementation into Unreal.
+
+<AllAccessPass title="Why Prism?" subtitle="Why Prism is the ideal choice" readMore="Learn more about why I chose Prism">
+Being a ReShade shader, that is, a shader applied in real-time as an injector to any DirectX 9/10/11/12, OpenGL or Vulkan application, Prism has a host of neat tricks up its sleeve to save on performance.
+
+## Dynamic sample count
+Prism comes with a system to determine at runtime how many samples it needs to achieve the intended intensity of the effect.
+
+It works by determining the maximum pixel offset at a given intensity, then clamping the amount of samples that are to be applied to the maximum pixel offset.
+
+This works since by default, each pixel gets its own sample, and we can just divide the max pixel offset by how many pixels we want in-between each sample.
+
+```hlsl
+// Get total offset in pixels for automatic sample count
+uint pixelOffset = uint(ceil(length(distortion * SCREEN_SIZE)));
+
+// How many pixels should be between each sample
+pixelOffset = min(pixelOffset / pixelsPerSample, 1u); // pixelsPerSample = 1
+
+// Dynamic sample count
+uint sampleCount = clamp(pixelOffset + pixelOffset % 2u, 2u, sampleLimit);
+```
+
+Now, even if `sampleLimit` is `256u` for example, we will only sample the screen as many times as are required to get the desired effect.
+
+This is a very useful optimization as most of the time, chromatic aberration is a rather subtle effect, so the effect should *very* rarely come close to the sample limit. For example, on a 1080p display a pixel offset of 256 would mean distorting a whopping 13.3% of the screen. This is what that looks like:
+
+So the performance cost of the effect is directly proportional to the intensity of the effect (which is important to keep in mind for artists!).
+
+## Small footprint
+Prism is small. Very small.
+
+At a mere 58 lines of code, it's small enough that I could easily put it into Unreal without having to collapse it into it's own file or anything silly like that. It can just slot right into the tonemapping pipeline, no questions asked.
+
+It also doesn't have any dependencies on any other shaders (aside from [blue noise dithering](https://github.com/Fubaxiusz/fubax-shaders/blob/982c61f09322f54235c86579a77aa0d9c437c586/Shaders/Prism.fx#L196), which I removed), and only uses standard HLSL functions.
+
+## `Spectrum` doesn't use a LUT
+Yep, no LUT, just clever math.
+
+Take a look at a similar ReShade shader, MartysMods' (Pascal Glicher) Chromatic Aberration shader. Advertising itself as "A hilariously overengineered chromatic aberration effect", it uses a LUT based on CIE 1931 which was then optimized with an offline gradient descent algorithm.
+![MartysMods' Spectrum LUT](images/meerkat/ca_lut_new.png "[image-rendering:pixelated]")
+
+Of course, sampling any texture in a C++ program is a bit of a pain. You're signing yourself up to a lot more work than implementing any math-based algorithm has.
+
+On top of that, there are the obvious performance considerations that come with sampling any texture on the GPU. Never mind mobile or mobile-adjacent platforms (looking at you Switch), sampling a texture *hundreds* of times per frame can bring even reasonably powered devices to their knees.
+
+As MartysMods' shader said, using a LUT here is "hilariously overengineered".
+
+For these reasons, I chose to avoid any shader that uses a LUT at any critical stage of the shader, especially the `Spectrum` function.
+
+## Achromatic lens
+Prism has code to emulate an [achromatic lens](https://en.wikipedia.org/wiki/Achromatic_lens). Though not especially visually interesting with used as a boolean option, it produces interesting results when the achromat correction strength is set somewhere between 25% and 75%.
+
+<InlineCarousel images={[
+	{
+		src: "images/meerkat/normal-lens-diagram.png",
+		alt: "A normal lens, exhibiting the signature effects of chromatic aberration"
+	},
+	{
+		src: "images/meerkat/achromat-lens-diagram.png",
+		alt: "An achromat lens, featuring an achromatic doublet, distorting the red and blue wavelengths to correct them of chromatic aberration"
+	}
+]}/>
+</AllAccessPass>
+
+### Style
+
+You might've noticed that the chromatic aberration in Meerkat Demo and Prism isn't quite 1-to-1. That's because I'm a massive fan of anamorphic lenses and the visual artifacts that come along with them.
+
+Ever since the (now long forgotten) [reveal trailer](https://youtu.be/AQEizp-VrVU) for [Minecraft Earth](https://minecraft.wiki/w/Minecraft_Earth) in 2019, I've been obsessed with the camera and lens setup used in the trailer. It's what inspired me to turn the chromatic aberration into a radial effect instead of the typical (and physically accurate) zoom.
+
+<InlineCarousel images={[
+  "images/meerkat/mce-0.png",
+  "images/meerkat/mce-12.png",
+	"images/meerkat/mce-14.png",
+  "images/meerkat/mce-18.png",
+	"images/meerkat/mce-20.png",
+  "images/meerkat/mce-3.png"
+]} alt="Notice the horizontal stretching of the bokeh at the top & bottom of the frame and vertical stretching at the sides" startIndex={1}/>

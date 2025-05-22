@@ -1,0 +1,10 @@
+{
+  "this": "./metadata.json",
+  "associatedPost": "SitePage /project/meerkat-demo",
+  "title": "meerkat demo with custom lens flare and chromatic aberration",
+  "description": "A demo featuring custom post process lens flares and chromatic aberration I made.",
+  "date": "2024-01-06T13:28:40Z",
+  "src": "youtube/RWbbao0E0A0",
+  "poster": "./../../images/meerkat.png",
+  "thumbnails": "./thumb/thumbnails.vtt"
+}
