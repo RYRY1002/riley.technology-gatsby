@@ -1,0 +1,32 @@
+{
+  "this": "./metadata.json",
+  "associatedPost": "SitePage /project/v4",
+  "title": "Minecraft Acid Interstate V4",
+  "description": "The sequel to Bruce's Acid Interstate V3. Song is Time Lapses by Glue Trip.",
+  "date": "2021-01-16T06:00:14Z",
+  "src": "youtube/Dfd5xpEHLII",
+  "poster": "./../../images/v4.jpg",
+  "posters": [
+    "./../../images/v4.jpg",
+    "./../../images/v4/v4-1.png",
+    "./../../images/v4/v4-6.png",
+    "./../../images/v4/v4-7.png",
+    "./../../images/v4/v4-9.png",
+    "./../../images/v4/v4-14.png",
+    "./../../images/v4/v4-15.png",
+    "./../../images/v4/v4-17.png",
+    "./../../images/v4/v4-19.png",
+    "./../../images/v4/v4-22.png",
+    "./../../images/v4/v4-23.png"
+  ],
+  "thumbnails": "./thumb/thumbnails.vtt",
+  "textTracks": [
+    {"src": "./en.vtt", "label": "English", "language": "en", "kind": "subtitles", "type": "vtt", "default": true},
+    {"src": "./ar.vtt", "label": "Arabic", "language": "ar", "kind": "subtitles", "type": "vtt"},
+    {"src": "./es.vtt", "label": "Spanish", "language": "es", "kind": "subtitles", "type": "vtt"},
+    {"src": "./fr.vtt", "label": "French", "language": "fr", "kind": "subtitles", "type": "vtt"},
+    {"src": "./ru.vtt", "label": "Russian", "language": "ru", "kind": "subtitles", "type": "vtt"},
+    {"src": "./zh.vtt", "label": "Chinese", "language": "zh", "kind": "subtitles", "type": "vtt"},
+    {"src": "./chapters.vtt", "language": "en", "kind": "chapters", "type": "vtt", "default": true}
+  ]
+}

@@ -48,9 +48,65 @@ images:
       alt: todo
     - src: ../static/images/v4/v4-23.png
       alt: todo
+importance: 5
+---
+
+<MarkdownVideoPlayer video="videos/v4"/>
+
+Way back in 2017, YouTube recommended to me a video that would go on to change my life for the foreseeable future. That video was [MiningGodBruce](https://www.youtube.com/MiningGodBruce)'s [Subtlety Minecraft music video](https://youtu.be/C1ZN_NRBWwI?feature=shared "TOPAZ - Subtlety | Minecraft Music Video").
+
+Most viewers enjoyed this video, albeit more than most, but in my case, it utterly captivated me.
+
+My Autism diagnosis probably had a large part to play in that, after all the video activated my sensory responses (ie, [hand flapping](https://certifiedautismcenter.com/2021/10/12/autism-stimming-and-hand-flapping-what-are-the-key-causes-and-behaviors/)) like no other.
+
+The classic response to an amazing piece of art from any 10-year-old? Try and recreate it. So that's what I set out to do. Fortunately, Bruce had included a vast swath of details about the video's creation, even including his project files and source code.
+
+Of course, being a 10-year-old, there was no way I could possibly try to recreate months of work from someone in their very late teens. Not that that would stop me from trying.
+
+`INITIAL ATTEMPTS AAP` (maybe...)
 
 ---
 
-This will be a written blog post at some point. Allegedly.
+Skip ahead to mid-2020. I came into possession of a computer that would allow me to work on this project. I had spent the last few years developing my programming skills in my spare time on [Scratch](https://scratch.mit.edu/) and as an extracurricular activity at my school where I learnt [Processing](https://processing.org/). Using a few old tutorials on developing shaders from the folks at Continuum `INSERT LINK`, and Past Life Pro `INSERT LINK`, I started working away at the shader.
 
-I might even start styling the blog post page before I go to Uni.
+Bruce had been fortunate enough to provide the source code for the Minecraft shader he used to make his videos, and I used that as a jumping off point to start work on my project (and learn GLSL at the same time). Like any curious programmer working in an unfamiliar codebase, I started tinkering with the code, disabling certain lines and changing variable values to figure out what purpose they served.
+
+During my time working on this project, I took [hundreds of screenshots](https://photos.app.goo.gl/wYMRYWAyX56PUq588) of interesting errors, progress milestones, and images of things to get feedback on. They'll continue to be interspersed throughout this article.
+
+<InlineCarousel images={[
+  {
+    src: "images/v4/bts/2020-10-04_10.51.48.png",
+    alt: "Tinkering with transitions resulted in numerous catastrophic errors."
+  },
+  {
+    src: "images/v4/bts/2020-10-03_13.26.06.png",
+    alt: "Tuning displacement intensity had predictable results."
+  },
+	{
+    src: "images/v4/bts/2020-11-28_18.36.35.png",
+    alt: "Probable VRAM allocation issue."
+  },
+  {
+    src: "images/v4/bts/2020-11-14_21.16.31.png",
+    alt: "I have no idea what happened. Not a clue."
+  },
+  {
+    src: "images/v4/bts/2020-12-18_14.42.08.png",
+    alt: "Who knows. Perhaps some things are better when kept secret."
+  },
+  {
+    src: "images/v4/bts/2020-11-25_19.46.07.png",
+    alt: "Frustum culled terrain. The rails are in a different sector (vertical chunk) and haven't been culled (just)."
+  },
+  {
+    src: "images/v4/bts/2020-12-05_22.14.01.png",
+    alt: "Squish"
+  },
+  {
+    src: "images/v4/bts/2020-12-06_01.23.39.png",
+    alt: "The shader always expects to be the player at a specific Y and Z coordinate, as the displacement is relative to the camera's position. So going where you're not supposed to causes issues."
+  }]}/>
+
+I started off by generating the terrain that would be used in the video. Due to a few quirks resulting from changes to Minecraft's terrain generation throughout the years, I ended up using an [ancient mod](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/1280998-1-3-2-generator-ports-generate-terrain-from-older) for Minecraft 1.2.5 (released in April 2012, yes really). This process consists of finding a random world seed that looks nice and then moving the camera forward for thousands of blocks to get the game to generate more terrain. The amount of terrain that needs to be generated was calculated in advance.
+`TERRAIN LENGTH AAP`
+The terrain is then converted into a newer version of the game (1.12.2, released September 2017) where I do the rest of the work.
