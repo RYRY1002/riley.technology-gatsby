@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../react-devicons"
 		}
 	],
 	"settings": {
@@ -12,7 +9,13 @@
 		"typescript.tsdk": "node_modules\\typescript\\lib",
 		"github-actions.workflows.pinned.workflows": [
 			".github/workflows/gatsby.yml"
-		]
+		],
+
+		// Custom keyboard shortcuts
+		"workspace.gatsby.develop.enabled": true,
+		"workspace.gatsby.build.enabled": true,
+		"workspace.gatsby.serve.enabled": true,
+		"workspace.gatsby.clean.enabled": true
 	},
 	"launch": {
 		"version": "0.2.0",
@@ -23,7 +26,7 @@
 				"request": "launch",
 				"program": "${workspaceRoot:gatsby}/node_modules/.bin/gatsby",
 				"windows": {
-					"program": "${workspaceRoot:gatsby}/node_modules/gatsby/dist/bin/gatsby"
+					"program": "${workspaceRoot:gatsby}/node_modules/gatsby/dist/bin/gatsby.js"
 				},
 				"args": ["develop"],
 				"env": {
@@ -39,7 +42,7 @@
 				"request": "launch",
 				"program": "${workspaceRoot:gatsby}/node_modules/.bin/gatsby",
 				"windows": {
-					"program": "${workspaceRoot:gatsby}/node_modules/gatsby/dist/bin/gatsby"
+					"program": "${workspaceRoot:gatsby}/node_modules/gatsby/dist/bin/gatsby.js"
 				},
 				"args": ["build"],
 				"env": {
@@ -50,5 +53,31 @@
 				"console": "integratedTerminal"
 			}
 		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+    {
+      "label": "Gatsby develop",
+      "type": "shell",
+      "command": "gatsby develop"
+    },
+    {
+      "label": "Gatsby build",
+      "type": "shell",
+      "command": "gatsby build"
+    },
+    {
+      "label": "Gatsby serve",
+      "type": "shell",
+      "command": "gatsby serve",
+      "dependsOn": "Gatsby Build"
+    },
+    {
+      "label": "Gatsby clean",
+      "type": "shell",
+      "command": "gatsby clean"
+    }
+  ]
 	}
 }

@@ -1,4 +1,8 @@
 @import 'tailwindcss';
+@source not "../../../.cache/";
+@source not "../../../public/";
+@source not "../../../src/gatsby-types.d.ts";
+
 @reference "./sizes/sm.css";
 @reference "./sizes/base.css";
 @reference "./sizes/lg.css";

@@ -1,7 +1,7 @@
 import * as path from "path"
 import { createFilePath, createRemoteFileNode } from "gatsby-source-filesystem"
 
-export const onCreateWebpackConfig = ({ actions }) => {
+export const onCreateWebpackConfig = ({ actions, getConfig, stage }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -11,8 +11,15 @@ export const onCreateWebpackConfig = ({ actions }) => {
         "@/static": path.resolve(__dirname, "static"),
         "@/posts": path.resolve(__dirname, "posts")
       },
-    },
+    }
   })
+
+  if (stage === "build-javascript" && getConfig().optimization.minimizer != false) {
+    let config = getConfig();
+    config.optimization.minimizer = config.optimization.minimizer.filter((plugin) => {
+      return plugin.constructor.name !== "CssMinimizerPlugin";
+    });
+  }
 }
 
 exports.createSchemaCustomization = ({ actions }) => {
@@ -26,8 +33,6 @@ exports.createSchemaCustomization = ({ actions }) => {
     type Mdx implements Node {
       remoteImages: [File] @link(from: "fields.remoteImagesId")
     }`)
-
-  printTypeDefinitions({ });
 }
 
 exports.createPages = ({ graphql, actions: { createPage } }) => {
