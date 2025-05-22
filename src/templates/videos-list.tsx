@@ -101,13 +101,6 @@ export const pageQuery = graphql`
           description
           date(formatString: "MMMM DD, YYYY")
           src
-          download {
-            url {
-              relativePath
-              prettySize
-            }
-            filename
-          }
           poster {
             childImageSharp {
               gatsbyImageData(layout: CONSTRAINED)
