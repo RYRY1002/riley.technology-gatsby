@@ -5,9 +5,9 @@ import { Link, PageProps, graphql } from "gatsby";
 import ThemeProvider from "@/components/ui/theme-provider";
 import ThemeToggleButton from "@/components/theme-toggle-button";
 
-import v4loop from "@/static/videos/v4_loop.mp4";
+import { cn } from "@/lib/utils"
 
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 
 import {
   Pagination,
@@ -19,13 +19,23 @@ import {
   PaginationNext,
   PaginationLast
 } from "@/components/ui/pagination"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi
+} from "@/components/ui/carousel";
+import Fade from "embla-carousel-fade";
+import Autoplay from "embla-carousel-autoplay";
 
 import { remapValue } from "@/lib/utils";
 
 import Footer from "@/components/footer";
 import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
-export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
+export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
   const posts = data.allMdx.edges;
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;
@@ -57,6 +67,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
           let currentScroll = $(window).scrollTop();
           let socialTop = $("#hero-text").offset().top;
           let socialBottom = socialTop + $("#hero-text").height();
+          let scrollPercent = currentScroll / socialBottom;
 
           if ( currentScroll >= socialBottom ) {
             $("#socials").addClass("sticky");
@@ -73,6 +84,22 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
       }
       {
         $(window).on("scroll load", function() {
+          let currentScroll = $(window).scrollTop();
+          let arrow = $("#hero").height() - $("#socials").height() - $(window).height() * 0.25;
+
+          function lerp(start, end, time) {
+            return start + (end - start) * time;
+          }
+
+          if (currentScroll <= arrow) {
+            $("#rotating-arrow").css("rotate", lerp(0, 90, Math.min(...[currentScroll / arrow, 1])) + "deg");
+          } else {
+            $("#rotating-arrow").css("rotate");
+          }
+        });
+      }
+      {
+        $(window).on("scroll load", function() {
           let viewportHeight = $(window).height();
           let viewportWidth = $(window).width();
           let currentScroll = $(window).scrollTop();
@@ -80,19 +107,19 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
           let mainHeight = $("main").height();
 
           if (currentScroll >= mainHeight) {
-            $("#bg-video").addClass("absolute!");
-            $("#bg-video").addClass("h-screen");
-            $("#bg-video").addClass("-bottom-[3vw]!");
-            $("#bg-video").removeClass("fixed");
-            $("#bg-video").removeClass("h-full");
-            $("#bg-video").css("mask-image", "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)");
+            $("#background-pics").addClass("absolute!");
+            $("#background-pics").addClass("h-screen");
+            $("#background-pics").addClass("-bottom-[3vw]!");
+            $("#background-pics").removeClass("fixed");
+            $("#background-pics").removeClass("h-full");
+            $("#background-pics").css("mask-image", "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)");
           } else {
-            $("#bg-video").removeClass("absolute!");
-            $("#bg-video").removeClass("h-screen");
-            $("#bg-video").removeClass("-bottom-[3vw]!");
-            $("#bg-video").addClass("fixed");
-            $("#bg-video").addClass("h-full");
-            $("#bg-video").css("mask-image", "");
+            $("#background-pics").removeClass("absolute!");
+            $("#background-pics").removeClass("h-screen");
+            $("#background-pics").removeClass("-bottom-[3vw]!");
+            $("#background-pics").addClass("fixed");
+            $("#background-pics").addClass("h-full");
+            $("#background-pics").css("mask-image", "");
           }
         });
       }
@@ -103,11 +130,11 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
           let heroBottom = $("#hero-text").offset().top + $("#hero-text").height();
   
           if (currentScroll >= heroBottom) {
-            $("#bg-video").css("filter", 
+            $("#background-pics").css("filter", 
             "blur(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + "px) " + 
             "brightness(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ")");
           } else {
-            $("#bg-video").css("filter", "");
+            $("#background-pics").css("filter", "");
           }
         });
       }
@@ -117,10 +144,32 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <main className="relative z-1 bg-background">
-        <video id="bg-video" className="fixed bottom-0 left-0 w-full h-full object-cover -z-1" autoPlay loop muted>
-            <source src={v4loop} type="video/mp4"/>
-        </video>
-        <div id="hero" className="px-20 pt-12 h-[89vh] w-full">
+        <Carousel plugins={[Autoplay({ stopOnInteraction: false, stopOnFocusIn: false }), Fade()]} opts={{ loop: true }} id="background-pics" className="absolute -z-1 h-full w-full overflow-hidden">
+          <CarouselContent className="h-full w-full">
+            <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
+              <StaticImage src="../../static/images/v4/v4-1.png" alt="Hero image" placeholder="dominantColor"/>
+            </CarouselItem>
+            <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
+              <StaticImage src="../../static/images/v4/v4-14.png" alt="Hero image" placeholder="dominantColor"/>
+            </CarouselItem>
+            <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
+              <StaticImage src="../../static/images/v4/v4-15.png" alt="Hero image" placeholder="dominantColor"/>
+            </CarouselItem>
+            <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
+              <StaticImage src="../../static/images/v5-progressupdate.jpg" alt="Hero image" placeholder="dominantColor"/>
+            </CarouselItem>
+            <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
+              <StaticImage src="../../static/images/v4/v4-19.png" alt="Hero image" placeholder="dominantColor"/>
+            </CarouselItem>
+            <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
+              <StaticImage src="../../static/images/v4/v4-23.png" alt="Hero image" placeholder="dominantColor"/>
+            </CarouselItem>
+            <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
+              <StaticImage src="../../static/images/v4-360.jpg" alt="Hero image" placeholder="dominantColor"/>
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
+        <div id="hero" className="px-20 pt-12 h-[89vh] w-full *:drop-shadow-lg">
           <h1 id="hero-text" className="text-6xl font-bold mb-5 relative">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h1>
           <div id="socials" className="relative fill-foreground">
             <Link id="social-link" to="https://www.youtube.com/@RYRY1002" className="pr-1">
@@ -137,16 +186,16 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }) => {
             </Link>
           </div>
         </div>
-        <div id="acticles-header" className="mx-16 -mb-4 flex flex-wrap">
-          <h2 className="text-4xl font-bold">Things I've made</h2>
-          <MaterialSymbol symbol="arrow_outward" size={40} fill className="ml-2"/>
+        <div id="acticles-header" className="mx-16 -mb-4 flex flex-wrap *:drop-shadow-lg">
+          <h2 className="text-4xl font-bold ">Things I've made</h2>
+          <MaterialSymbol symbol="arrow_outward" size={40} fill className="ml-2" id="rotating-arrow"/>
         </div>
-        <div id="articles" className="flex grow shrink-0 flex-wrap justify-center content-center flex-row gap-[0.65rem] m-16">
+        <div id="articles" className="grid grid-cols-3 grid-flow-dense auto-rows-auto justify-center content-center gap-[0.65rem] m-16">
           {posts.map(({ node }) => {
             return (
-              <article id={node.id} className="transition-transform duration-150 ease-in-out grow shrink-0 bg-cover bg-center h-[35vmin] min-w-min max-w-full rounded-lg relative overflow-hidden hover:scale-[1.075]">
+              <article id={node.id} className={cn("transition-transform duration-150 ease-in-out bg-cover bg-center min-h-[35vmin] rounded-lg relative overflow-hidden hover:scale-[1.075]", (node.frontmatter.importance >= 2 ? "col-start-1 col-span-2" : "col-start-3"), (node.frontmatter.importance >= 4 && "row-span-2"))}>
                 <GatsbyImage image={getImage(node.frontmatter.image)} alt={node.frontmatter.title} className="absolute! w-full h-full pointer-events-none object-fill z-[-1]"/>
-                <Link to={"/project/" + node.frontmatter.slug} className="p-8 relative w-full h-full inline-block -top-1.5">
+                <Link to={"/project/" + node.frontmatter.slug} className="p-8 relative w-full h-full inline-block -top-1.5 *:drop-shadow-lg">
                   <h2 className="text-3xl font-bold leading-none">{node.frontmatter.title}</h2>
                   <small className="italic text-sm" style={{fontStretch: 85 + "%"}}>{node.frontmatter.date}</small>
                 </Link>
@@ -208,13 +257,6 @@ export const pageQuery = graphql`
         }
         limit: $limit
         skip: $skip
-        filter: {
-          internal: {
-            contentFilePath: {
-              regex: "/posts\\/(?:[^\\/]+\\/)?post\\.mdx$|posts\\/[^\\/]+\\.mdx$/gm"
-            }
-          }
-        }
       ) {
       edges {
         node {
@@ -230,6 +272,7 @@ export const pageQuery = graphql`
               }
             }
             slug
+            importance
           }
           id
         }

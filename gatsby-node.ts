@@ -126,7 +126,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
     const posts = result.data.allMdx.edges;
     // Create homepage w/ pagination
     {
-      const postsPerPage = 2;
+      const postsPerPage = 12;
       const numPages = Math.ceil(posts.length / postsPerPage);
   
       Array.from({ length: numPages }).forEach((_, i) => {
@@ -136,6 +136,26 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
           context: {
             limit: postsPerPage,
             skip: i * postsPerPage,
+            numPages,
+            currentPage: i + 1
+          },
+        });
+      });
+    }
+
+    const videos = result.data.allVideoMetadata.edges;
+    // Create videos list w/ pagination
+    {
+      const videosPerPage = 6;
+      const numPages = Math.ceil(videos.length / videosPerPage);
+  
+      Array.from({ length: numPages }).forEach((_, i) => {
+        createPage({
+          path: i === 0 ? `/videos` : `/videos/${i + 1}`,
+          component: path.resolve('./src/templates/videos-list.tsx'),
+          context: {
+            limit: videosPerPage,
+            skip: i * videosPerPage,
             numPages,
             currentPage: i + 1
           },
