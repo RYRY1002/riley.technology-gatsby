@@ -65,18 +65,7 @@ export const VideosPage: React.FC<PageProps> = ({ data, pageContext }: any) => {
                         type: track.type,
                         default: track.default
                       }))}
-                      download={{url: node.download.url.relativePath, filename: node.download.filename, size: node.download.url.prettySize}}
-                      src={node.src.map((src) => ({
-                        src: src.src.relativePath,
-                        width: src.width,
-                        height: src.height,
-                        fps: src.fps,
-                        hdr: src.hdr,
-                        type: src.type,
-                        label: src.label,
-                        badge: src.badge,
-                        codec: src.codec
-                      }))}
+                      src={node.src}
                     />
                   </ScrollArea>
                 </DialogContent>
