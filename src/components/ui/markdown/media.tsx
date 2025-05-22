@@ -13,13 +13,6 @@ export function MarkdownVideoPlayer({ video }: { video: string }) {
           description
           date(formatString: "MMMM DD, YYYY")
           src
-          download {
-            url {
-              relativePath
-              prettySize
-            }
-            filename
-          }
           poster {
             childImageSharp {
               gatsbyImageData(layout: CONSTRAINED)
