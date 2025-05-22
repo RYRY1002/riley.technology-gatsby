@@ -6,6 +6,11 @@
 
 @import "tw-animate-css";
 
+@plugin "@vidstack/react/tailwind.cjs";
+
+@import "./player/player.css";
+@import "./player/video.css";
+
 @custom-variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
 
 /* Tailwind theme */
@@ -281,6 +286,40 @@ span.katex {
 /* Charts */
 .prose > div.chart-wrapper, .prose-sm > div.chart-wrapper {
   @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 *:grow;
+}
+
+/* Player */
+.prose > div[data-media-player].video-player:not([data-fullscreen]) {
+  @apply block w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2;
+}
+
+@theme {
+  --animate-slide-from-left: slideToLeft 0.2s ease-out reverse;
+  --animate-slide-from-right: slideToRight 0.2s ease-out reverse;
+  --animate-slide-to-left: slideToLeft 0.2s ease-out;
+  --animate-slide-to-right: slideToRight 0.2s ease-out;
+  
+  @keyframes slideToLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideToRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+  }
 }
 
 /* footer */

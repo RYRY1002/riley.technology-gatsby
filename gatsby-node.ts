@@ -32,6 +32,9 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(`
     type Mdx implements Node {
       remoteImages: [File] @link(from: "fields.remoteImagesId")
+    }
+    type VideoMetadata implements Node {
+      associatedPost: SitePage @link(from: "associatedPost")
     }`)
 }
 
@@ -71,6 +74,46 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
             }
             excerpt
             tableOfContents
+          }
+        }
+      }
+      allVideoMetadata(
+        sort: {date: DESC}
+        limit: 1000
+      ) {
+        edges {
+          node {
+            title
+            description
+            date(formatString: "MMMM DD, YYYY")
+            src
+            poster {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
+            posters {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
+            thumbnails {
+              relativePath
+            }
+            textTracks {
+              src {
+                relativePath
+              }
+              label
+              language
+              kind
+              type
+              default
+            }
+            this {
+              relativeDirectory
+            }
+            id
           }
         }
       }

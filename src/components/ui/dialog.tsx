@@ -7,7 +7,22 @@ import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
 const Dialog = DialogPrimitive.Root
 
-const DialogTrigger = DialogPrimitive.Trigger
+//const DialogTrigger = DialogPrimitive.Trigger
+const DialogTrigger = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger> & { overrideClassName?: boolean }
+>(({ className, overrideClassName, ...props }, ref) => (
+  <DialogPrimitive.Trigger
+    ref={ref}
+    className={!overrideClassName ? cn(
+      "inline-flex items-center justify-center rounded-md border border-transparent bg-accent px-4 py-2 text-sm font-medium text-accent-foreground shadow-sm transition-colors hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent/80",
+      className
+    ) : className}
+    aria-controls=""
+    {...props}
+  />
+))
+DialogTrigger.displayName = DialogPrimitive.Trigger.displayName
 
 const DialogPortal = DialogPrimitive.Portal
 

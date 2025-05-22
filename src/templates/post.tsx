@@ -32,7 +32,9 @@ import Footer from "@/components/footer";
 
 require("katex/dist/katex.min.css")
 
-import { InlineCarousel, MarkdownImage, AllAccessPass } from "@/components/ui/markdown";
+import { InlineCarousel, MarkdownImage, AllAccessPass, MarkdownVideoPlayer } from "@/components/ui/markdown";
+
+import { VideoPlayer } from "@/components/ui/player";
 
 const mdxImage = props => (
   <MarkdownImage image={{src: props.src, alt: props.alt}} className={props.title} {...props}/>
@@ -40,30 +42,13 @@ const mdxImage = props => (
 const mdxComponents = {
   InlineCarousel,
   AllAccessPass,
-  img: mdxImage
+  img: mdxImage,
+  MarkdownVideoPlayer,
+  VideoPlayer
 }
 
 export default function BlogPost({ data: { mdx }, children }) {
   const { frontmatter } = mdx;
-
-  if (typeof window !== "undefined") {
-    import("jquery").then((jQuery) => {
-      const $ = jQuery.default;
-      {
-        // Pauses videos not currently in viewport for performance
-        require("is-in-viewport");
-        $(window).on("scroll", function() {
-          $("video").each(function() {
-            if ($(this).is(":in-viewport")) {
-              $(this).get(0).play();
-            } else {
-              $(this).get(0).pause();
-            }
-          })
-        })
-      }
-    })
-  }
 
   const [api, setApi] = React.useState<CarouselApi>();
   const [fullscreenApi, setFullscreenApi] = React.useState<CarouselApi>();

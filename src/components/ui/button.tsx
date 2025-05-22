@@ -19,6 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        icon: "hover:bg-accent-foreground/20"
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -40,6 +41,12 @@ export interface ButtonProps
   asChild?: boolean
 }
 
+export interface ButtonDivProps
+  extends React.ButtonHTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+}
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
@@ -54,4 +61,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
-export { Button, buttonVariants }
+const ButtonDiv = React.forwardRef<HTMLDivElement, ButtonDivProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "div"
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+ButtonDiv.displayName = "ButtonDiv"
+
+export { Button, ButtonDiv, buttonVariants }

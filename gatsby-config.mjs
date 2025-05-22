@@ -107,6 +107,12 @@ const config = {
         }
       }
     }, "gatsby-transformer-sharp", {
+      resolve: "gatsby-transformer-json",
+      options: {
+        path: "static/videos",
+        typeName: "VideoMetadata"
+      }
+    }, {
       resolve: "gatsby-source-filesystem",
       options: {
         "name": "media",
@@ -163,7 +169,36 @@ const config = {
     }, {
       resolve: "gatsby-plugin-material-symbols",
       options: {
-        verbose: true
+        verbose: true,
+        extraIcons: {
+          "outlined": [
+            "first_page",
+            "chevron_left",
+            "chevron_right",
+            "last_page",
+
+            "replay",
+            "play_arrow",
+            "pause",
+            "no_sound",
+            "volume_down",
+            "volume_up",
+            "subtitles",
+            "subtitles_off",
+            "airplay",
+            "cast",
+            "bookmarks",
+            "settings",
+            "accessibility_new",
+            "speed",
+            "instant_mix",
+            "arrow_back",
+            "music_note",
+            "download",
+            "fullscreen_exit",
+            "fullscreen"
+          ]
+        }
       }
     }, {
       resolve: "gatsby-plugin-posthog",
