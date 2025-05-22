@@ -1,0 +1,122 @@
+---
+type: post
+slug: uds-mods
+date: 2024-11-21
+title: Ultra Dynamic Sky modifications
+subtitile: Work I did to improve Ultra Dynamic Sky with the goal of merging the changes back into the original project.
+links:
+  - title: Ultra Dynamic Sky on Fab
+    url: https://www.fab.com/listings/84fda27a-c79f-49c9-8458-82401fb37cfb
+image: ../static/images/uds/HighresScreenshot_2024.11.26-00.05.46.png
+images:
+  hero:
+    - src: ../static/images/uds/HighresScreenshot_2024.11.26-00.05.46.png
+      alt: "An example of what is theoretically possible when you are able to control every UDS parameter in weather states"
+    - src: ../static/images/uds/HighresScreenshot_2024.11.26-00.05.55.png
+      alt: "An example of what is theoretically possible when you are able to control every UDS parameter in weather states. Featuring my custom lens flares."
+    - src: ../static/images/uds/HighresScreenshot_2024.11.25-23.19.57.png
+      alt: "Debug tools I used whilst developing the new LUT format"
+tags:
+  - Unreal Engine
+  - Graphics Programming
+importance: 3
+---
+
+I've been a user of [Ultra Dynamic Sky (UDS)](https://www.fab.com/listings/84fda27a-c79f-49c9-8458-82401fb37cfb) since around 2022, and as good as the asset is, I've found a few ways to improve it since then.
+
+I spent about a month at the tail end of 2024 working to actually implement these changes, and when I was done I sent a message to the Everett Gunther, the original author of UDS, describing the improvements I had made and offered to share my diffs with him.
+
+<AllAccessPass title="Message to Everett" subtitle="The message I sent to the original author of Ultra Dynamic Sky" readMore="Read the message I sent">
+  Heya all (and Everett Gunther). I recently found the time to implement a small portion of the suggestions I've been tinkering with on and off for the last couple years and would like to share these suggestions and accompanying implementations here in the hopes they are added to UDS officially. 
+  These took a while to implement. I really don't want to have to redo this work for every UDS update.
+  These changes are sorted in descending priority (top = important, bottom = relatively unimportant).
+
+  1. Weather presets should have some parameters intended for art-direction
+      - When creating new weather presets, too often does it feel like you are fighting with UDS to get that little bit more control to achieve just the look you were going for, and no matter how many combinations of parameters you try, you can never seem to get that last 10% of the way there
+      - With some tweaking, this would improve the look of all weather presets, but one that stands to gain more than most is the Overcast preset 
+        - Currently, the Overcast preset looks as if you've taken the Thunder preset and turned off all the rain and thunder. That's because behind the scenes, that's what it is
+        - Adding these art-direction parameters would allow the Overcast preset to look a lot closer to reference photography than it currently does
+      - I've implemented Multiscatting Light Intensity, Multiscattering Light Occlusion, Multiscattering Phase 1, Multiscattering Phase 2, Multiscattering Eccentricity, Cloud Wisp Opacity & Cloud Profile LUT Index (read on to learn more about those last 2)
+  2. The X-axis of the Cloud Profile LUT texture should be completely arbitrary and assignable in weather presets, not mapped to cloud density
+      - This would allow for two weather presets with the same cloud density to have differently shaped clouds
+        - Take the Light Rain and (a hypothetical) Sleet presets, whilst both may have a similar cloud density, given that in the real world the conditions required for sleet only occur under highly specific circumstances, it's a safe bet that the shape of the clouds would probably be different to your typical rain shower
+          - This is currently not possible
+      - I've implemented this by adding a property to all weather presets containing the location of the appropriate vertical slice of the Cloud Profile LUT, described as how many pixels to the right the vertical slice is from the left of the LUT texture
+        - I've also updated the Cloud Profile LUT authoring tool use this new format (not just on the backend, there are many changes to the UI to make the tool a breeze to use)
+          - It even allows you to convert existing custom LUTs which use the legacy cloud coverage format to the new arbitrary format whenever a legacy LUT is opened in the authoring tool
+          - I also added some QoL features, mainly more spinboxes
+  3. Cloud Wisps should move away from a texture stored in polar coordinates to a top-down texture with clever UVs applied to it
+      - Allows for a full replacement of the existing implementation with reduced overhead & a far easier cloud wisp texture creation process
+      - Whilst we're overhauling Cloud Wisps, we might as well allow a single cloud wisp texture to use all 4 color channels, effectively storing 4 cloud wisp textures in a single texture, allowing for greater art-direction, smooth transitions between different cloud wisps, and allowing multiple cloud wisps to be shown at once
+        - This should be controllable in weather presets, as outlined earlier
+        - The Cloud Wisps Opacity parameter should be made a Linear Color variable to allow for control over all 4 color channels
+
+  Thanks everyone for your time.
+
+  Get in contact with me via DM if you'd like a copy. You'll need to own UDS already.
+</AllAccessPass>
+
+These suggestions consisted of 3 main points:
+1. Weather presets should have some parameters intended for art-direction
+
+<InlineCarousel images={[
+  {
+    src: "images/uds/HighresScreenshot_2024.11.26-00.05.46.png",
+    alt: "An example of what is theoretically possible when you are able to control every UDS parameter in weather states"
+  },
+  {
+    src: "images/uds/HighresScreenshot_2024.11.26-00.05.55.png",
+    alt: "An example of what is theoretically possible when you are able to control every UDS parameter in weather states"
+  },
+  {
+    src: "images/uds/RadialCloudFormation.png",
+    alt: "A baked representation of this radial cloud formation"
+  }
+]}/>
+
+2. The X-axis of the Cloud Profile LUT texture should be completely arbitrary and assignable in weather presets, not mapped to cloud density
+
+<InlineCarousel images={[
+  {
+    src: "images/uds/HighresScreenshot_2024.11.25-23.19.57.png",
+    alt: "Debug tools I used whilst developing this new LUT format"
+  },
+  {
+    src: "images/uds/HighresScreenshot_2024.11.25-23.19.52.png",
+    alt: "What this formation looks like normally"
+  },
+  {
+    src: "images/uds/MaterialGraph-Volumetric_Clouds_Extinction.png",
+    alt: "A snapshot of the material graph for the new cloud profile LUT"
+  }
+]}/>
+
+3. Cloud Wisps should move away from a texture stored in polar coordinates to a top-down texture with clever UVs applied to it
+
+<InlineCarousel images={[
+  {
+    src: "images/uds/HighresScreenshot_2024.11.05-13.34.42.png",
+    alt: "The implementation of my cloud wisps"
+  },
+  {
+    src: "images/uds/HighresScreenshot_2024.11.05-13.34.52.png",
+    alt: "A visualisation of the cloud wisps' UVs"
+  },
+	{
+    src: "images/uds/MaterialGraph-Cloud_Wisps.png",
+    alt: "A snapshot of the material graph for the new cloud wisps' UVs"
+  },
+  {
+    src: "images/uds/Wisps.png",
+    alt: "The texture I used for the cloud wisps during development"
+  }
+]}/>
+
+As it turns out, Everett was already working on implementing something to the effect of my first suggestion.
+
+> This is something I've actually already done some work on for 8.5. The sky modifier system is expanded to include everything it possibly can on UDS. That is, every color/float that is actively applied/involved in cached properties.
+
+This was then included as the headline feature of UDS 8.5, released on November 21st, 2024.
+
+> - Added a new Sky Modifier Editor utility, a tool for creating and working with sky modifier assets,
+> - A sky modifier can now be selected on a weather preset asset directly, and it will be applied to UDS based on how that preset is affecting local weather. Associating custom presets with sky modifiers allows weather to effectively take control of anything on UDS exposed to the sky modifier system.
