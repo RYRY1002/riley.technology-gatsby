@@ -6,7 +6,7 @@ export const onCreateWebpackConfig = ({ actions, getConfig, stage }) => {
     resolve: {
       alias: {
         "@/components": path.resolve(__dirname, "src/components"),
-        "@/lib/utils": path.resolve(__dirname, "src/lib/utils"),
+        "@/lib": path.resolve(__dirname, "src/lib"),
         "@/src": path.resolve(__dirname, "src"),
         "@/static": path.resolve(__dirname, "static"),
         "@/posts": path.resolve(__dirname, "posts")

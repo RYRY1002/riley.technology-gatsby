@@ -311,8 +311,8 @@ span.katex {
 
 /* footer */
 footer > #footer-copyright-deco {
-  @apply h-[14vw] relative overflow-hidden -mt-8 w-[99vw] left-1/2 -translate-x-1/2;
+  @apply h-[14vw] relative overflow-hidden -mt-8 w-full flex flex-row justify-between gap-4 *:-mx-[1%];
 }
 footer > #footer-copyright-deco > #footer-massive-copyright {
-  @apply select-none absolute bottom-0 translate-y-[14%] align-text-bottom leading-[0.78]! font-bold text-nowrap bg-linear-to-b from-[#00000000] to-foreground bg-clip-text text-transparent text-[calc((100vw-12rem)/(1088/208))] w-full text-center;
+  @apply select-none bottom-0 translate-y-[14%] align-text-bottom leading-[0.78]! font-bold text-nowrap bg-linear-to-b from-[#00000000] to-foreground bg-clip-text text-transparent text-[calc((100vw-12rem)/(1088/208))] text-center;
 }

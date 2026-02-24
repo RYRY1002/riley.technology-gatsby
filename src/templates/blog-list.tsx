@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link, PageProps, graphql } from "gatsby";
 
-
 import ThemeProvider from "@/components/ui/theme-provider";
 import ThemeToggleButton from "@/components/theme-toggle-button";
 
@@ -35,6 +34,8 @@ import { remapValue } from "@/lib/utils";
 import Footer from "@/components/footer";
 import { MaterialSymbol } from "gatsby-plugin-material-symbols";
 
+import { getTagline } from "@/lib/taglines";
+
 export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
   const posts = data.allMdx.edges;
   const { currentPage, numPages } = pageContext;
@@ -65,20 +66,20 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
         // Makes the socials sticky after the hero text is hidden
         $(window).on("scroll load", function() {
           let currentScroll = $(window).scrollTop();
-          let socialTop = $("#hero-text").offset().top;
-          let socialBottom = socialTop + $("#hero-text").height();
+          let socialTop = $("#tagline").offset().top;
+          let socialBottom = socialTop + $("#tagline").height();
           let scrollPercent = currentScroll / socialBottom;
 
           if ( currentScroll >= socialBottom ) {
             $("#socials").addClass("sticky");
             $("#socials").removeClass("relative");
             $("#socials").addClass("top-5");
-            $("#hero-text").css("margin-bottom", $("#socials").height() + "!important");
+            $("#tagline").css("margin-bottom", $("#socials").height() + "!important");
           } else {
             $("#socials").removeClass("sticky");
             $("#socials").addClass("relative");
             $("#socials").removeClass("top-5");
-            $("#hero-text").css("margin-bottom", 0 + "!important");
+            $("#tagline").css("margin-bottom", 0 + "!important");
           }
         });
       }
@@ -127,7 +128,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
         // Blurs the background video when scrolling
         $(window).on("scroll load", function() {
           let currentScroll = $(window).scrollTop();
-          let heroBottom = $("#hero-text").offset().top + $("#hero-text").height();
+          let heroBottom = $("#tagline").offset().top + $("#tagline").height();
   
           if (currentScroll >= heroBottom) {
             $("#background-pics").css("filter", 
@@ -147,7 +148,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
         <Carousel plugins={[Autoplay({ stopOnInteraction: false, stopOnFocusIn: false }), Fade()]} opts={{ loop: true }} id="background-pics" className="absolute -z-1 h-full w-full overflow-hidden">
           <CarouselContent className="h-full w-full">
             <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
-              <StaticImage src="../../static/images/v4/v4-1.png" alt="Hero image" placeholder="dominantColor"/>
+              <StaticImage src="../../static/images/v4/v4-1.png" alt="Hero image" placeholder="blurred"/>
             </CarouselItem>
             <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
               <StaticImage src="../../static/images/v4/v4-14.png" alt="Hero image" placeholder="dominantColor"/>
@@ -170,9 +171,9 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
           </CarouselContent>
         </Carousel>
         <div id="hero" className="px-20 pt-12 h-[89vh] w-full *:drop-shadow-lg">
-          <h1 id="hero-text" className="text-6xl font-bold mb-5 relative">I am a Programmer, Game Developer and Video Editor based in Sydney, Australia.</h1>
           <div id="socials" className="relative fill-foreground">
             <Link id="social-link" to="https://www.youtube.com/@RYRY1002" className="pr-1">
+          <h1 id="tagline" className="text-6xl font-bold mb-5 relative">{getTagline("main")}</h1>
               <svg className="fill-foreground w-[1.4em] h-[1.4em] inline-block"><path className="text-foreground" d="m20.06,5.06c-.24-.88-.93-1.58-1.82-1.82-1.6-.43-8.01-.43-8.01-.43,0,0-6.41,0-8.01.43-.88.24-1.57.93-1.81,1.82C0,6.66,0,10,0,10,0,10,0,13.34.43,14.94c.24.88.93,1.58,1.82,1.82,1.6.43,8.01.43,8.01.43,0,0,6.41,0,8.01-.43.88-.24,1.58-.93,1.82-1.82.43-1.6.43-4.94.43-4.94,0,0,0-3.34-.43-4.94h0Zm-11.87,8.01v-6.15l5.32,3.08-5.32,3.07Z"></path></svg>
             </Link>
             <Link id="social-link" to="https://github.com/RYRY1002" className="pr-1">
