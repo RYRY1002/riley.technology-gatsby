@@ -137,9 +137,14 @@ export default function Footer(this: any) {
             })}
           </BreadcrumbList>
         </Breadcrumb>
-        <small className="text-muted-foreground text-xs z-1 relative">
-          Page last compiled {buildTime}
-        </small>
+        <div className="flex flex-col justify-between mt-2 *:text-muted-foreground *:text-xs *:z-1 *:w-fit">
+          <small>
+            Page last compiled {buildTime}
+          </small>
+          <small className="hover:text-primary">
+            <Link to="/legal">Legal stuff</Link>
+          </small>
+        </div>
       </div>
       <div id="footer-copyright-deco">
         <h1 id="footer-massive-copyright">
