@@ -245,9 +245,9 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
   )
 }
 
-export const Head = () => (
+export const Head = ({}) => (
   <>
-    <title>riley.technology</title>
+    <title>Riley Cunningham - Video game & generalist programmer, video editor</title>
   </>
 )
 

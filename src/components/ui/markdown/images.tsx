@@ -127,7 +127,7 @@ export function InlineCarousel(
   return (
     <Dialog open={isFullscreenHeroCarouselOpen} onOpenChange={handleFullscreenHeroCarouselOpenChange}>
       <Carousel setApi={setApi} className="2xl:w-[300%] lg:w-[200%] w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2" opts={{startIndex: startIndex}}>
-        <CarouselContent>
+        <CarouselContent className2="rounded-xl">
           {queriedImages.map((image, index) => (
             <CarouselItem key={index} className="h-[60vmin] md:basis-2/3! cursor-grab active:cursor-grabbing select-none pl-4">
               <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
@@ -259,7 +259,7 @@ export function MarkdownImage(
 
   return (
     <Dialog>
-      <div className="relative 2xl:w-[300%] lg:w-[200%] w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2 h-[50vmin] rounded-xl">
+      <div className="relative w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2 h-[50vmin] rounded-xl">
         <GatsbyImage image={getImage(queriedImage.src)} alt={queriedImage.alt} className={`object-cover h-[50vmin] rounded-xl ${className}`}/>
         <p className="absolute m-0! left-8 top-5 w-max max-w-[75%] drop-shadow-sm">{queriedImage.alt}</p>
         <DialogTrigger asChild>

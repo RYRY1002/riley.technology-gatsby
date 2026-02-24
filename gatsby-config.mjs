@@ -16,7 +16,7 @@ import { transformerMetaLineNumbers } from "./src/shiki/transformers/line-number
 
 const config = {
   siteMetadata: {
-    title: `riley.technology`,
+    title: `Riley Cunningham`,
     siteUrl: `https://riley.technology`
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.

@@ -186,7 +186,7 @@ export function DropdownMenuSliderItem({
   return (
     <div className={cn("px-2 py-1.5", className)}>
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-sm font-medium">{label}</span>
+        <span className="text-sm">{label}</span>
         {showValue && <span className="text-sm text-muted-foreground">{valueFormatter(value[0])}</span>}
       </div>
       {!children ? (

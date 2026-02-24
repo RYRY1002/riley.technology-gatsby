@@ -275,11 +275,6 @@ span.katex {
   @apply relative flex flex-row flex-wrap items-start justify-center grow gap-6 w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2 *:grow;
 }
 
-/* Player */
-.prose > div[data-media-player].video-player:not([data-fullscreen]) {
-  @apply block w-[85vw] max-w-[calc(100%+35vw)] left-1/2 -translate-x-1/2;
-}
-
 @theme {
   --animate-slide-from-left: slideToLeft 0.2s ease-out reverse;
   --animate-slide-from-right: slideToRight 0.2s ease-out reverse;

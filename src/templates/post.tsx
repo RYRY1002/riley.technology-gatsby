@@ -82,11 +82,15 @@ export default function BlogPost({ data: { mdx }, children }) {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <div vaul-drawer-wrapper="">
         <main className="relative z-1 bg-background">
-          <div id="hero" className="relative mt-8 mx-[12.5%] mb-14 rounded-xl">
+          <Link to="" className="flex flex-row mt-6 mx-[15%]">
+            <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={24}/>
+            Head home
+          </Link>
+          <div id="hero" className="relative mt-6 mx-[12.5%] mb-14 rounded-xl">
             {frontmatter.images?.hero && (
               <Dialog open={isFullscreenHeroCarouselOpen} onOpenChange={handleFullscreenHeroCarouselOpenChange}>
                 <Carousel setApi={setApi}>
-                  <CarouselContent>
+                  <CarouselContent className2="rounded-xl">
                     {frontmatter.images.hero.map((image, index) => (
                       <CarouselItem key={index} className="h-[60vmin] md:basis-2/3 lg:basis-[45%] cursor-grab active:cursor-grabbing select-none pl-4">
                         <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
@@ -143,7 +147,7 @@ export default function BlogPost({ data: { mdx }, children }) {
             )}
             <div id="hero-text" className="absolute bottom-7 left-10 prose">
               <h1 className="m-0!">{frontmatter.title}</h1>
-              <h4 className="m-0!">{frontmatter.date}</h4>
+              <h4 className="m-0! font-normal">{frontmatter.date}</h4>
             </div>
           </div>
           <div className="relative pb-8 prose">
@@ -158,6 +162,12 @@ export default function BlogPost({ data: { mdx }, children }) {
     </ThemeProvider>
   )
 }
+
+export const Head = ({ data }) => (
+  <>
+    <title>{data.mdx.frontmatter.title} - Riley Cunningham</title>
+  </>
+)
 
 export const pageQuery = graphql`
   query ($id: String!) {
