@@ -13,13 +13,6 @@ export function MarkdownVideoPlayer({ video }: { video: string }) {
           description
           date(formatString: "MMMM DD, YYYY")
           src
-          download {
-            url {
-              relativePath
-              prettySize
-            }
-            filename
-          }
           poster {
             childImageSharp {
               gatsbyImageData(layout: CONSTRAINED)
@@ -67,7 +60,6 @@ export function MarkdownVideoPlayer({ video }: { video: string }) {
       description={queriedVideo.description as string}
       date={queriedVideo.date as string}
       src={queriedVideo.src}
-      download={{url: queriedVideo.download.url.relativePath as string, filename: queriedVideo.download.filename as string, size: queriedVideo.download.url.prettySize as string}}
       poster={"/" + queriedVideo.poster.relativePath}
       thumbnails={"/" + queriedVideo.thumbnails.relativePath}
       textTracks={queriedVideo.textTracks?.map((track) => ({
