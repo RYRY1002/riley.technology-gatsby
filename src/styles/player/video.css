@@ -275,12 +275,8 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-:where([data-preview] .vds-video-layout .vds-captions) {
-  opacity: 0;
-}
-
 :where(.vds-video-layout .vds-captions) {
-  z-index: 10;
+  z-index: 3;
   transition: var(--video-captions-transition, bottom 0.3s ease-in-out);
 }
 

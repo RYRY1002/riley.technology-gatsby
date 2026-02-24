@@ -106,7 +106,7 @@ const MediaContext = React.createContext<
   }
 >({} as any);
 
-function KeyboardAnimations() {
+function KeyboardAnimationsPlyr() {
   const visible = useCustomState<boolean>(false),
   icon = useCustomState<string>(""),
   text = useCustomState<string>(""),
@@ -232,7 +232,7 @@ function TimeSliderComponent() {
           {thumbnails && (
             <TimeSlider.Thumbnail.Root
               src={thumbnails}
-              className="vds-slider-thumbnail vds-thumbnail m-[10px]"
+              className="vds-slider-thumbnail vds-thumbnail"
             >
               <TimeSlider.Thumbnail.Img />
             </TimeSlider.Thumbnail.Root>
@@ -466,26 +466,26 @@ function ChapterMenuComponent(
         side="top"
         loop
         sideOffset={0}
-        className="flex py-2 rounded-t-md bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom duration-200 ease-out" overrideClassName
+        className="flex rounded-t-md bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom duration-200 ease-out" overrideClassName
         container={dropdownMenuContainerRef.current}
         collisionBoundary={dropdownMenuContainerRef.current}
         onMouseLeave={attemptChaptersMenuOpenChange}
         ref={chaptersMenuContentRef}
         style={{width: controlBarIconsRef.current?.offsetWidth}}
       >
-        <DropdownMenuRadioGroup value={chapter()} onValueChange={chapter.set}>
+        <DropdownMenuRadioGroup value={chapter()} onValueChange={chapter.set} className="max-w-full">
           {chapterOptions.map(({ cue, label, value, startTimeText, durationText, select, setProgressVar, selected }) => (
-            <DropdownMenuRadioItem value={value} onSelect={select} ref={setProgressVar} data-active={selected ? selected : undefined} noIndicator className="px-4! gap-3 h-23 focus:bg-card/50 data-active:bg-card/50 group/chapter" key={value}>
+            <DropdownMenuRadioItem value={value} onSelect={select} ref={setProgressVar} data-active={selected ? selected : undefined} noIndicator className="first:pt-2 last:pb-2 px-4! py-0 gap-3 h-18 focus:bg-card/50 data-active:bg-card/50 group/chapter" key={value}>
               {thumbnails && (
-                <Thumbnail.Root src={thumbnails} className="vds-thumbnail shrink-0 border-0! rounded-md after:absolute after:bottom-0 after:left-0 after:h-1 after:w-[var(--progress)] after:bg-foreground after:rounded-none" time={cue.startTime}>
+                <Thumbnail.Root src={thumbnails} className="vds-thumbnail shrink-0 rounded-sm after:absolute after:bottom-0 after:left-0 after:h-1 after:w-[var(--progress)] after:bg-foreground after:rounded-none" style={{"--max-width": "100px"}} time={cue.startTime + 8}>
                   <Thumbnail.Img />
                 </Thumbnail.Root>
               )}
               <div className="vds-chapter-radio-content">
-                <span className="vds-chapter-radio-label">{label}</span>
+                <span className="vds-chapter-radio-label text-ellipsis block leading-none pb-1">{label}</span>
                 <div className="flex gap-1.5">
-                  <span className="vds-chapter-radio-start-time rounded-sm bg-card/50 group-focus:bg-card/65 px-1.5 py-0.5">{startTimeText}</span>
-                  <span className="vds-chapter-radio-duration rounded-sm bg-card/50 group-focus:bg-card/65 px-1.5 py-0.5">{durationText}</span>
+                  <span className="vds-chapter-radio-start-time rounded-sm bg-card/50 group-focus:bg-card/65 px-1.5 py-0.5 text-xs">{startTimeText}</span>
+                  <span className="vds-chapter-radio-duration rounded-sm bg-card/50 group-focus:bg-card/65 px-1.5 py-0.5 text-xs">{durationText}</span>
                 </div>
               </div>
             </DropdownMenuRadioItem>
@@ -508,7 +508,7 @@ function SettingsMenuComponent(
   { selectedTrack } = captionOptions,
   captionsEnabled = selectedTrack && isTrackCaptionKind(selectedTrack),
   captionOptionsNoOff = useCaptionOptions(),
-  anyCaptions = captionOptionsNoOff.length > 0,
+  anyCaptions = captionOptionsNoOff.length > 1,
   audioOptions = useAudioOptions(),
   videoQualityOptions = useVideoQualityOptions({auto: true});
 
@@ -698,22 +698,34 @@ function SettingsMenuComponent(
               <MaterialSymbol symbol="speed" fill size={24}/>
               <span>Playback</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={handleMenuItemSelect("audio")}>
+            {/*<DropdownMenuItem onSelect={handleMenuItemSelect("audio")}>
               <MaterialSymbol symbol="volume_up" fill size={24}/>
               <span>Audio</span>
-            </DropdownMenuItem>
-            {anyCaptions && (
+            </DropdownMenuItem>*/}
+            {anyCaptions ? (
               <DropdownMenuItem onSelect={handleMenuItemSelect("captions")}>
                 <MaterialSymbol symbol="subtitles" fill size={24}/>
                 <span className="flex-grow">Subtitles/CC</span>
                 <span className="text-primary/50">{captionOptions.selectedTrack?.label}</span>
               </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem disabled className="cursor-not-allowed">
+                <MaterialSymbol symbol="subtitles" fill size={24}/>
+                <span className="flex-grow">Subtitles/CC</span>
+                <span className="text-primary/50">None</span>
+              </DropdownMenuItem>
             )}
-            {!useVideoQualityOptions({ auto: false }).disabled && (
+            {!useVideoQualityOptions({ auto: false }).disabled ? (
               <DropdownMenuItem onSelect={handleMenuItemSelect("quality")}>
                 <MaterialSymbol symbol="instant_mix" fill size={24}/>
                 <span className="flex-grow">Quality</span>
                 <span className="text-primary/50">{videoQualityOptions.selectedQuality?.label}{videoQualityOptions.selectedQuality?.hdr && " HDR"}{videoQualityOptions.find((value) => value.selected == true).label == "Auto" && " (Auto)"}</span>
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem disabled className="cursor-not-allowed">
+                <MaterialSymbol symbol="instant_mix" fill size={24}/>
+                <span className="flex-grow">Quality</span>
+                <span className="text-primary/50">Auto</span>
               </DropdownMenuItem>
             )}
           </TabsContent>
@@ -728,12 +740,12 @@ function SettingsMenuComponent(
               <Label htmlFor="announcements" className="flex-1">Announcements</Label>
               <Switch id="announcements" checked={userPrefersAnnouncements()} onCheckedChange={userPrefersAnnouncements.set}/>
             </DropdownMenuItem>
-            {!(useMediaState("viewType") !== "video" || noKeyboardAnimations) && (
+            {/*!(useMediaState("viewType") !== "video" || noKeyboardAnimations) && (
               <DropdownMenuItem className="gap-2" onSelect={(e) => e.preventDefault}>
                 <Label htmlFor="keyboardAnimations" className="flex-1">Keyboard animations</Label>
-                <Switch id="keyboardAnimations" checked={userPrefersKeyboardAnimations()} onCheckedChange={userPrefersAnnouncements.set}/>
+                <Switch id="keyboardAnimations" checked={userPrefersKeyboardAnimations()} onCheckedChange={userPrefersKeyboardAnimations.set}/>
               </DropdownMenuItem>
-            )}
+            )*/}
           </TabsContent>
 
           <TabsContent value="playback" ref={playbackSettingsMenuRef}>
@@ -1042,7 +1054,7 @@ function Layout() {
           <Gesture className="vds-gesture" event="dblpointerup" action="seek:10" />
         </div>
       )}
-      {/* <KeyboardAnimations /> */}
+      {/*<KeyboardAnimations />*/}
       <div className="vds-buffering-indicator">
         <MaterialSymbol symbol="progress_activity" fill size={72} className="vds-buffering-spinner"/>
       </div>

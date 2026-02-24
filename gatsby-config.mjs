@@ -196,7 +196,9 @@ const config = {
             "music_note",
             "download",
             "fullscreen_exit",
-            "fullscreen"
+            "fullscreen",
+            "progress_activity",
+            "text_format"
           ]
         }
       }
