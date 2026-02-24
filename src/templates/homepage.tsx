@@ -157,7 +157,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
               <StaticImage src="../../static/images/v4/v4-15.png" alt="Hero image" placeholder="dominantColor"/>
             </CarouselItem>
             <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
-              <StaticImage src="../../static/images/v5-progressupdate.jpg" alt="Hero image" placeholder="dominantColor"/>
+              <StaticImage src="../../static/images/v5-progressupdate.webp" alt="Hero image" placeholder="dominantColor"/>
             </CarouselItem>
             <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
               <StaticImage src="../../static/images/v4/v4-19.png" alt="Hero image" placeholder="dominantColor"/>
@@ -166,7 +166,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
               <StaticImage src="../../static/images/v4/v4-23.png" alt="Hero image" placeholder="dominantColor"/>
             </CarouselItem>
             <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
-              <StaticImage src="../../static/images/v4-360.jpg" alt="Hero image" placeholder="dominantColor"/>
+              <StaticImage src="../../static/images/v5-poc.webp" alt="Hero image" placeholder="dominantColor"/>
             </CarouselItem>
           </CarouselContent>
         </Carousel>
