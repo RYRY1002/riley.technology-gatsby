@@ -90,13 +90,12 @@
 
 @theme inline {
   --font-*: initial;
-  --font-sans: IBM Plex Sans, sans-serif;
 
-  --font-mono: JetBrains Mono, monospace;
+  --font-sans: "BF Sans", sans-serif;
 
+  --font-mono: "JetBrains Mono", monospace;
   --font-mono--font-feature-settings:
     'zero', 'cv07', 'cv11', 'cv14', 'cv16', 'cv18', 'cv19', 'cv20';
-
   --font-mono-length: 2;
 
   --color-border: var(--border);
@@ -166,6 +165,13 @@
 
 @layer base {
   @font-face {
+    src: url(fonts/bf-sans.woff2) format('woff2');
+    font-family: 'BF Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
     src: url(fonts/jetbrains-mono-var.woff2) format('woff2-variations');
     font-family: 'JetBrains Mono';
     font-style: normal;
@@ -184,7 +190,7 @@
       'cv20';
   }
   @font-face {
-    src: url(fonts//jetbrains-mono-var_italic.woff2) format('woff2-variations');
+    src: url(fonts/jetbrains-mono-var_italic.woff2) format('woff2-variations');
     font-family: 'JetBrains Mono';
     font-style: italic;
     font-weight: 100 800;
@@ -201,25 +207,6 @@
       'cv19',
       'cv20';
   }
-
-  @font-face {
-    src: url(fonts/ibm-plex-sans-var_roman.woff2) format('woff2-variations');
-    font-family: 'IBM Plex Sans';
-    font-style: normal;
-    font-weight: 100 700;
-    font-stretch: 85% 100%;
-    font-display: swap;
-  }
-  @font-face {
-    src: url(fonts/ibm-plex-sans-var_italic.woff2) format('woff2-variations');
-    font-family: 'IBM Plex Sans';
-    font-style: italic;
-    font-weight: 100 700;
-    font-stretch: 85% 100%;
-    font-display: swap;
-  }
-
-
 }
 
 /* Not sure what this is, but it generated when Tailwind was installed, so it'll stay for now
