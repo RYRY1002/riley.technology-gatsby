@@ -202,13 +202,6 @@ const config = {
           ]
         }
       }
-    }, {
-      resolve: "gatsby-plugin-posthog",
-      options: {
-        apiKey: "phc_FznuSwNvDr8kZemdu5laB3UmGx9Qx2pglYxsgUDnghR",
-        head: true,
-        isEnabledDevMode: false
-      }
     }
   ]
 };
