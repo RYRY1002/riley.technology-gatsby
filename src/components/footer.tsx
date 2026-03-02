@@ -92,11 +92,11 @@ export default function Footer(this: any) {
   }, []);
 
   return (
-    <footer className="bg-background px-[12vw] w-full bottom-0 pt-[25vh] sticky z-0 block">
-      <div id="footer-tagline" className="my-4 flex items-center space-x-4 h-24" onClick={newTagline}>
-        <h2 id="tagline" className="text-4xl font-bold transition-opacity w-fit" style={{opacity: taglineOpacity}}>{tagline}</h2>
+    <footer className="bg-background px-[12vw] max-md:px-8 w-full bottom-0 pt-[25vh] sticky z-0 block">
+      <div id="footer-tagline" className="my-4 flex space-x-4 h-24 items-end">
+        <h2 id="tagline" className="text-4xl max-md:text-xl font-bold transition-opacity w-fit align-bottom" style={{opacity: taglineOpacity}}>{tagline}</h2>
       </div>
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row max-md:flex-col-reverse md:justify-between md:items-center max-md:pb-8">
         <div id="footer-pageinfo" className="z-1">
           <Breadcrumb>
             <BreadcrumbList>
@@ -152,7 +152,7 @@ export default function Footer(this: any) {
               })}
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="flex flex-col justify-between mt-2 *:text-muted-foreground *:text-xs *:z-1 *:w-fit">
+          <div className="flex flex-col justify-between mt-2 *:text-muted-foreground *:text-xs max-md:*:text-2xs *:z-1 *:w-fit">
             <small>
               Page last compiled {buildTime}
             </small>
@@ -164,7 +164,7 @@ export default function Footer(this: any) {
             </small>
           </div>
         </div>
-          <div id="socials" className="relative fill-foreground flex gap-1">
+          <div id="socials" className="fill-foreground flex gap-1">
             <Link id="social-link" to="https://www.youtube.com/@RYRY1002">
               <svg className="fill-foreground w-[1.4em] h-[1.4em] inline-block"><path className="text-foreground" d="m20.06,5.06c-.24-.88-.93-1.58-1.82-1.82-1.6-.43-8.01-.43-8.01-.43,0,0-6.41,0-8.01.43-.88.24-1.57.93-1.81,1.82C0,6.66,0,10,0,10,0,10,0,13.34.43,14.94c.24.88.93,1.58,1.82,1.82,1.6.43,8.01.43,8.01.43,0,0,6.41,0,8.01-.43.88-.24,1.58-.93,1.82-1.82.43-1.6.43-4.94.43-4.94,0,0,0-3.34-.43-4.94h0Zm-11.87,8.01v-6.15l5.32,3.08-5.32,3.07Z"></path></svg>
             </Link>

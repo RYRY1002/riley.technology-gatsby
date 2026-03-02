@@ -296,7 +296,7 @@ function TitleComponent() {
   chapterTitle = useChapterTitle();
 
   return (
-    <p className="text-foreground/65 flex items-center">
+    <p className="text-foreground/65 flex items-center max-md:hidden">
       {(hasChapters && (started || !title)) ? chapterTitle : title}
     </p>
   )
@@ -665,7 +665,7 @@ function SettingsMenuComponent(
 
   return (
     <DropdownMenu open={settingsMenuOpen()} onOpenChange={(open) => handleSettingsMenuOpenChange(open)} modal={false}>
-      <DropdownMenuTrigger className="group flex h-full items-center" overrideClassName ref={settingsMenuTriggerRef} onMouseEnter={() => handleSettingsMenuOpenChange(true)} onMouseLeave={attemptSettingsMenuOpenChange}>
+      <DropdownMenuTrigger className="group flex h-full items-center max-md:hidden" overrideClassName ref={settingsMenuTriggerRef} onMouseEnter={() => handleSettingsMenuOpenChange(true)} onMouseLeave={attemptSettingsMenuOpenChange}>
         <Tooltip>
           <TooltipTrigger asChild>
             <ButtonDiv variant="icon" size="icon">

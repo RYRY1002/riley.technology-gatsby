@@ -82,21 +82,21 @@ export default function BlogPost({ data: { mdx }, children }) {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <div vaul-drawer-wrapper="">
         <main className="relative z-1 bg-background">
-          <Link to="" className="flex flex-row mt-6 mx-[15%]">
+          <Link to="" className="flex flex-row mt-6 mx-[15%] max-md:mx-6">
             <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={24}/>
             Head home
           </Link>
-          <div id="hero" className="relative mt-6 mx-[12.5%] mb-14 rounded-xl">
+          <div id="hero" className="relative mt-6 mx-[12.5%] max-md:mx-0 mb-14 rounded-xl">
             {frontmatter.images?.hero && (
               <Dialog open={isFullscreenHeroCarouselOpen} onOpenChange={handleFullscreenHeroCarouselOpenChange}>
                 <Carousel setApi={setApi}>
-                  <CarouselContent className2="rounded-xl">
+                  <CarouselContent className="gap-4" className2="rounded-xl">
                     {frontmatter.images.hero.map((image, index) => (
-                      <CarouselItem key={index} className="h-[60vmin] md:basis-2/3 lg:basis-[45%] cursor-grab active:cursor-grabbing select-none pl-4">
+                      <CarouselItem key={index} className="h-[60vmin] md:basis-2/3 lg:basis-[45%] cursor-grab active:cursor-grabbing select-none relative">
                         <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
-                        <div className="absolute md:w-[calc(66.666667%-1rem)] lg:w-[calc(45%-1rem)] h-full bottom-0 object-cover rounded-xl">
+                        <div className="absolute w-full h-full bottom-0 object-cover rounded-xl">
                           <div id="hero-overlay" className="absolute w-full h-full bottom-0 object-cover rounded-xl" style={{background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.93) 100%)"}}/>
-                          <p className="absolute left-8 top-5 w-max max-w-[75%] drop-shadow-sm">{image.alt}</p>
+                          <p className="absolute left-8 top-5 w-max max-w-[75%] max-md:max-w-[85%] drop-shadow-sm max-md:text-sm">{image.alt}</p>
                         </div>
                       </CarouselItem>
                     ))}
@@ -117,15 +117,15 @@ export default function BlogPost({ data: { mdx }, children }) {
                   <Carousel setApi={setFullscreenApi}>
                     <CarouselContent>
                       {frontmatter.images.hero.map((image, index) => (
-                        <CarouselItem key={index} className="grid grid-cols-[1fr_320px] h-screen cursor-grab active:cursor-grabbing select-none">
+                        <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] max-md:grid-rows-[1fr_15%] h-screen cursor-grab active:cursor-grabbing select-none">
                           <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-full" objectFit="contain"/>
-                          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose">
+                          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 max-md:p-0 border-l max-md:border-0 cursor-auto select-auto prose">
                             <div>
                               <p className="not-prose"><strong>{index + 1}</strong> of <strong>{frontmatter.images.hero.length}</strong></p>
                               <Separator orientation="horizontal" className="mt-2"/>
-                              <p>{image.alt}</p>
+                              <p className="mb-0">{image.alt}</p>
                             </div>
-                            <div>
+                            <div className="max-md:hidden">
                               <a href={"/" + image.src.relativePath} className="no-underline!">Download the original</a>
                               <p className="m-0! text-xs">
                                 {image.src.childImageSharp.original.width}x{image.src.childImageSharp.original.height} {image.src.prettySize}
@@ -135,19 +135,19 @@ export default function BlogPost({ data: { mdx }, children }) {
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2">
+                    <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2 max-md:hidden">
                       <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
                     </CarouselPrevious>
-                    <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2">
+                    <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2 max-md:hidden">
                       <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
                     </CarouselNext>
                   </Carousel>
                 </DialogContent>
               </Dialog>
             )}
-            <div id="hero-text" className="absolute bottom-7 left-10 prose">
-              <h1 className="m-0!">{frontmatter.title}</h1>
-              <h4 className="m-0! font-normal">{frontmatter.date}</h4>
+            <div id="hero-text" className="absolute bottom-7 mx-10! max-md:mx-5! my-0! prose">
+              <h1 className="m-0! max-md:text-2xl">{frontmatter.title}</h1>
+              <h4 className="m-0! font-normal max-md:text-base">{frontmatter.date}</h4>
             </div>
           </div>
           <div className="relative pb-8 prose">

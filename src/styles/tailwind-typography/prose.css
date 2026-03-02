@@ -18,6 +18,7 @@
       color: var(--tw-prose-body);
       max-width: 85ch;
       @apply mx-auto;
+      @apply max-md:mx-6;
     }
 
     [class~="lead"] {
@@ -269,6 +270,7 @@
         font-weight: 400;
         line-height: 1.25;
         @apply font-mono rounded-xl!;
+        @apply max-md:w-screen relative left-1/2 -translate-x-1/2 md:max-w-[75vw] md:w-max;
       }
 
       > code {

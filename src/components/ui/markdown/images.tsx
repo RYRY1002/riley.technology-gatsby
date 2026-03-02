@@ -127,9 +127,9 @@ export function InlineCarousel(
   return (
     <Dialog open={isFullscreenHeroCarouselOpen} onOpenChange={handleFullscreenHeroCarouselOpenChange}>
       <Carousel setApi={setApi} className="2xl:w-[300%] lg:w-[200%] w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2" opts={{startIndex: startIndex}}>
-        <CarouselContent className2="rounded-xl">
+        <CarouselContent className="-ml-4" className2="rounded-xl">
           {queriedImages.map((image, index) => (
-            <CarouselItem key={index} className="h-[60vmin] md:basis-2/3! cursor-grab active:cursor-grabbing select-none pl-4">
+            <CarouselItem key={index} className="h-[60vmin] cursor-grab active:cursor-grabbing select-none pl-4">
               <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
               {perImageAlt && (
                 <div className="absolute md:w-[calc(66.666667%-1rem)] lg:w-[calc(45%-1rem)] h-full bottom-0 object-cover rounded-xl">
@@ -160,15 +160,15 @@ export function InlineCarousel(
         <Carousel setApi={setFullscreenApi}>
           <CarouselContent>
             {queriedImages.map((image, index) => (
-              <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] h-screen cursor-grab active:cursor-grabbing select-none">
+              <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] max-md:grid-rows-[1fr_15%] h-screen cursor-grab active:cursor-grabbing select-none">
                 <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-full" objectFit="contain"/>
-                <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose">
+                <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 max-md:p-0 border-l max-md:border-0 cursor-auto select-auto prose">
                   <div>
                     <p className="not-prose"><strong>{index + 1}</strong> of <strong>{queriedImages.length}</strong></p>
                     <Separator orientation="horizontal" className="mt-2"/>
-                    <p>{perImageAlt ? image.alt : alt}</p>
+                    <p className="mb-0">{perImageAlt ? image.alt : alt}</p>
                   </div>
-                  <div>
+                  <div className="max-md:hidden">
                     <a href={"/" + image.relativePath} className="no-underline!">Download the original</a>
                     <p className="m-0! text-xs">
                       {image.original.width}x{image.original.height} {image.prettySize}
@@ -178,10 +178,10 @@ export function InlineCarousel(
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2">
+          <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2 max-md:hidden">
             <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
           </CarouselPrevious>
-          <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2">
+          <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2 max-md:hidden">
             <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
           </CarouselNext>
         </Carousel>
@@ -269,13 +269,13 @@ export function MarkdownImage(
         </DialogTrigger>
       </div>
       <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
-        <div className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%]">
+        <div className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] max-md:grid-rows-[1fr_15%]">
           <GatsbyImage image={getImage(queriedImage.src)} alt={queriedImage.alt} className={`object-cover h-full ${className}`} objectFit="contain"/>
-          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 border-l cursor-auto select-auto prose">
+          <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 max-md:p-0 border-l max-md:border-0 cursor-auto select-auto prose">
             <div>
-              <p>{queriedImage.alt}</p>
+              <p className="max-md:m-0">{queriedImage.alt}</p>
             </div>
-            <div>
+            <div className="max-md:hidden">
               <a href={"/" + queriedImage.relativePath} className="no-underline!">Download the original</a>
               <p className="m-0! text-xs">
                 {queriedImage.original.width}x{queriedImage.original.height} {queriedImage.prettySize}
