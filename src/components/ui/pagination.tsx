@@ -1,11 +1,5 @@
 import * as React from "react"
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ArrowLeftToLineIcon,
-  ArrowRightToLineIcon,
-  MoreHorizontalIcon,
-} from "lucide-react"
+import { MaterialSymbol } from "gatsby-plugin-material-symbols"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants, type Button } from "@/components/ui/button"
@@ -78,7 +72,7 @@ function PaginationFirst({
       className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
       {...props}
     >
-      <ArrowLeftToLineIcon />
+      <MaterialSymbol symbol="first_page" size={18} weight={300} />
       <span className="hidden sm:block">First</span>
     </PaginationLink>
   )
@@ -95,7 +89,7 @@ function PaginationPrevious({
       className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
       {...props}
     >
-      <ChevronLeftIcon />
+      <MaterialSymbol symbol="chevron_left" size={18} weight={300} />
       <span className="hidden sm:block">Previous</span>
     </PaginationLink>
   )
@@ -113,7 +107,7 @@ function PaginationNext({
       {...props}
     >
       <span className="hidden sm:block">Next</span>
-      <ChevronRightIcon />
+      <MaterialSymbol symbol="chevron_right" size={18} weight={300} />
     </PaginationLink>
   )
 }
@@ -130,7 +124,7 @@ function PaginationLast({
       {...props}
     >
       <span className="hidden sm:block">Last</span>
-      <ArrowRightToLineIcon />
+      <MaterialSymbol symbol="last_page" size={18} weight={300} />
     </PaginationLink>
   )
 }
@@ -146,7 +140,7 @@ function PaginationEllipsis({
       className={cn("flex size-9 items-center justify-center", className)}
       {...props}
     >
-      <MoreHorizontalIcon className="size-4" />
+      <MaterialSymbol symbol="more_horiz" size={18} weight={300} />
       <span className="sr-only">More pages</span>
     </span>
   )

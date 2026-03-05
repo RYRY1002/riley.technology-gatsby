@@ -83,7 +83,7 @@ export default function BlogPost({ data: { mdx }, children }) {
       <div vaul-drawer-wrapper="">
         <main className="relative z-1 bg-background">
           <Link to="" className="flex flex-row mt-6 mx-[15%] max-md:mx-6">
-            <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={24}/>
+            <MaterialSymbol symbol="arrow_back" size={24} weight={300} />
             Head home
           </Link>
           <div id="hero" className="relative mt-6 mx-[12.5%] max-md:mx-0 mb-14 rounded-xl">
@@ -102,16 +102,12 @@ export default function BlogPost({ data: { mdx }, children }) {
                     ))}
                   </CarouselContent>
                   <DialogTrigger asChild>
-                    <Button variant="outline" size="icon" className="absolute h-8 w-8 rounded-full right-6 top-5">
-                      <MaterialSymbol symbol="open_in_full" weight={300} grade={-25} size={16}/>
+                    <Button variant="outline" size="icon" className="absolute size-8 rounded-full right-6 top-5">
+                      <MaterialSymbol symbol="open_in_full" size={18} weight={300} />
                     </Button>
                   </DialogTrigger>
-                  <CarouselPrevious>
-                    <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
-                  </CarouselPrevious>
-                  <CarouselNext>
-                    <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
-                  </CarouselNext> 
+                  <CarouselPrevious />
+                  <CarouselNext />
                 </Carousel>
                 <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
                   <Carousel setApi={setFullscreenApi}>
@@ -135,12 +131,8 @@ export default function BlogPost({ data: { mdx }, children }) {
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2 max-md:hidden">
-                      <MaterialSymbol symbol="arrow_back" weight={300} grade={-25} size={16}/>
-                    </CarouselPrevious>
-                    <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2 max-md:hidden">
-                      <MaterialSymbol symbol="arrow_forward" weight={300} grade={-25} size={16}/>
-                    </CarouselNext>
+                    <CarouselPrevious className="absolute h-8 w-8 rounded-full left-6 top-1/2 -translate-y-1/2 max-md:hidden" />
+                    <CarouselNext className="absolute h-8 w-8 rounded-full right-6 top-1/2 -translate-y-1/2 max-md:hidden" />
                   </Carousel>
                 </DialogContent>
               </Dialog>

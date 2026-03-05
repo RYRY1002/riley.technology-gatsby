@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CheckIcon } from "lucide-react"
+import { MaterialSymbol } from "gatsby-plugin-material-symbols"
 import { Checkbox as CheckboxPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
@@ -21,7 +21,7 @@ function Checkbox({
         data-slot="checkbox-indicator"
         className="grid place-content-center text-current transition-none"
       >
-        <CheckIcon className="size-3.5" />
+        <MaterialSymbol symbol="check" size={16} weight={300} />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   )

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react"
+import { MaterialSymbol } from "gatsby-plugin-material-symbols"
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui"
 import { Slider } from "@/components/ui/slider"
 
@@ -101,7 +101,7 @@ function DropdownMenuCheckboxItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
+          <MaterialSymbol symbol="check" size={18} weight={300} />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -136,7 +136,7 @@ function DropdownMenuRadioItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CircleIcon className="size-2 fill-current" />
+          <MaterialSymbol symbol="radio_button_unchecked" size={10} weight={300} className="fill-current" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -247,7 +247,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto size-4" />
+      <MaterialSymbol symbol="chevron_right" size={18} weight={300} className="ml-auto" />
     </DropdownMenuPrimitive.SubTrigger>
   )
 }

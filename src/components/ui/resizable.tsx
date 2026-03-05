@@ -1,5 +1,5 @@
 import * as React from "react"
-import { GripVerticalIcon } from "lucide-react"
+import { MaterialSymbol } from "gatsby-plugin-material-symbols"
 import * as ResizablePrimitive from "react-resizable-panels"
 
 import { cn } from "@/lib/utils"
@@ -42,7 +42,7 @@ function ResizableHandle({
     >
       {withHandle && (
         <div className="z-10 flex h-4 w-3 items-center justify-center rounded-xs border bg-border">
-          <GripVerticalIcon className="size-2.5" />
+          <MaterialSymbol symbol="drag_indicator" size={12} weight={300} />
         </div>
       )}
     </ResizablePrimitive.Separator>

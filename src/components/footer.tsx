@@ -116,10 +116,7 @@ export default function Footer(this: any) {
                 </BreadcrumbLink>
               )}
               </BreadcrumbItem>
-              <BreadcrumbSeparator className="h-3.75 w-3.25 relative">
-                {/*<MaterialSymbol symbol="filter_alt" size={20} fill className="-rotate-90"/>*/}
-                <svg width="15" height="13" viewBox="0 0 15 15" fill="none" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator className="text-lg align-baseline">/</BreadcrumbSeparator>
               {urlArray.map((item, index) => {
                 breadcrumbUrl = breadcrumbUrl + "/" + item;
 
@@ -142,10 +139,7 @@ export default function Footer(this: any) {
                     )}
                     </BreadcrumbItem>
                     {index !== urlArray.length - 1 && (
-                      <BreadcrumbSeparator className="h-3.75 w-3.25 relative">
-                        {/*<MaterialSymbol symbol="filter_alt" size={20} fill className="-rotate-90"/>*/}
-                        <svg width="15" height="13" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -translate-y-2/4 m-0 top-2/4"><path d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
-                      </BreadcrumbSeparator>
+                      <BreadcrumbSeparator className="text-lg align-baseline">/</BreadcrumbSeparator>
                     )}
                   </>
                 )
