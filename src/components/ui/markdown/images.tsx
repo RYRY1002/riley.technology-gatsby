@@ -127,7 +127,7 @@ export function InlineCarousel(
   return (
     <Dialog open={isFullscreenHeroCarouselOpen} onOpenChange={handleFullscreenHeroCarouselOpenChange}>
       <Carousel setApi={setApi} className="2xl:w-[300%] lg:w-[200%] w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2" opts={{startIndex: startIndex}}>
-        <CarouselContent className="-ml-4" className2="rounded-xl">
+        <CarouselContent className="-ml-4" className="rounded-xl">
           {queriedImages.map((image, index) => (
             <CarouselItem key={index} className="h-[60vmin] cursor-grab active:cursor-grabbing select-none pl-4">
               <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>

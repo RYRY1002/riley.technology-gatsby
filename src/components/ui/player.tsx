@@ -28,8 +28,6 @@ import {
   Track,
 } from "@vidstack/react";
 import { type MediaPlayerInstance, TimeSliderInstance, useMediaState, useActiveTextTrack, useCaptionOptions, useChapterOptions, isTrackCaptionKind, useMediaContext, usePlaybackRateOptions, useAudioOptions, useAudioGainOptions, useVideoQualityOptions, getDownloadFile, useMediaStore, useMediaRemote } from "@vidstack/react";
-import { useDefaultLayoutContext } from "E:/Stuff/riley.technology/gatsby/node_modules/@vidstack/react/prod/player/vidstack-default-layout.js";
-//import { useActive } from "E:/Stuff/riley.technology/gatsby/node_modules/@vidstack/react/prod/chunks/vidstack-DzQtn4XB.js";
 
 import {
   Tooltip,
@@ -37,7 +35,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Button, ButtonDiv } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
@@ -228,7 +226,7 @@ function TimeSliderComponent() {
           }
         </TimeSlider.Chapters>
         <TimeSlider.Thumb className="vds-slider-thumb" />
-        <TimeSlider.Preview className="vds-slider-preview">
+        <TimeSlider.Preview className="vds-slider-preview border">
           {thumbnails && (
             <TimeSlider.Thumbnail.Root
               src={thumbnails}
@@ -275,7 +273,7 @@ function TimeInfo() {
   const live = useMediaState("live");
 
   return live ? (
-    <Button variant="icon" asChild>
+    <Button variant="outline" asChild>
       <LiveButton>
           <span className="vds-live-button-text">LIVE</span>
       </LiveButton>
@@ -333,17 +331,17 @@ function VolumePopupSliderComponent(
 
   return !(useMediaState("pointer") === "coarse" && !muted) && (
     <DropdownMenu open={volumeSliderOpen()} modal={false}>
-      <DropdownMenuTrigger className="flex h-full items-center" overrideClassName ref={volumeSliderTriggerRef} onMouseOver={() => {volumeSliderOpen.set(true)}} onMouseLeave={attemptVolumeSliderOpenChange}>
+      <DropdownMenuTrigger className="flex h-full items-center" ref={volumeSliderTriggerRef} onMouseOver={() => {volumeSliderOpen.set(true)}} onMouseLeave={attemptVolumeSliderOpenChange}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <ButtonDiv variant="icon" size="icon">
+            <Button variant="ghost" size="icon">
               <MuteButton asChild>
                 <MaterialSymbol
                   symbol={muted ||volume == 0 ? "no_sound" : volume < 0.5 ? "volume_down" : "volume_up"}
                   fill size={24}
                 />
               </MuteButton>
-            </ButtonDiv>
+            </Button>
           </TooltipTrigger>
           <TooltipContent>
             {muted ? "Unmute" : "Mute"}
@@ -353,7 +351,7 @@ function VolumePopupSliderComponent(
       <DropdownMenuContent
         side="top"
         sideOffset={0}
-        className="h-14 flex px-5 rounded-t-md bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom duration-200 ease-out" overrideClassName
+        className="h-14 flex px-5 rounded-t-md rounded-b-none bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom duration-200 ease-out"
         container={dropdownMenuContainerRef.current}
         collisionBoundary={dropdownMenuContainerRef.current}
         onMouseLeave={attemptVolumeSliderOpenChange}
@@ -375,7 +373,7 @@ function CaptionButtonComponent() {
   return anyCaptions && (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="icon" size="icon" asChild>
+        <Button variant="ghost" size="icon" asChild>
           <CaptionButton>
             <MaterialSymbol
               symbol={captionsEnabled ? "subtitles" : "subtitles_off"}
@@ -395,7 +393,7 @@ function RemotePlaybackButtons() {
   return <>
     <Tooltip>
       <TooltipTrigger className="aria-hidden:hidden" asChild>
-        <Button variant="icon" size="icon" asChild>
+        <Button variant="ghost" size="icon" asChild>
           <AirPlayButton>
             <MaterialSymbol symbol="airplay" fill size={24}/>
           </AirPlayButton>
@@ -407,7 +405,7 @@ function RemotePlaybackButtons() {
     </Tooltip>
     <Tooltip>
       <TooltipTrigger className="aria-hidden:hidden" asChild>
-        <Button variant="icon" size="icon" asChild>
+        <Button variant="outline" size="icon" asChild>
           <GoogleCastButton>
               <MaterialSymbol symbol="cast" fill size={24}/>
           </GoogleCastButton>
@@ -450,12 +448,12 @@ function ChapterMenuComponent(
 
   return chapterOptions.length > 0 && (
     <DropdownMenu open={chaptersMenuOpen()} modal={false}>
-      <DropdownMenuTrigger className="flex h-full items-center" overrideClassName ref={chaptersMenuTriggerRef} onMouseOver={() => {chaptersMenuOpen.set(true)}} onMouseLeave={attemptChaptersMenuOpenChange}>
+      <DropdownMenuTrigger className="flex h-full items-center" ref={chaptersMenuTriggerRef} onMouseOver={() => {chaptersMenuOpen.set(true)}} onMouseLeave={attemptChaptersMenuOpenChange}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <ButtonDiv variant="icon" size="icon">
+            <Button variant="ghost" size="icon">
               <MaterialSymbol symbol="bookmarks" fill size={24}/>
-            </ButtonDiv>
+            </Button>
           </TooltipTrigger>
           <TooltipContent>
             Chapters
@@ -466,7 +464,7 @@ function ChapterMenuComponent(
         side="top"
         loop
         sideOffset={0}
-        className="flex rounded-t-md bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom duration-200 ease-out" overrideClassName
+        className="flex rounded-t-md bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom duration-200 ease-out"
         container={dropdownMenuContainerRef.current}
         collisionBoundary={dropdownMenuContainerRef.current}
         onMouseLeave={attemptChaptersMenuOpenChange}
@@ -477,7 +475,7 @@ function ChapterMenuComponent(
           {chapterOptions.map(({ cue, label, value, startTimeText, durationText, select, setProgressVar, selected }) => (
             <DropdownMenuRadioItem value={value} onSelect={select} ref={setProgressVar} data-active={selected ? selected : undefined} noIndicator className="first:pt-2 last:pb-2 px-4! py-0 gap-3 h-18 focus:bg-card/50 data-active:bg-card/50 group/chapter" key={value}>
               {thumbnails && (
-                <Thumbnail.Root src={thumbnails} className="vds-thumbnail shrink-0 rounded-sm after:absolute after:bottom-0 after:left-0 after:h-1 after:w-[var(--progress)] after:bg-foreground after:rounded-none" style={{"--max-width": "100px"}} time={cue.startTime + 8}>
+                <Thumbnail.Root src={thumbnails} className="vds-thumbnail shrink-0 rounded-sm after:absolute after:bottom-0 after:left-0 after:h-1 after:w-(--progress) after:bg-foreground after:rounded-none" style={{"--max-width": "100px"}} time={cue.startTime + 8}>
                   <Thumbnail.Img />
                 </Thumbnail.Root>
               )}
@@ -570,7 +568,7 @@ function SettingsMenuComponent(
   function attemptSettingsMenuOpenChange() {
     clearTimeout(settingsMenuOpenChangeTimeoutRef.current);
     settingsMenuOpenChangeTimeoutRef.current = setTimeout(() => {
-      if (!settingsMenuTriggerRef.current?.matches(":hover") && !settingsMenuContentRef.current?.matches(":hover")) {
+      if (!settingsMenuTriggerRef.current?.matches(":hover") && !settingsMenuContentRef.current?.matches(":hover") && !dropdownMenuContainerRef.current?.matches(":hover")) {
         handleSettingsMenuOpenChange(false);
       }
     }, 200);
@@ -665,12 +663,12 @@ function SettingsMenuComponent(
 
   return (
     <DropdownMenu open={settingsMenuOpen()} onOpenChange={(open) => handleSettingsMenuOpenChange(open)} modal={false}>
-      <DropdownMenuTrigger className="group flex h-full items-center max-md:hidden" overrideClassName ref={settingsMenuTriggerRef} onMouseEnter={() => handleSettingsMenuOpenChange(true)} onMouseLeave={attemptSettingsMenuOpenChange}>
+      <DropdownMenuTrigger className="group flex h-full items-center max-md:hidden" ref={settingsMenuTriggerRef} onMouseEnter={() => handleSettingsMenuOpenChange(true)} onMouseLeave={attemptSettingsMenuOpenChange}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <ButtonDiv variant="icon" size="icon">
+            <Button variant="ghost" size="icon">
               <MaterialSymbol symbol="settings" fill size={24} className="group-aria-expanded:rotate-60 transition-transform"/>
-            </ButtonDiv>
+            </Button>
           </TooltipTrigger>
           <TooltipContent>
             Settings
@@ -681,14 +679,14 @@ function SettingsMenuComponent(
         side="top"
         loop
         sideOffset={0}
-        className="flex p-2 rounded-t-md bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom duration-200 ease-out" overrideClassName
+        className="flex p-2 rounded-t-md rounded-b-none bg-card/50 items-center backdrop-blur-sm data-[state=open]:animate-in slide-in-from-bottom data-[state=closed]:animate-out slide-out-to-bottom transition-[height] *:transition-[height] duration-200 *:duration-200 ease-in-out *:ease-in-out will-change-[height] *:will-change-[height]"
         container={dropdownMenuContainerRef.current}
         collisionBoundary={dropdownMenuContainerRef.current}
         onMouseLeave={attemptSettingsMenuOpenChange}
         ref={settingsMenuContentRef}
         style={{width: controlBarIconsRef.current?.offsetWidth}}
       >
-        <Tabs value={settingsMenuHistory().current} className="w-full transition-[height] duration-200 ease-in-out will-change-[height]" style={{height: settingsMenuHeight()}}>
+        <Tabs value={settingsMenuHistory().current} className="w-full" style={{height: settingsMenuHeight()}}>
           <TabsContent value="main" ref={mainSettingsMenuRef} className="*:**:has-[role^='menuitem']:focus:bg-accent/50 *:gap-2">
             <DropdownMenuItem onSelect={handleMenuItemSelect("accessibility")}>
               <MaterialSymbol symbol="accessibility_new" fill size={24}/>
@@ -705,26 +703,26 @@ function SettingsMenuComponent(
             {anyCaptions ? (
               <DropdownMenuItem onSelect={handleMenuItemSelect("captions")}>
                 <MaterialSymbol symbol="subtitles" fill size={24}/>
-                <span className="flex-grow">Subtitles/CC</span>
+                <span className="grow">Subtitles/CC</span>
                 <span className="text-primary/50">{captionOptions.selectedTrack?.label}</span>
               </DropdownMenuItem>
             ) : (
               <DropdownMenuItem disabled className="cursor-not-allowed">
                 <MaterialSymbol symbol="subtitles" fill size={24}/>
-                <span className="flex-grow">Subtitles/CC</span>
+                <span className="grow">Subtitles/CC</span>
                 <span className="text-primary/50">None</span>
               </DropdownMenuItem>
             )}
             {!useVideoQualityOptions({ auto: false }).disabled ? (
               <DropdownMenuItem onSelect={handleMenuItemSelect("quality")}>
                 <MaterialSymbol symbol="instant_mix" fill size={24}/>
-                <span className="flex-grow">Quality</span>
+                <span className="grow">Quality</span>
                 <span className="text-primary/50">{videoQualityOptions.selectedQuality?.label}{videoQualityOptions.selectedQuality?.hdr && " HDR"}{videoQualityOptions.find((value) => value.selected == true).label == "Auto" && " (Auto)"}</span>
               </DropdownMenuItem>
             ) : (
               <DropdownMenuItem disabled className="cursor-not-allowed">
                 <MaterialSymbol symbol="instant_mix" fill size={24}/>
-                <span className="flex-grow">Quality</span>
+                <span className="grow">Quality</span>
                 <span className="text-primary/50">Auto</span>
               </DropdownMenuItem>
             )}
@@ -759,7 +757,9 @@ function SettingsMenuComponent(
               <Switch id="loop" checked={useMediaState("loop")} onCheckedChange={userPrefersLoopChange}/>
             </DropdownMenuItem>
 
-            <DropdownMenuSliderItem label="Speed" value={[playbackSpeed()]} onValueChange={(value) => {changePlaybackRate(value[0]); playbackSpeed.set(value[0])}} min={.10} max={2} step={0.01} valueFormatter={(value) => `${value}x`}/>
+            <DropdownMenuSliderItem value={[playbackSpeed()]} onValueChange={(value) => {changePlaybackRate(value[0]); playbackSpeed.set(value[0])}} min={.10} max={2} step={0.01} valueFormatter={(value) => `${value}x`}>
+              Speed
+            </DropdownMenuSliderItem>
           </TabsContent>
 
           <TabsContent value="audio" ref={audioSettingsMenuRef}>
@@ -774,7 +774,9 @@ function SettingsMenuComponent(
                 <span>Track</span>
               </DropdownMenuItem>
             )}
-            <DropdownMenuSliderItem label="Gain" value={[audioGain()]} onValueChange={(value) => {changeAudioGain(value[0] / 100); audioGain.set(value[0])}} min={100} max={300} step={1} valueFormatter={(value) => `${value}%`}/>
+            <DropdownMenuSliderItem value={[audioGain()]} onValueChange={(value) => {changeAudioGain(value[0] / 100); audioGain.set(value[0])}} min={100} max={300} step={1} valueFormatter={(value) => `${value}%`}>
+              Gain
+            </DropdownMenuSliderItem>
           </TabsContent>
 
           {!useAudioOptions().disabled && (
@@ -825,8 +827,12 @@ function SettingsMenuComponent(
                   <Label htmlFor="captions-font-color" className="flex-1">Font color</Label>
                   <Input type="color" id="captions-font-color" className="w-[30%]" value={captionsFontColor()} onChange={(event) => captionsFontColor.set(event.target.value)} />
                 </DropdownMenuItem>
-                <DropdownMenuSliderItem label="Font size" value={[captionsFontSize()]} onValueChange={(value) => captionsFontSize.set(value[0])} min={.1} max={4} step={.05} valueFormatter={(value) => `${value * 100}%`}/>
-                <DropdownMenuSliderItem label="Font opacity" value={[captionsFontOpacity()]} onValueChange={(value) => captionsFontOpacity.set(value[0])} min={.1} max={1} step={.05} valueFormatter={(value) => `${value * 100}%`}/>
+                <DropdownMenuSliderItem value={[captionsFontSize()]} onValueChange={(value) => captionsFontSize.set(value[0])} min={.1} max={4} step={.05} valueFormatter={(value) => `${value * 100}%`}>
+                  Font size
+                </DropdownMenuSliderItem>
+                <DropdownMenuSliderItem value={[captionsFontOpacity()]} onValueChange={(value) => captionsFontOpacity.set(value[0])} min={.1} max={1} step={.05} valueFormatter={(value) => `${value * 100}%`}>
+                  Font opacity
+                </DropdownMenuSliderItem>
                 <DropdownMenuItem onSelect={handleMenuItemSelect("captions-format-edge-style")} className="gap-2">
                   <MaterialSymbol symbol="style" fill size={24}/>
                   <span>Edge style</span>
@@ -836,7 +842,9 @@ function SettingsMenuComponent(
               <DropdownMenuSeparator />
 
               <DropdownMenuGroup>
-                <DropdownMenuSliderItem label="Background opacity" value={[captionsBackgroundOpacity()]} onValueChange={(value) => captionsBackgroundOpacity.set(value[0])} min={0} max={1} step={.05} valueFormatter={(value) => `${value * 100}%`}/>
+                <DropdownMenuSliderItem value={[captionsBackgroundOpacity()]} onValueChange={(value) => captionsBackgroundOpacity.set(value[0])} min={0} max={1} step={.05} valueFormatter={(value) => `${value * 100}%`}>
+                  Background opacity
+                </DropdownMenuSliderItem>
                 <DropdownMenuItem>
                   <Label htmlFor="captions-background-color" className="flex-1">Background color</Label>
                   <Input type="color" id="captions-background-color" className="w-[30%]" value={captionsBackgroundColor()} onChange={(event) => captionsBackgroundColor.set(event.target.value)} />
@@ -846,7 +854,9 @@ function SettingsMenuComponent(
               <DropdownMenuSeparator />
 
               <DropdownMenuGroup>
-                <DropdownMenuSliderItem label="Window opacity" value={[captionsWindowOpacity()]} onValueChange={(value) => captionsWindowOpacity.set(value[0])} min={0} max={1} step={.05} valueFormatter={(value) => `${value * 100}%`}/>
+                <DropdownMenuSliderItem value={[captionsWindowOpacity()]} onValueChange={(value) => captionsWindowOpacity.set(value[0])} min={0} max={1} step={.05} valueFormatter={(value) => `${value * 100}%`}>
+                  Window opacity
+                </DropdownMenuSliderItem>
                 <DropdownMenuItem>
                   <Label htmlFor="captions-window-color" className="flex-1">Window color</Label>
                   <Input type="color" id="captions-window-color" className="w-[30%]" value={captionsWindowColor()} onChange={(event) => captionsWindowColor.set(event.target.value)} />
@@ -927,7 +937,7 @@ function DownloadButtonComponent() {
   return download && (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="icon" size="icon" asChild>
+        <Button variant="ghost" size="icon" asChild>
           <a href={file.url as string} download={file.name} title={file.name}>
             <MaterialSymbol symbol="file_download" fill size={24} />
           </a>
@@ -944,7 +954,7 @@ function FullscreenButtonComponent() {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="icon" size="icon">
+        <Button variant="ghost" size="icon">
           <FullscreenButton asChild>
               {fullscreen ? (
                 <MaterialSymbol symbol="fullscreen_exit" fill size={24}/>
@@ -1060,7 +1070,7 @@ function Layout() {
       </div>
       <Captions className="vds-captions" exampleText="Captions will look like this"
         style={captionsCSSStyle()}/>
-      <div className="flex absolute flex-col inset-0 w-full h-full bg-linear-to-t from-card/60 from-11% to-card/0 to-30% z-[2] pointer-events-none group-not-data-controls/video-player:opacity-0 transition-opacity" ref={layoutDivRef}>
+      <div className="flex absolute flex-col inset-0 w-full h-full bg-linear-to-t from-card/60 from-11% to-card/0 to-30% z-2 pointer-events-none group-not-data-controls/video-player:opacity-0 transition-opacity" ref={layoutDivRef}>
         <div className="flex-1 pointer-events-none"/>
         <TooltipProvider>
           <TimeSliderComponent />
@@ -1073,7 +1083,7 @@ function Layout() {
             </div>
             <div className="control-bar items-end relative">
               <div className="control-bar-content dropdown-collision-boundary absolute w-full h-[calc(var(--player-height)-calc(var(--spacing,0.25rem)*17.5))] bottom-full mb-1 *:overflow-hidden *:*:overflow-hidden *:*:mb-1 pointer-events-none *:pointer-events-auto" ref={dropdownMenuContainerRef}/>
-              <div className="control-bar-icons h-12 gap-4 flex px-4 rounded-b-md rounded-t-md transition-[border_radius] duration-200 ease-in-out bg-card/50 items-center relative backdrop-blur-sm *:data-[state=open]:bg-transparent" ref={controlBarIconsRef}>
+              <div className="control-bar-icons h-12 gap-4 flex px-4 rounded-b-md rounded-t-md transition-[border_radius] duration-200 ease-in-out bg-card/50 items-center relative backdrop-blur-sm *:data-[state=open]:bg-transparent border" ref={controlBarIconsRef}>
                 <VolumePopupSliderComponent dropdownMenuContainerRef={dropdownMenuContainerRef} controlBarIconsRef={controlBarIconsRef} />
                 <CaptionButtonComponent />
                 <RemotePlaybackButtons />

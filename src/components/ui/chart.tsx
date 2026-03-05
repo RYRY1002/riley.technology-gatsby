@@ -1,12 +1,7 @@
+"use client"
+
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
-import type {
-  NameType,
-  Payload,
-  ValueType,
-  Formatter
-} from "recharts/types/component/DefaultTooltipContent"
-import { Separator } from "@/components/ui/separator"
 
 import { cn } from "@/lib/utils"
 
@@ -39,25 +34,28 @@ function useChart() {
   return context
 }
 
-const ChartContainer = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> & {
-    config: ChartConfig
-    children: React.ComponentProps<
-      typeof RechartsPrimitive.ResponsiveContainer
-    >["children"]
-  }
->(({ id, className, children, config, ...props }, ref) => {
+function ChartContainer({
+  id,
+  className,
+  children,
+  config,
+  ...props
+}: React.ComponentProps<"div"> & {
+  config: ChartConfig
+  children: React.ComponentProps<
+    typeof RechartsPrimitive.ResponsiveContainer
+  >["children"]
+}) {
   const uniqueId = React.useId()
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`
 
   return (
     <ChartContext.Provider value={{ config }}>
       <div
+        data-slot="chart"
         data-chart={chartId}
-        ref={ref}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-hidden [&_.recharts-surface]:outline-hidden",
+          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className
         )}
         {...props}
@@ -69,12 +67,11 @@ const ChartContainer = React.forwardRef<
       </div>
     </ChartContext.Provider>
   )
-})
-ChartContainer.displayName = "Chart"
+}
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
-    ([_, config]) => config.theme || config.color
+    ([, config]) => config.theme || config.color
   )
 
   if (!colorConfig.length) {
@@ -105,101 +102,91 @@ ${colorConfig
   )
 }
 
-const ChartTooltipContent = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-    React.ComponentProps<"div"> & {
-      hideLabel?: boolean
-      hideIndicator?: boolean
-      indicator?: "line" | "dot" | "dashed"
-      valueFormatter?: Formatter<ValueType, NameType>
-      nameKey?: string
-      labelKey?: string
-      unit?: { before: string, after: string } | string
-      showTotal?: boolean
-    }
->(
-  (
-    {
-      active,
-      payload,
-      className,
-      indicator = "dot",
-      hideLabel = false,
-      hideIndicator = false,
-      label,
-      labelFormatter,
-      labelClassName,
-      formatter,
-      valueFormatter,
-      color,
-      nameKey,
-      labelKey,
-      unit,
-      showTotal = false,
-    },
-    ref
-  ) => {
-    const { config } = useChart()
+const ChartTooltip = RechartsPrimitive.Tooltip
 
-    const tooltipLabel = React.useMemo(() => {
-      if (hideLabel || !payload?.length) {
-        return null
-      }
+function ChartTooltipContent({
+  active,
+  payload,
+  className,
+  indicator = "dot",
+  hideLabel = false,
+  hideIndicator = false,
+  label,
+  labelFormatter,
+  labelClassName,
+  formatter,
+  color,
+  nameKey,
+  labelKey,
+}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+  React.ComponentProps<"div"> & {
+    hideLabel?: boolean
+    hideIndicator?: boolean
+    indicator?: "line" | "dot" | "dashed"
+    nameKey?: string
+    labelKey?: string
+  }) {
+  const { config } = useChart()
 
-      const [item] = payload
-      const key = `${labelKey || item.dataKey || item.name || "value"}`
-      const itemConfig = getPayloadConfigFromPayload(config, item, key)
-      const value =
-        !labelKey && typeof label === "string"
-          ? config[label as keyof typeof config]?.label || label
-          : itemConfig?.label
-
-      if (labelFormatter) {
-        return (
-          <div className={cn("font-medium", labelClassName)}>
-            {labelFormatter(value, payload)}
-          </div>
-        )
-      }
-
-      if (!value) {
-        return null
-      }
-
-      return <div className={cn("font-medium", labelClassName)}>{value}</div>
-    }, [
-      label,
-      labelFormatter,
-      payload,
-      hideLabel,
-      labelClassName,
-      config,
-      labelKey,
-    ])
-
-    if (!active || !payload?.length) {
+  const tooltipLabel = React.useMemo(() => {
+    if (hideLabel || !payload?.length) {
       return null
     }
 
-    const nestLabel = payload.length === 1 && indicator !== "dot"
+    const [item] = payload
+    const key = `${labelKey || item?.dataKey || item?.name || "value"}`
+    const itemConfig = getPayloadConfigFromPayload(config, item, key)
+    const value =
+      !labelKey && typeof label === "string"
+        ? config[label as keyof typeof config]?.label || label
+        : itemConfig?.label
 
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
-          className
-        )}
-      >
-        {!nestLabel && tooltipLabel}
-        <div className="grid gap-1.5">
-          {payload.map((item, index) => {
+    if (labelFormatter) {
+      return (
+        <div className={cn("font-medium", labelClassName)}>
+          {labelFormatter(value, payload)}
+        </div>
+      )
+    }
+
+    if (!value) {
+      return null
+    }
+
+    return <div className={cn("font-medium", labelClassName)}>{value}</div>
+  }, [
+    label,
+    labelFormatter,
+    payload,
+    hideLabel,
+    labelClassName,
+    config,
+    labelKey,
+  ])
+
+  if (!active || !payload?.length) {
+    return null
+  }
+
+  const nestLabel = payload.length === 1 && indicator !== "dot"
+
+  return (
+    <div
+      className={cn(
+        "grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
+        className
+      )}
+    >
+      {!nestLabel ? tooltipLabel : null}
+      <div className="grid gap-1.5">
+        {payload
+          .filter((item) => item.type !== "none")
+          .map((item, index) => {
             const key = `${nameKey || item.name || item.dataKey || "value"}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
             const indicatorColor = color || item.payload.fill || item.color
 
-            return <>
+            return (
               <div
                 key={item.dataKey}
                 className={cn(
@@ -242,109 +229,57 @@ const ChartTooltipContent = React.forwardRef<
                       )}
                     >
                       <div className="grid gap-1.5">
-                        {nestLabel && tooltipLabel}
+                        {nestLabel ? tooltipLabel : null}
                         <span className="text-muted-foreground">
                           {itemConfig?.label || item.name}
                         </span>
                       </div>
                       {item.value && (
-                        <span className="font-mono font-medium tabular-nums text-foreground ml-8">
-                          {(typeof unit === "object" && unit.before) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.before}</span>
-                          )}
-                          {(typeof unit === "string" && (unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
-                          )}
-                          {valueFormatter ? valueFormatter(item.value, item.name, item, index, item.payload) : item.value.toLocaleString()}
-                          {(typeof unit === "object" && unit.after ) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.after}</span>
-                          )}
-                          {(typeof unit === "string" && !(unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
-                          )}
+                        <span className="font-mono font-medium text-foreground tabular-nums">
+                          {item.value.toLocaleString()}
                         </span>
                       )}
                     </div>
                   </>
                 )}
               </div>
-              {showTotal && index === 1 && <>
-                <Separator/>
-                <div
-                  key={item.dataKey}
-                  className={cn(
-                    "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
-                    indicator === "dot" && "items-center"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "flex flex-1 justify-between leading-none",
-                      nestLabel ? "items-end" : "items-center"
-                    )}
-                  >
-                    <div className="grid gap-1.5">
-                      <span className="text-muted-foreground">
-                        Total
-                      </span>
-                    </div>
-                    {item.value && (
-                      <span className="font-mono font-medium tabular-nums text-foreground ml-8">
-                          {(typeof unit === "object" && unit.before) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.before}</span>
-                          )}
-                          {(typeof unit === "string" && (unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
-                          )}
-                          {payload.reduce((total, item) => total + Number(item.value), 0).toString()}
-                          {(typeof unit === "object" && unit.after ) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit.after}</span>
-                          )}
-                          {(typeof unit === "string" && !(unit === "$" || unit === "dollar" || unit === "dollars" || unit === "US$")) && (
-                            <span className="font-sans font-normal text-muted-foreground ml-0.5">{unit}</span>
-                          )}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </>}
-            </>
+            )
           })}
-        </div>
       </div>
-    )
+    </div>
+  )
+}
+
+const ChartLegend = RechartsPrimitive.Legend
+
+function ChartLegendContent({
+  className,
+  hideIcon = false,
+  payload,
+  verticalAlign = "bottom",
+  nameKey,
+}: React.ComponentProps<"div"> &
+  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+    hideIcon?: boolean
+    nameKey?: string
+  }) {
+  const { config } = useChart()
+
+  if (!payload?.length) {
+    return null
   }
-)
-ChartTooltipContent.displayName = "ChartTooltip"
 
-const ChartLegendContent = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-      hideIcon?: boolean
-      nameKey?: string
-    }
->(
-  (
-    { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
-    ref
-  ) => {
-    const { config } = useChart()
-
-    if (!payload?.length) {
-      return null
-    }
-
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "flex items-center justify-center gap-4",
-          verticalAlign === "top" ? "pb-3" : "pt-3",
-          className
-        )}
-      >
-        {payload.map((item) => {
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center gap-4",
+        verticalAlign === "top" ? "pb-3" : "pt-3",
+        className
+      )}
+    >
+      {payload
+        .filter((item) => item.type !== "none")
+        .map((item) => {
           const key = `${nameKey || item.dataKey || "value"}`
           const itemConfig = getPayloadConfigFromPayload(config, item, key)
 
@@ -369,145 +304,8 @@ const ChartLegendContent = React.forwardRef<
             </div>
           )
         })}
-      </div>
-    )
-  }
-)
-ChartLegendContent.displayName = "ChartLegend"
-
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from "@/components/ui/tooltip";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { MaterialSymbol } from "gatsby-plugin-material-symbols";
-
-function ChartExplanation(
-  {
-    tooltip: tooltipContent,
-    dialog: {
-      title: dialogTitle,
-      subtitle: dialogSubtitle,
-      content: dialogContent,
-      button: dialogCloseButton
-    }
-  }: {
-    tooltip?: string,
-    dialog?: {
-      title?: string,
-      subtitle?: string,
-      content?: React.ReactNode,
-      button?: string
-    }
-  }
-) {
-  const dialog = ((dialogTitle || dialogContent) || dialogContent) ? true : false;
-  if (!tooltipContent && !dialog) {
-    throw new Error("ChartExplanation must have either a tooltip or a dialog.", { cause: "tooltip and dialog props are both undefined." });
-  };
-
-  return <>
-    {tooltipContent ? <>
-      {dialog ? (
-        <Dialog>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="ml-1">
-                <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
-              </TooltipTrigger>
-              <TooltipContent>
-                {tooltipContent}
-                <DialogTrigger>
-                  <MaterialSymbol symbol="help" weight={400} grade={200} size={14}/>
-                </DialogTrigger>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>
-                {dialogTitle}
-              </DialogTitle>
-              <DialogDescription>
-                {dialogSubtitle}
-              </DialogDescription>
-            </DialogHeader>
-            {dialogContent}
-            {dialogCloseButton && (
-              <DialogFooter>
-                <DialogClose>
-                  <Button>
-                    {dialogCloseButton}
-                  </Button>
-                </DialogClose>
-              </DialogFooter>
-            )}
-          </DialogContent>
-        </Dialog>
-      ) : (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger className="ml-1">
-              <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
-            </TooltipTrigger>
-            <TooltipContent>
-              {tooltipContent}
-              <DialogTrigger>
-                <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
-              </DialogTrigger>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      )}
-    </> : (
-      <Dialog>
-        <DialogTrigger className="ml-1">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <MaterialSymbol symbol="help" weight={400} grade={-25} size={16}/>
-              </TooltipTrigger>
-              <TooltipContent>
-                Learn more about this chart and what you can learn from it
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
-              {dialogTitle}
-            </DialogTitle>
-            <DialogDescription>
-              {dialogSubtitle}
-            </DialogDescription>
-          </DialogHeader>
-          {dialogContent}
-          {dialogCloseButton && (
-            <DialogFooter>
-              <DialogClose>
-                <Button>
-                  {dialogCloseButton}
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          )}
-        </DialogContent>
-      </Dialog>
-    )}
-  </>
+    </div>
+  )
 }
 
 // Helper to extract item config from a payload.
@@ -549,15 +347,11 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config]
 }
 
-const ChartTooltip = RechartsPrimitive.Tooltip;
-const ChartLegend = RechartsPrimitive.Legend;
-export { ChartTooltip, ChartLegend };
-export * from "recharts";
-
 export {
   ChartContainer,
+  ChartTooltip,
   ChartTooltipContent,
+  ChartLegend,
   ChartLegendContent,
   ChartStyle,
-  ChartExplanation
-};
+}

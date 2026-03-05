@@ -90,9 +90,9 @@ export default function BlogPost({ data: { mdx }, children }) {
             {frontmatter.images?.hero && (
               <Dialog open={isFullscreenHeroCarouselOpen} onOpenChange={handleFullscreenHeroCarouselOpenChange}>
                 <Carousel setApi={setApi}>
-                  <CarouselContent className="gap-4" className2="rounded-xl">
+                  <CarouselContent className="rounded-xl">
                     {frontmatter.images.hero.map((image, index) => (
-                      <CarouselItem key={index} className="h-[60vmin] md:basis-2/3 lg:basis-[45%] cursor-grab active:cursor-grabbing select-none relative">
+                      <CarouselItem key={index} className="h-[60vmin] max-md:basis-[85%] basis-[45%] cursor-grab active:cursor-grabbing select-none relative">
                         <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
                         <div className="absolute w-full h-full bottom-0 object-cover rounded-xl">
                           <div id="hero-overlay" className="absolute w-full h-full bottom-0 object-cover rounded-xl" style={{background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.93) 100%)"}}/>

@@ -21,10 +21,7 @@ import {
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi
+  CarouselItem
 } from "@/components/ui/carousel";
 import Fade from "embla-carousel-fade";
 import Autoplay from "embla-carousel-autoplay";
@@ -47,106 +44,101 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
   // This is to prevent builds from messing up, nodejs doesn't have access to window as it doesn't load it in a browser
   // It seems a bit out of place for JS, checks like this are usually reserved for well made programs in good languages. This is necessary for it to build though.
   if (typeof window !== "undefined") {
-    import("jquery").then((jQuery) => {
-      const $ = jQuery.default;
-      {
-        // Pauses videos not currently in viewport for performance
-        require("is-in-viewport");
-        $(window).on("scroll", function() {
-          $("video").each(function() {
-            if ($(this).is(":in-viewport")) {
-              $(this).get(0).play();
-            } else {
-              $(this).get(0).pause();
-            }
-          })
+    const $ = require("jquery/slim");
+    {
+      // Pauses videos not currently in viewport for performance
+      require("is-in-viewport");
+      $(window).on("scroll", function() {
+        $("video").each(function() {
+          if ($(this).is(":in-viewport")) {
+            $(this).get(0).play();
+          } else {
+            $(this).get(0).pause();
+          }
         })
-      }
-      {
-        // Makes the socials sticky after the hero text is hidden
-        $(window).on("scroll load", function() {
-          let currentScroll = $(window).scrollTop();
-          let socialTop = $("#tagline").offset().top;
-          let socialBottom = socialTop + $("#tagline").height();
-          let scrollPercent = currentScroll / socialBottom;
+      })
+    }
+    {
+      // Makes the socials sticky after the hero text is hidden
+      $(window).on("scroll load", function() {
+        let currentScroll = $(window).scrollTop();
+        let socialTop = $("#tagline").offset().top;
+        let socialBottom = socialTop + $("#tagline").height();
+        let scrollPercent = currentScroll / socialBottom;
 
-          if ( currentScroll >= socialBottom ) {
-            $("#socials").addClass("sticky");
-            $("#socials").removeClass("relative");
-            $("#socials").addClass("top-5");
-            $("#tagline").css("margin-bottom", $("#socials").height() + "!important");
-          } else {
-            $("#socials").removeClass("sticky");
-            $("#socials").addClass("relative");
-            $("#socials").removeClass("top-5");
-            $("#tagline").css("margin-bottom", 0 + "!important");
-          }
-        });
-      }
-      {
-        $(window).on("scroll load", function() {
-          let currentScroll = $(window).scrollTop();
-          let arrow = $("#hero").height() - $("#socials").height() - $(window).height() * 0.25;
+        if ( currentScroll >= socialBottom ) {
+          $("#socials").addClass("sticky");
+          $("#socials").removeClass("relative");
+          $("#socials").addClass("top-5");
+          $("#tagline").css("margin-bottom", $("#socials").height() + "!important");
+        } else {
+          $("#socials").removeClass("sticky");
+          $("#socials").addClass("relative");
+          $("#socials").removeClass("top-5");
+          $("#tagline").css("margin-bottom", 0 + "!important");
+        }
+      });
+    }
+    {
+      $(window).on("scroll load", function() {
+        let currentScroll = $(window).scrollTop();
+        let arrow = $("#hero").height() - $("#socials").height() - $(window).height() * 0.25;
 
-          function lerp(start, end, time) {
-            return start + (end - start) * time;
-          }
+        function lerp(start, end, time) {
+          return start + (end - start) * time;
+        }
 
-          if (currentScroll <= arrow) {
-            $("#rotating-arrow").css("rotate", lerp(0, 90, Math.min(...[currentScroll / arrow, 1])) + "deg");
-          } else {
-            $("#rotating-arrow").css("rotate");
-          }
-        });
-      }
-      {
-        $(window).on("scroll load", function() {
-          let viewportHeight = $(window).height();
-          let viewportWidth = $(window).width();
-          let currentScroll = $(window).scrollTop();
-          currentScroll = currentScroll + viewportHeight - (viewportWidth * 0.03);
-          let mainHeight = $("main").height();
+        if (currentScroll <= arrow) {
+          $("#rotating-arrow").css("rotate", lerp(0, 90, Math.min(...[currentScroll / arrow, 1])) + "deg");
+        } else {
+          $("#rotating-arrow").css("rotate");
+        }
+      });
+    }
+    {
+      $(window).on("scroll load", function() {
+        let currentScroll = $(window).scrollTop() + $(window).height();
+        let mainHeight = $("main").height();
 
-          if (currentScroll >= mainHeight) {
-            $("#background-pics").addClass("absolute!");
-            $("#background-pics").addClass("h-screen");
-            $("#background-pics").addClass("-bottom-[3vw]!");
-            $("#background-pics").removeClass("fixed");
-            $("#background-pics").removeClass("h-full");
-            $("#background-pics").css("mask-image", "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)");
-          } else {
-            $("#background-pics").removeClass("absolute!");
-            $("#background-pics").removeClass("h-screen");
-            $("#background-pics").removeClass("-bottom-[3vw]!");
-            $("#background-pics").addClass("fixed");
-            $("#background-pics").addClass("h-full");
-            $("#background-pics").css("mask-image", "");
-          }
-        });
-      }
-      {
-        // Blurs the background video when scrolling
-        $(window).on("scroll load", function() {
-          let currentScroll = $(window).scrollTop();
-          let heroBottom = $("#tagline").offset().top + $("#tagline").height();
-  
-          if (currentScroll >= heroBottom) {
-            $("#background-pics").css("filter", 
-            "blur(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + "px) " + 
-            "brightness(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ")");
-          } else {
-            $("#background-pics").css("filter", "");
-          }
-        });
-      }
-    });
+        if (currentScroll >= mainHeight) {
+          $("#background-pics").addClass("absolute!");
+          $("#background-pics").addClass("h-screen");
+          $("#background-pics").addClass("-bottom-[3vw]!");
+          $("#background-pics").removeClass("fixed");
+          $("#background-pics").removeClass("h-full");
+          $("#background-pics").css("mask-image", "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)");
+        } else {
+          $("#background-pics").removeClass("absolute!");
+          $("#background-pics").removeClass("h-screen");
+          $("#background-pics").removeClass("-bottom-[3vw]!");
+          $("#background-pics").addClass("fixed");
+          $("#background-pics").addClass("h-full");
+          $("#background-pics").css("mask-image", "");
+        }
+      });
+    }
+    {
+      // Blurs the background video when scrolling
+      $(window).on("scroll load", function() {
+        let currentScroll = $(window).scrollTop();
+        let heroBottom = $("#tagline").offset().top + $("#tagline").height();
+
+        if (currentScroll >= heroBottom) {
+          $("#background-pics").css("filter", 
+          "blur(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + "px) " + 
+          "brightness(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ")");
+        } else {
+          $("#background-pics").css("filter", "");
+        }
+      });
+    }
   }
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <main className="relative z-1 bg-background">
         <Carousel plugins={[Autoplay({ stopOnInteraction: false, stopOnFocusIn: false }), Fade()]} opts={{ loop: true }} id="background-pics" className="absolute -z-1 h-full w-full overflow-hidden">
-          <CarouselContent className="h-full w-full">
+          <CarouselContent className="h-full w-full *:m-0!">
             <CarouselItem className="fixed bottom-0 left-0 w-full *:w-full h-full *:h-full object-cover -z-1 select-none">
               <StaticImage src="../../static/images/v4/v4-1.png" alt="Hero image" placeholder="blurred"/>
             </CarouselItem>
@@ -198,11 +190,11 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
           <div id="articles" className="grid grid-cols-3 max-md:grid-cols-1 grid-flow-dense auto-rows-auto justify-center content-center gap-[0.65rem] my-16 max-md:my-8">
             {posts.map(({ node }) => {
               return (
-                <article id={node.id} className={cn("transition-transform duration-150 ease-in-out bg-cover bg-center min-h-[35vmin] max-md:min-h-[60vmin] rounded-xl relative overflow-hidden hover:scale-[1.075] hover:z-[10]", (node.frontmatter.importance >= 2 ? "md:col-start-1 md:col-span-2" : "md:col-start-3"), (node.frontmatter.importance >= 4 && "md:row-span-2"))}>
+                <article id={node.id} className={cn("transition-transform duration-150 ease-in-out bg-cover bg-center min-h-[35vmin] max-md:min-h-[60vmin] rounded-xl relative overflow-hidden hover:scale-[1.075] hover:z-10", (node.frontmatter.importance >= 2 ? "md:col-start-1 md:col-span-2" : "md:col-start-3"), (node.frontmatter.importance >= 4 && "md:row-span-2"))}>
                   <GatsbyImage image={getImage(node.frontmatter.image)} alt={node.frontmatter.title} className="absolute! w-full h-full pointer-events-none object-fill z-[-1]"/>
                   <Link to={"/project/" + node.frontmatter.slug} className="p-8 relative w-full h-full inline-block -top-1.5 *:drop-shadow-lg/75">
                     <h2 className="text-3xl font-bold leading-none">{node.frontmatter.title}</h2>
-                    <small className="text-sm" style={{fontStretch: 85 + "%"}}>{node.frontmatter.date}</small>
+                    <small className="text-sm">{node.frontmatter.date}</small>
                   </Link>
                 </article>
               )
