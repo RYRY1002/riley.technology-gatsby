@@ -133,7 +133,7 @@ export function InlineCarousel(
               <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
               {perImageAlt && (
                 <div className="absolute md:w-[calc(66.666667%-1rem)] lg:w-[calc(45%-1rem)] h-full bottom-0 object-cover rounded-xl">
-                  <p className="absolute m-0! left-8 top-5 w-[85%] drop-shadow-sm">{image.alt}</p>
+                  <p className="absolute m-0! left-8 top-5 w-[85%] drop-shadow-sm text-foreground-dark">{image.alt}</p>
                 </div>
               )}
             </CarouselItem>
@@ -141,7 +141,7 @@ export function InlineCarousel(
         </CarouselContent>
         {!perImageAlt && (
           <div className="absolute left-6 top-5">
-            <p className="m-0! drop-shadow-sm">{alt}</p>
+            <p className="m-0! drop-shadow-sm text-foreground-dark">{alt}</p>
           </div>
         )}
         <DialogTrigger asChild>
@@ -253,7 +253,7 @@ export function MarkdownImage(
     <Dialog>
       <div className="relative w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2 h-[50vmin] rounded-xl">
         <GatsbyImage image={getImage(queriedImage.src)} alt={queriedImage.alt} className={`object-cover h-[50vmin] rounded-xl ${className}`}/>
-        <p className="absolute m-0! left-8 top-5 w-max max-w-[75%] drop-shadow-sm">{queriedImage.alt}</p>
+        <p className="absolute m-0! left-8 top-5 w-max max-w-[75%] drop-shadow-sm text-foreground-dark">{queriedImage.alt}</p>
         <DialogTrigger asChild>
           <Button variant="outline" size="icon" className="absolute size-8 rounded-full right-6 top-5">
             <MaterialSymbol symbol="open_in_full" size={18} weight={300} />

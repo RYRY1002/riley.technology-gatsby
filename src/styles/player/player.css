@@ -671,7 +671,7 @@ iframe.vds-youtube[data-no-controls] {
   transition: opacity 0.2s ease-out;
   will-change: left, opacity;
   contain: layout paint style;
-  @apply bg-card/50 backdrop-blur-sm p-2 rounded-md;
+  @apply bg-card/50 border backdrop-blur-sm p-2 rounded-md;
 }
 
 :where(.vds-slider-preview[data-visible]) {

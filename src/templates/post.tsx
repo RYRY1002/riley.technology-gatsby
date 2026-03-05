@@ -79,10 +79,10 @@ export default function BlogPost({ data: { mdx }, children }) {
   }, [api, fullscreenApi, isFullscreenHeroCarouselOpen]);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" enableSystem>
       <div vaul-drawer-wrapper="">
         <main className="relative z-1 bg-background">
-          <Link to="" className="flex flex-row mt-6 mx-[15%] max-md:mx-6">
+          <Link to="/" className="flex flex-row mt-6 mx-[15%] max-md:mx-6">
             <MaterialSymbol symbol="arrow_back" size={24} weight={300} />
             Head home
           </Link>
@@ -96,7 +96,7 @@ export default function BlogPost({ data: { mdx }, children }) {
                         <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
                         <div className="absolute w-full h-full bottom-0 object-cover rounded-xl">
                           <div id="hero-overlay" className="absolute w-full h-full bottom-0 object-cover rounded-xl" style={{background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.93) 100%)"}}/>
-                          <p className="absolute left-8 top-5 w-max max-w-[75%] max-md:max-w-[85%] drop-shadow-sm max-md:text-sm">{image.alt}</p>
+                          <p className="absolute left-8 top-5 w-max max-w-[75%] max-md:max-w-[85%] drop-shadow-sm max-md:text-sm text-foreground-dark">{image.alt}</p>
                         </div>
                       </CarouselItem>
                     ))}
@@ -137,17 +137,17 @@ export default function BlogPost({ data: { mdx }, children }) {
                 </DialogContent>
               </Dialog>
             )}
-            <div id="hero-text" className="absolute bottom-7 mx-10! max-md:mx-5! my-0! prose">
+            <div id="hero-text" className="absolute bottom-7 mx-10! max-md:mx-5! my-0! prose *:text-foreground-dark">
               <h1 className="m-0! max-md:text-2xl">{frontmatter.title}</h1>
               <h4 className="m-0! font-normal max-md:text-base">{frontmatter.date}</h4>
             </div>
           </div>
-          <div className="relative pb-8 prose">
+          <div className="relative pb-[3vw] prose">
             <MDXProvider components={mdxComponents}>
               {children}
             </MDXProvider>
           </div>
-          <div id="footer-gradient-deco" className="absolute -bottom-[2vw] z-0 h-[2vw] w-full bg-linear-to-b from-background to-[#ffffff00]"/>
+          <div id="main-to-footer-gradient" className="absolute z-0 -bottom-[3vw] h-[3vw] w-full bg-linear-to-b from-background to-white/0"/>
         </main>
         <Footer/>
       </div>

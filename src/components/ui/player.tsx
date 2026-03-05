@@ -1053,7 +1053,7 @@ function Layout() {
   }
   
   return (
-    <div className="vds-video-layout" data-match>
+    <div className="dark vds-video-layout" data-match>
       {userPrefersAnnouncements && <MediaAnnouncer />}
       {!noGestures && (
         <div className="vds-gestures">

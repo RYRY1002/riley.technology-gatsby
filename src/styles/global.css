@@ -10,7 +10,7 @@
 @import "./player/player.css";
 @import "./player/video.css";
 
-@custom-variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *), .dark, .dark *, [data-theme=dark], [data-theme=dark] *);
 
 /* Tailwind theme */
 :root {
@@ -80,6 +80,70 @@
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
   }
+
+  --background-light: oklch(1 0 0);
+  --foreground-light: oklch(0.145 0 0);
+  --card-light: oklch(1 0 0);
+  --card-foreground-light: oklch(0.145 0 0);
+  --popover-light: oklch(1 0 0);
+  --popover-foreground-light: oklch(0.145 0 0);
+  --primary-light: oklch(0.205 0 0);
+  --primary-foreground-light: oklch(0.985 0 0);
+  --secondary-light: oklch(0.97 0 0);
+  --secondary-foreground-light: oklch(0.205 0 0);
+  --muted-light: oklch(0.97 0 0);
+  --muted-foreground-light: oklch(0.556 0 0);
+  --accent-light: oklch(0.97 0 0);
+  --accent-foreground-light: oklch(0.205 0 0);
+  --destructive-light: oklch(0.577 0.245 27.325);
+  --border-light: oklch(0.922 0 0);
+  --input-light: oklch(0.922 0 0);
+  --ring-light: oklch(0.708 0 0);
+  --chart-1-light: oklch(0.646 0.222 41.116);
+  --chart-2-light: oklch(0.6 0.118 184.704);
+  --chart-3-light: oklch(0.398 0.07 227.392);
+  --chart-4-light: oklch(0.828 0.189 84.429);
+  --chart-5-light: oklch(0.769 0.188 70.08);
+  --sidebar-light: oklch(0.985 0 0);
+  --sidebar-foreground-light: oklch(0.145 0 0);
+  --sidebar-primary-light: oklch(0.205 0 0);
+  --sidebar-primary-foreground-light: oklch(0.985 0 0);
+  --sidebar-accent-light: oklch(0.97 0 0);
+  --sidebar-accent-foreground-light: oklch(0.205 0 0);
+  --sidebar-border-light: oklch(0.922 0 0);
+  --sidebar-ring-light: oklch(0.708 0 0);
+
+  --background-dark: oklch(0.145 0 0);
+  --foreground-dark: oklch(0.985 0 0);
+  --card-dark: oklch(0.205 0 0);
+  --card-foreground-dark: oklch(0.985 0 0);
+  --popover-dark: oklch(0.205 0 0);
+  --popover-foreground-dark: oklch(0.985 0 0);
+  --primary-dark: oklch(0.922 0 0);
+  --primary-foreground-dark: oklch(0.205 0 0);
+  --secondary-dark: oklch(0.269 0 0);
+  --secondary-foreground-dark: oklch(0.985 0 0);
+  --muted-dark: oklch(0.269 0 0);
+  --muted-foreground-dark: oklch(0.708 0 0);
+  --accent-dark: oklch(0.269 0 0);
+  --accent-foreground-dark: oklch(0.985 0 0);
+  --destructive-dark: oklch(0.704 0.191 22.216);
+  --border-dark: oklch(1 0 0 / 10%);
+  --input-dark: oklch(1 0 0 / 15%);
+  --ring-dark: oklch(0.556 0 0);
+  --chart-1-dark: oklch(0.488 0.243 264.376);
+  --chart-2-dark: oklch(0.696 0.17 162.48);
+  --chart-3-dark: oklch(0.769 0.188 70.08);
+  --chart-4-dark: oklch(0.627 0.265 303.9);
+  --chart-5-dark: oklch(0.645 0.246 16.439);
+  --sidebar-dark: oklch(0.205 0 0);
+  --sidebar-foreground-dark: oklch(0.985 0 0);
+  --sidebar-primary-dark: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground-dark: oklch(0.985 0 0);
+  --sidebar-accent-dark: oklch(0.269 0 0);
+  --sidebar-accent-foreground-dark: oklch(0.985 0 0);
+  --sidebar-border-dark: oklch(1 0 0 / 10%);
+  --sidebar-ring-dark: oklch(0.556 0 0);
 }
 
 @theme inline {
@@ -130,6 +194,72 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-light: var(--color-foreground-light);
+  --color-background-light: var(--background-light);
+  --color-foreground-light: var(--foreground-light);
+  --color-card-light: var(--card-light);
+  --color-card-foreground-light: var(--card-foreground-light);
+  --color-popover-light: var(--popover-light);
+  --color-popover-foreground-light: var(--popover-foreground-light);
+  --color-primary-light: var(--primary-light);
+  --color-primary-foreground-light: var(--primary-foreground-light);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-foreground-light: var(--secondary-foreground-light);
+  --color-muted-light: var(--muted-light);
+  --color-muted-foreground-light: var(--muted-foreground-light);
+  --color-accent-light: var(--accent-light);
+  --color-accent-foreground-light: var(--accent-foreground-light);
+  --color-destructive-light: var(--destructive-light);
+  --color-border-light: var(--border-light);
+  --color-input-light: var(--input-light);
+  --color-ring-light: var(--ring-light);
+  --color-chart-1-light: var(--chart-1-light);
+  --color-chart-2-light: var(--chart-2-light);
+  --color-chart-3-light: var(--chart-3-light);
+  --color-chart-4-light: var(--chart-4-light);
+  --color-chart-5-light: var(--chart-5-light);
+  --color-sidebar-light: var(--sidebar-light);
+  --color-sidebar-foreground-light: var(--sidebar-foreground-light);
+  --color-sidebar-primary-light: var(--sidebar-primary-light);
+  --color-sidebar-primary-foreground-light: var(--sidebar-primary-foreground-light);
+  --color-sidebar-accent-light: var(--sidebar-accent-light);
+  --color-sidebar-accent-foreground-light: var(--sidebar-accent-foreground-light);
+  --color-sidebar-border-light: var(--sidebar-border-light);
+  --color-sidebar-ring-light: var(--sidebar-ring-light);
+
+  --color-dark: var(--color-foreground-dark);
+  --color-background-dark: var(--background-dark);
+  --color-foreground-dark: var(--foreground-dark);
+  --color-card-dark: var(--card-dark);
+  --color-card-foreground-dark: var(--card-foreground-dark);
+  --color-popover-dark: var(--popover-dark);
+  --color-popover-foreground-dark: var(--popover-foreground-dark);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-foreground-dark: var(--primary-foreground-dark);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-secondary-foreground-dark: var(--secondary-foreground-dark);
+  --color-muted-dark: var(--muted-dark);
+  --color-muted-foreground-dark: var(--muted-foreground-dark);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-foreground-dark: var(--accent-foreground-dark);
+  --color-destructive-dark: var(--destructive-dark);
+  --color-border-dark: var(--border-dark);
+  --color-input-dark: var(--input-dark);
+  --color-ring-dark: var(--ring-dark);
+  --color-chart-1-dark: var(--chart-1-dark);
+  --color-chart-2-dark: var(--chart-2-dark);
+  --color-chart-3-dark: var(--chart-3-dark);
+  --color-chart-4-dark: var(--chart-4-dark);
+  --color-chart-5-dark: var(--chart-5-dark);
+  --color-sidebar-dark: var(--sidebar-dark);
+  --color-sidebar-foreground-dark: var(--sidebar-foreground-dark);
+  --color-sidebar-primary-dark: var(--sidebar-primary-dark);
+  --color-sidebar-primary-foreground-dark: var(--sidebar-primary-foreground-dark);
+  --color-sidebar-accent-dark: var(--sidebar-accent-dark);
+  --color-sidebar-accent-foreground-dark: var(--sidebar-accent-foreground-dark);
+  --color-sidebar-border-dark: var(--sidebar-border-dark);
+  --color-sidebar-ring-dark: var(--sidebar-ring-dark);
 
   @keyframes accordion-down {
     from {
@@ -209,17 +339,6 @@
       'cv19',
       'cv20';
   }
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* Not sure what this is, but it generated when Tailwind was installed, so it'll stay for now
-Shouldn't cause any performance issues at build time as PurgeCSS is installed */
-@layer base {
   * {
     @apply border-border!;
   }
@@ -317,5 +436,5 @@ footer > #footer-copyright-deco {
   @apply h-[14vw] relative overflow-hidden -mt-8 w-full flex flex-row justify-between gap-4 *:-mx-[1%] max-md:*:mx-0;
 }
 footer > #footer-copyright-deco > #footer-massive-copyright {
-  @apply select-none bottom-0 translate-y-[14%] align-text-bottom leading-[0.78] font-bold text-nowrap bg-linear-to-b from-[#00000000] to-foreground bg-clip-text text-transparent text-[18vw] text-center;
+  @apply select-none bottom-0 translate-y-[14%] align-text-bottom leading-[0.78] font-bold text-nowrap bg-linear-to-b from-background to-foreground bg-clip-text text-transparent text-[18vw] text-center;
 }

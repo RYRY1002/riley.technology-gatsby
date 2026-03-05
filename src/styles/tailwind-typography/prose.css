@@ -255,8 +255,8 @@
 
     code {
       @variant not-not-prose {
-        color: var(--tw-prose-code);
-        background-color: var(--tw-prose-pre-bg);
+        color: var(--tw-prose-body) !important;
+        background-color: var(--primary-foreground) !important;
         font-weight: 400;
         padding: 0.2em 0.4em;
       }
@@ -264,8 +264,7 @@
 
     pre, span.shiki {
       @variant not-not-prose {
-        color: var(--tw-prose-pre-code) !important;
-        background-color: var(--tw-prose-pre-bg) !important;
+        background-color: var(--primary-foreground) !important;
         overflow-x: auto;
         font-weight: 400;
         line-height: 1.25;

@@ -97,7 +97,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
     }
     {
       $(window).on("scroll load", function() {
-        let currentScroll = $(window).scrollTop() + $(window).height();
+        let currentScroll = $(window).scrollTop() + $(window).height() - ($(window).width() * 0.03);
         let mainHeight = $("main").height();
 
         if (currentScroll >= mainHeight) {
@@ -106,14 +106,12 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
           $("#background-pics").addClass("-bottom-[3vw]!");
           $("#background-pics").removeClass("fixed");
           $("#background-pics").removeClass("h-full");
-          $("#background-pics").css("mask-image", "linear-gradient(rgb(255, 255, 255) 97%, rgba(255, 255, 255, 0) 100%)");
         } else {
           $("#background-pics").removeClass("absolute!");
           $("#background-pics").removeClass("h-screen");
           $("#background-pics").removeClass("-bottom-[3vw]!");
           $("#background-pics").addClass("fixed");
           $("#background-pics").addClass("h-full");
-          $("#background-pics").css("mask-image", "");
         }
       });
     }
@@ -122,11 +120,14 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
       $(window).on("scroll load", function() {
         let currentScroll = $(window).scrollTop();
         let heroBottom = $("#tagline").offset().top + $("#tagline").height();
+        let mainBottom = $("main").height() - $(window).height();
 
-        if (currentScroll >= heroBottom) {
+        if (currentScroll >= mainBottom) {
+          $("#background-pics").css("filter", "blur(20px) brightness(0.65)");
+        } else if (currentScroll >= heroBottom) {
           $("#background-pics").css("filter", 
-          "blur(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [0, 20]) + "px) " + 
-          "brightness(" + remapValue(currentScroll, [heroBottom, ($(document).height() - $(window).height())], [1, 0.65]) + ")");
+          "blur(" + remapValue(currentScroll, [heroBottom, mainBottom], [0, 20]) + "px) " + 
+          "brightness(" + remapValue(currentScroll, [heroBottom, mainBottom], [1, 0.65]) + ")");
         } else {
           $("#background-pics").css("filter", "");
         }
@@ -135,7 +136,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
   }
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+    <ThemeProvider attribute="class" enableSystem>
       <main className="relative z-1 bg-background">
         <Carousel plugins={[Autoplay({ stopOnInteraction: false, stopOnFocusIn: false }), Fade()]} opts={{ loop: true }} id="background-pics" className="absolute -z-1 h-full w-full overflow-hidden">
           <CarouselContent className="h-full w-full *:m-0!">
@@ -187,7 +188,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
             <h2 className="text-4xl max-md:text-2xl font-bold">Things I've made</h2>
             <MaterialSymbol symbol="arrow_outward" size={40} fill className="ml-2 select-none relative -bottom-0.5 max-md:text-[32px]!" id="rotating-arrow"/>
           </div>
-          <div id="articles" className="grid grid-cols-3 max-md:grid-cols-1 grid-flow-dense auto-rows-auto justify-center content-center gap-[0.65rem] my-16 max-md:my-8">
+          <div id="articles" className="grid grid-cols-3 max-md:grid-cols-1 grid-flow-dense auto-rows-auto justify-center content-center gap-[0.65rem] mt-16 max-md:my-8 pb-[3vw]">
             {posts.map(({ node }) => {
               return (
                 <article id={node.id} className={cn("transition-transform duration-150 ease-in-out bg-cover bg-center min-h-[35vmin] max-md:min-h-[60vmin] rounded-xl relative overflow-hidden hover:scale-[1.075] hover:z-10", (node.frontmatter.importance >= 2 ? "md:col-start-1 md:col-span-2" : "md:col-start-3"), (node.frontmatter.importance >= 4 && "md:row-span-2"))}>
@@ -233,7 +234,6 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
           )}
         </div>
       </main>
-      <div id="footer-gradient-deco" className="relative z-0 h-[2vw] w-full bg-linear-to-b from-background to-[#ffffff00]" style={{maskImage: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)"}}/>
       <Footer/>
     </ThemeProvider>
   )

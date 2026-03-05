@@ -33,7 +33,7 @@ export function AllAccessPass(
   return (
     <Dialog>
       <DialogTrigger className="w-full h-fit" asChild>
-        <Button variant="outline" className="h-[6em]">
+        <Button variant="outline" className="h-21">
           <h1 className="m-0! max-md:text-2xl">{readMore ? readMore : "Read more about" + title}</h1>
           <MaterialSymbol symbol="open_in_new" weight={300} grade={200} size={25} className="ml-4"/>
         </Button>
