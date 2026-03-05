@@ -139,18 +139,18 @@ const config = {
         color: "#ff5e27",
         showSpinner: false
       }
-    }, /*{
+    }, {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "riley.technology",
-        short_name: "riley.technology",
+        name: "Riley Cunningham - Video game & generalist programmer, video editor",
+        short_name: "Riley Cunningham",
         start_url: "/",
-        background_color: "#ffffff",
-        theme_color: "#663399",
-        display: "standalone",
-        icon: "static/images/icon.png"
+        background_color: "oklch(0.145 0 0)",
+        theme_color: "oklch(0.145 0 0)",
+        display: "browser",
+        icon: "static/images/favicon.png"
       }
-    }, */{
+    }, {
       resolve: "gatsby-plugin-sharp",
       options: {
         defaults: {
