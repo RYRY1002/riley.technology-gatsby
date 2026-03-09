@@ -129,7 +129,7 @@ export function InlineCarousel(
       <Carousel setApi={setApi} className="2xl:w-[300%] lg:w-[200%] w-screen lg:max-w-[75vw] left-1/2 -translate-x-1/2" opts={{startIndex: startIndex}}>
         <CarouselContent className="-ml-4" className="rounded-xl">
           {queriedImages.map((image, index) => (
-            <CarouselItem key={index} className="h-[60vmin] cursor-grab active:cursor-grabbing select-none pl-4">
+            <CarouselItem key={index} className="h-[60vmin] cursor-grab active:cursor-grabbing select-none pl-4 first:pl-0">
               <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-[60vmin] rounded-xl"/>
               {perImageAlt && (
                 <div className="absolute md:w-[calc(66.666667%-1rem)] lg:w-[calc(45%-1rem)] h-full bottom-0 object-cover rounded-xl">
@@ -154,9 +154,9 @@ export function InlineCarousel(
       </Carousel>
       <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
         <Carousel setApi={setFullscreenApi}>
-          <CarouselContent>
+          <CarouselContent className="w-screen *:m-0">
             {queriedImages.map((image, index) => (
-              <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] max-md:grid-rows-[1fr_15%] h-screen cursor-grab active:cursor-grabbing select-none">
+              <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] max-md:grid-rows-[1fr_15%] h-screen cursor-grab active:cursor-grabbing select-none m-0">
                 <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-full" objectFit="contain"/>
                 <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 max-md:p-0 border-l max-md:border-0 cursor-auto select-auto prose">
                   <div>

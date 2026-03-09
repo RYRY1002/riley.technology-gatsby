@@ -36,6 +36,8 @@ import { InlineCarousel, MarkdownImage, AllAccessPass, MarkdownVideoPlayer } fro
 
 import { VideoPlayer } from "@/components/ui/player";
 
+import { cn } from "@/lib/utils";
+
 const mdxImage = props => (
   <MarkdownImage image={{src: props.src, alt: props.alt}} className={props.title} {...props}/>
 )
@@ -78,6 +80,8 @@ export default function BlogPost({ data: { mdx }, children }) {
     })
   }, [api, fullscreenApi, isFullscreenHeroCarouselOpen]);
 
+  const hasHero: boolean = frontmatter.images?.hero && frontmatter.images.hero.length > 0;
+
   return (
     <ThemeProvider attribute="class" enableSystem>
       <div vaul-drawer-wrapper="">
@@ -86,8 +90,8 @@ export default function BlogPost({ data: { mdx }, children }) {
             <MaterialSymbol symbol="arrow_back" size={24} weight={300} />
             Head home
           </Link>
-          <div id="hero" className="relative mt-6 mx-[12.5%] max-md:mx-0 mb-14 rounded-xl">
-            {frontmatter.images?.hero && (
+          <div id="hero" className={cn("relative mt-6 mx-[12.5%] max-md:mx-0 rounded-xl", !hasHero ? "h-[10vmin] mb-6" : "mb-14")}>
+            {hasHero && (
               <Dialog open={isFullscreenHeroCarouselOpen} onOpenChange={handleFullscreenHeroCarouselOpenChange}>
                 <Carousel setApi={setApi}>
                   <CarouselContent className="rounded-xl">
@@ -111,15 +115,17 @@ export default function BlogPost({ data: { mdx }, children }) {
                 </Carousel>
                 <DialogContent className="min-w-full h-screen max-w-none rounded-none border-none p-0">
                   <Carousel setApi={setFullscreenApi}>
-                    <CarouselContent>
+                    <CarouselContent className="w-screen *:m-0">
                       {frontmatter.images.hero.map((image, index) => (
-                        <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] max-md:grid-rows-[1fr_15%] h-screen cursor-grab active:cursor-grabbing select-none">
+                        <CarouselItem key={index} className="grid 2xl:grid-cols-[1fr_16%] xl:grid-cols-[1fr_26%] max-md:grid-rows-[1fr_15%] h-screen cursor-grab active:cursor-grabbing select-none m-0">
                           <GatsbyImage image={getImage(image.src)} alt={image.alt} className="object-cover h-full" objectFit="contain"/>
                           <div id="fullscreen-hero-carousel-alt" className="flex flex-col justify-between p-10 max-md:p-0 border-l max-md:border-0 cursor-auto select-auto prose">
                             <div>
                               <p className="not-prose"><strong>{index + 1}</strong> of <strong>{frontmatter.images.hero.length}</strong></p>
-                              <Separator orientation="horizontal" className="mt-2"/>
-                              <p className="mb-0">{image.alt}</p>
+                              {image.alt && <>
+                                <Separator orientation="horizontal" className="mt-2"/>
+                                <p className="mb-0">{image.alt}</p>
+                              </>}
                             </div>
                             <div className="max-md:hidden">
                               <a href={"/" + image.src.relativePath} className="no-underline!">Download the original</a>
