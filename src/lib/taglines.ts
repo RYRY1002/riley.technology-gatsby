@@ -1,6 +1,5 @@
 const taglines = {
   "main": "I am a gameplay, graphics, UI, tools, systems and web programmer working mainly in game development in Sydney, Australia",
-  "tripping high people": "Tripping high people since 2021",
   "unreal engine since": "Using Unreal Engine since 2021",
   "programming since": "Writing code since 2016",
   "c++ since": "Writing in C++ since 2021",
@@ -11,7 +10,11 @@ const taglines = {
   "coding for no reason": "Programming non-stop for no particular reason",
   "schooling teachers": "Teaching programming teachers new things since 2018",
   "good games": "Consumer of fine interactive entertainment",
-  "modding games since": "Modding games since 2014"
+  "modding games since": "Modifying games since 2014",
+  "first game": "Gaming since Need For Speed Underground 2 on the PlayStation 2",
+  "v4 comment 1": "\"This shit lowkey turned me into a pothead\" -comment under Acid Interstate V4",
+  "v4 comment 2": "\"I'm going through a really bad breakup right now and this has been such a source of comfort and source of inspiration\" -comment under Acid Interstate V4",
+  "v4 comment 3": "\"I don't know why but this made me cry\" -comment under Acid Interstate V4"
 }
 const taglinesArray = Object.values(taglines);
 type taglinesEnum = keyof typeof taglines;
@@ -36,7 +39,13 @@ const rareTaglines = {
   "to build a home 3": "This is a place where I don't feel alone, this is a place where I feel at home",
   "to build a home 4": "And now it's time to leave and turn to dust",
   "music box 1": "My darling, darling girl; won't you shout it to the world",
-  "music box 2": "My darling, darling girl; wrap yourself with all the world"
+  "music box 2": "My darling, darling girl; wrap yourself with all the world",
+  "milieu 1": "For Naoya & Miho",
+  "milieu 2": "Dromeda Three",
+  "milieu 3": "Rolling Smoke on Pier Four",
+  "milieu 4": "Soft Breath on Cracked Marble",
+  "milieu 5": "Imperial Rust",
+  "milieu 6": "Hurricane Blues"
 }
 const rareTaglinesArray = Object.values(rareTaglines);
 type rareTaglinesEnum = keyof typeof rareTaglines;
