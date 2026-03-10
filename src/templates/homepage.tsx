@@ -282,6 +282,10 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
 
 export const Head = ({}) => (
   <>
+    <html lang="en" />
+    <meta property="og:site_title" content="riley.technology"/>
+    <meta property="og:title" content="Riley Cunningham - Video game & generalist programmer, video editor"/>
+    <meta property="og:description" content="Riley Cunningham is a gameplay, graphics, UI, tools, systems and web programmer working mainly in game development in Sydney, Australia with a decade of computer programming experience."/>
     <title>Riley Cunningham - Video game & generalist programmer, video editor</title>
   </>
 )

@@ -162,9 +162,12 @@ export default function BlogPost({ data: { mdx }, children }) {
   )
 }
 
-export const Head = ({ data }) => (
+export const Head = ({ data: { mdx } }) => (
   <>
-    <title>{data.mdx.frontmatter.title} - Riley Cunningham</title>
+    <html lang="en" />
+    <meta property="og:site_title" content="Riley Cunningham is a gameplay, graphics, UI, tools, systems and web programmer working mainly in game development in Sydney, Australia with a decade of computer programming experience."/>
+    <meta property="og:title" content={`${mdx.frontmatter.title}`}/>
+    <title>{mdx.frontmatter.title} - Riley Cunningham</title>
   </>
 )
 
