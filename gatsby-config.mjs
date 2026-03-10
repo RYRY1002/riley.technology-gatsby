@@ -198,7 +198,10 @@ const config = {
             "fullscreen_exit",
             "fullscreen",
             "progress_activity",
-            "text_format"
+            "text_format",
+            "arrow_back",
+            "arrow_forward",
+            "mail"
           ]
         }
       }
