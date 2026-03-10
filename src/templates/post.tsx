@@ -46,7 +46,8 @@ const mdxComponents = {
   AllAccessPass,
   img: mdxImage,
   MarkdownVideoPlayer,
-  VideoPlayer
+  VideoPlayer,
+  Link
 }
 
 export default function BlogPost({ data: { mdx }, children }) {

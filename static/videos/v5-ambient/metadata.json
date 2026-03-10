@@ -1,0 +1,10 @@
+{
+  "this": "./metadata.json",
+  "associatedPost": "SitePage /project/v5-poc",
+  "title": "struggles of the past, present and future",
+  "description": "A collection of 60-second clips from the past, present and future.",
+  "date": "2021-04-13",
+  "src": "youtube/Iumv0GapT5M",
+  "poster": "./../../images/v5-ambient.jpg",
+  "thumbnails": "./thumb/thumbnails.vtt"
+}

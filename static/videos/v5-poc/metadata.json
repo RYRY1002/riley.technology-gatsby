@@ -1,0 +1,10 @@
+{
+  "this": "./metadata.json",
+  "associatedPost": "SitePage /project/v5-poc",
+  "title": "Minecraft Acid Interstate V5 Proof of Concept",
+  "description": "A proof of concept for what would have been Minecraft Acid Interstate V5.",
+  "date": "2021-10-15",
+  "src": "youtube/NTD2YI2iJKs",
+  "poster": "./../../images/v5-poc.webp",
+  "thumbnails": "./thumb/thumbnails.vtt"
+}

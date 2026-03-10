@@ -70,14 +70,14 @@ Of course, there's no need to reinvent the wheel on something as popular as chro
 A few hours later, I settled on [Prism](https://github.com/Fubaxiusz/fubax-shaders/blob/982c61f09322f54235c86579a77aa0d9c437c586/Shaders/Prism.fx) by [Jakub Maksymilian Fober](https://github.com/Fubaxiusz).
 
 <InlineCarousel images={[
+	"images/meerkat/prismtest1-2.png",
   "images/meerkat/prismtest0-2.png",
-  "images/meerkat/prismtest1-2.png",
 	"images/meerkat/prismtest2-2.png"
-]} alt="Prism in Red Dead Redemption 2" startIndex={1}/>
+]} alt="Prism in Red Dead Redemption 2. © Rockstar Games 2018"/>
 
 Like most chromatic aberration shaders, it samples the scene $n$ times, each at a different offset, then multiplies the sample by a color determined by the offset. Take a look:
 
-```hlsl showLineNumbers title="Prism.fx © 2018-2023 Jakub Maksymilian Fober"
+```hlsl showLineNumbers title="Prism.fx"
 float3 Spectrum(float hue)
 {
 	float3 hueColor;
@@ -205,7 +205,7 @@ Prism has code to emulate an [achromatic lens](https://en.wikipedia.org/wiki/Ach
 
 ### Style
 
-You might've noticed that the chromatic aberration in Meerkat Demo and Prism isn't quite 1-to-1. That's because I'm a massive fan of anamorphic lenses and the visual artifacts that come along with them.
+You might've noticed that the chromatic aberration in Meerkat Demo and Prism isn't quite 1-to-1. That's because I'm a massive fan of anamorphic lenses and the visual artifacts that come along with them. So much so that I even have an anamorphic lens in real life that I occasionally use for photography.
 
 Ever since the (now long forgotten) [reveal trailer](https://youtu.be/AQEizp-VrVU) for [Minecraft Earth](https://minecraft.wiki/w/Minecraft_Earth) in 2019, I've been obsessed with the camera and lens setup used in the trailer. It's what inspired me to turn the chromatic aberration into a radial effect instead of the typical (and physically accurate) zoom.
 

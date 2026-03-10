@@ -20,6 +20,16 @@ tags:
   - GLSL
 ---
 
-This will be a written blog post at some point. Allegedly.
+<MarkdownVideoPlayer video="videos/v5-poc" />
 
-I might even start styling the blog post page before I go to Uni.
+After the massive success that was <Link to="/project/v4">Acid Interstate V4</Link>, I started working on Acid Interstate V5.
+
+I decided I would use this as an opportunity to re-implement all of the Acid effects from scratch, as this would allow me to better understand how everything worked and would futher bolster my HLSL skills.
+
+I used Sonic Ethers Unbelievable Shaders (SEUS) as a base for the shader, and while displacing geometry with a vertex shader is not particularly difficult, there are a lot of other effects going on that make this shader more complex than it may seem at first glance.
+
+One big thing that not many people notice are the unrealistic shadows. The shadows are cast onto terrain that isn't effected by the geometry displacement and then displaced to fit onto the displaced geometry. This is done to create a look that is what you would expect, but isn't physically accurate (not that it matters very much, this is an acid shader after all).
+
+Some things that were never implemented but I wanted to add were distance fog that blends the terrain into the skybox, improved volumetric cloud dithering, variable penumbra shadows and more.
+
+You can view the source code for this project at [RYRY1002/acid-interstate-v5](https://github.com/RYRY1002/acid-interstate-v5)

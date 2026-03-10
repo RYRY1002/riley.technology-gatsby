@@ -1,15 +1,13 @@
 ---
 type: post
 slug: website
-date: 2024-08-08
+date: 2026-03-10
 title: riley.technology
 subtitle: The website you're on right now
 links:
   - title: GitHub repo
     url: https://github.com/RYRY1002/riley.technology-gatsby
-image: ../static/images/v4.jpg
-video: ../static/videos/v4.mp4
-videoLooping: ../static/videos/v4_loop.mp4
+image: ../static/images/banner.png
 tags:
   - Web dev
   - React
@@ -21,25 +19,53 @@ tags:
   - GitHub Actions
 ---
 
-Good riddance, I am so glad to be finally call this website finished.
-I started working on this site about 2 years ago, since then I've had the joy of rewriting the entire site from scrach twice.
+When I was in Year 9 (age 15), I decided I would need a website to serve as a digital portfolio for potential future employers. At the time, the extent of my web development experience was mucking around with Chrome DevTools.
 
-Everything you see on this site was made by me. This is my little corner of the internet. Welcome.
+Fortunately, I had the opportunity to learn the basics of web development at school, where I learned basic HTML, CSS and JavaScript. And given I was a student, I was able to take advantage of free hosting on GitHub pages, which was all I would need to host a simple static site.
 
----
-
-## First version: Plain ol' HTML+CSS+JS
-
-Initially, the site started out as a plain simple HTML+CSS+JS site (which I'll call vanilla web dev or just vanilla from now on). I liked the simplicity of making a vanilla site without any of that other web dev stuff which I, primarily as a C++ programmer, intrinsically hate.
-
-Eventually, I realised I wanted a site that in practice was a blog that I'd use to share production notes on my projects as well as high quality downloads. As it turns out, pagination isn't easy to implement in a vanilla site.
-
-I also realised I had no idea how I was going to host the site, ideally on GitHub Pages. That was the final nail in the coffin.
+So I used the skills I had learned to begin development on a portfolio site, using plain HTML, CSS and JavaScript. Little did I know at the time, but I would end up rewriting the entire site from scratch multiple times, each time with a different tech stack, each more complicated than the last.
 
 ---
 
-## Second version: Jekyll
+## 2022: Vanilla HTML, CSS, JS
+*Unfortunately, I didn't check this iteration into any iteration control, so I am unable to share the work (you aren't missing out on anything, really).*
 
-So in light of issues presented with vanilla web dev (turns out web dev nowadays isn't very friendly to vanilla enjoyers like me), I switched to making a Jekyll site.
+This iteration was a very good learning experience for me, I became very familiar with HTML and CSS syntax, and realised the limitations of not having a tech stack behind me.
 
-I stuck with Jekyll for a good year or so, and I made good progress during that time, coming close to a production site.
+Pagination was out the question, and I had to write an excessive amount of JavaScript to achieve just about anything.
+
+After about a month or two of development and not getting very far, I decided to look into other options, and that's when I found Jekyll.
+
+---
+
+## 2022-2024: Jekyll
+
+*This iteration of the website is still online, and can be viewed at [jekyll.riley.technology](https://jekyll.riley.technology) and the source code is available at [RYRY1002/riley.technology-jekyll](https://github.com/RYRY1002/riley.technology-jekyll).*
+
+Jekyll is a simple static site generator built in Ruby, and is what GitHub pages recommends for basic static sites. It was a huge improvement over not having any tech stack, and I actually got reasonably far through development before switching to another tech stack.
+
+Jekyll is about as good as it gets without jumping ship to a full-fat frontend framework like React. It lets you include [templates](https://shopify.github.io/liquid/), layouts, HTML includes, and has built-in support for Markdown with queryable frontmatter.
+
+Given that I didn't know how to use any frontend framework at the time (and the frontend scene was shifting around a lot at this time, with a new frontend framework coming out what felt like every other week), I decided to go with Jekyll instead of immediately jumping to a frontend framework with only a few months of web development experience.
+
+I got pretty far with this iteration of the site. I decided the general look of the site that I wanted to go with, how content would be structured, writing up a first article and other basics like that.
+
+After a while, I got hung up on the limitations of sticking with templated HTML, things like carousels being very difficult to create, images being very difficult to automatically optimise, video embeds being very difficult without dependencies, and FCP times being pretty abysmal on first loads thanks to that on any page where I dare to embed a video, I decided to jump ship to a full-fat frontend framework.
+
+---
+
+## 2024-2026: Gatsby
+
+*This iteration of the website is the one you are on right now. The source code is available at [RYRY1002/riley.technology](https://github.com/RYRY1002/riley.technology).*
+
+Gatsby is where I've spent the bulk of my time working on this website. Gatsby is a React-based static site generator, by that I mean that the whole page is a React app, but Gatsby does the hard work of pre-rending the page into HTML, bundling JS, and preprocessing CSS for me.
+
+I actually found out about Gatsby through the [motherfucking website](https://motherfuckingwebsite.com) trend that went around (again) a few years ago when I started working on this iteration of the site, and specifically a derivitive site that was built on Gatsby that had a perfect lighthouse score.
+
+I started out by re-building the work I had done on the Jekyll site, which I managed to get done within about a month or two. I then got to work building the devops pipeline I would use to quickly and easily build, optimise and update the site all in the cloud in just a few minutes.
+
+After that, given that I still years away from graduating high school, I was no rush to complete the website and used the site as a side project that I could use to build my web development skills and pass the time whenever needed.
+
+I built things that I could theoretically use on the site in the event that I ever needed to, like [charts](https://github.com/RYRY1002/riley.technology/commit/744120aa13923e9c9c074f6b78f4cec4a0d9c781), a [video player](https://github.com/RYRY1002/riley.technology/commit/df00c426c35ee70628f1c3cd8e23633db8d6ef3f), and more. Also, given that this site was built over the span of years, I [refactored](https://github.com/RYRY1002/riley.technology/commit/e57b0b78cff7ab37c0a2e7d6cb404c3ae5ed8c3d) parts of the site's code [several times](https://github.com/RYRY1002/riley.technology/commit/e72930409d5fdedb70ffef2f794c98b7b2e4057a).
+
+During the site's development I even dabbled with publishing an npm package, [gatsby-plugin-material-symbols](https://github.com/RYRY1002/gatsby-plugin-material-symbols/tree/main/plugin), which I built to optimise the Material Symbols that you see on this site. An explanation of the method used to optimise the symbols' file size by 500x can be found on the [plugin's README](https://github.com/RYRY1002/gatsby-plugin-material-symbols/blob/main/plugin/README.md#performance-optimizations).
