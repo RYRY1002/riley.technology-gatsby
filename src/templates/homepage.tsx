@@ -243,7 +243,10 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
           )}
           <section id="about-me" className="*:text-2xl *:max-md:text-base *:prose *:text-foreground *:my-5 pb-[2vw] *:drop-shadow-lg/80">
             <p>
-              My name is Riley Cunningham. I'm an {myAge}-year-old self-taught gameplay, graphics, UI, tools, systems and web programmer based in inner Sydney, Australia. I've always been fascinated by computers and the software they run. They are the most complicated machines with which the majority of humanity interacts with on a daily basis, and I have always been one to tinker with the things around me.
+              My name is Riley Cunningham. I'm an {myAge}-year-old self-taught graphics, gameplay, UI, tools, systems and web programmer based in inner Sydney, Australia.
+            </p>
+            <p>
+              I've always been fascinated by computers and the software they run. They are the most complicated machines with which the majority of humanity interacts with on a daily basis, making them a natural choice for endless exploration, modification, experimentation and creation that continues to this day.
             </p>
             <p>
               I've been writing code since 2016, when I was 9 years old. 
@@ -255,19 +258,19 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
               I've played and modified video games since 2014 and haven't stopped since. 
             </p>
             <p>
-              In 2020, I made a YouTube video in Minecraft that went viral with over 200,000 views. It received a huge amount of comments from a discerning online community, with one comment reading "I don't know why but this made me cry". To this day, I still cross paths with people who have watched and remember my videos.
+              In 2020, I made a YouTube video in Minecraft that went viral with over 200,000 views. It received a huge amount of engagement from a discerning online community. To this day, I still cross paths with people who have seen and remember things I've made.
             </p>
             <p>
-              I built an online group of like-minded programmers during this time, one worked at Apple in California. He asked if I wanted a job there - I was 14 years old, so naturally I had to decline.
+              I built an online group of like-minded programmers during this time, one worked at Apple in California. He asked if I wanted a job there — I was 14 years old, so naturally I had to decline.
             </p>
             <p>
-              After my video went viral, I learnt Unreal Engine and C++. Since then I've created films with it, made plugins, rewrote engine subsystems and submitted pull requests to Epic Games. I've taught myself C++, HLSL, JavaScript, Python, C# and more.
+              After my video went viral, I learnt Unreal Engine and C++. Since then I've created films with it, made plugins, rewrote engine subsystems and submitted pull requests to Epic Games. I've also taught myself C++, HLSL, JavaScript, Python, C# and more.
             </p>
             <p>
-              I've been enrolling in formal programming lessons since 2018, but I have consistently surpassed the curriculum available to me. Instead, I've found myself teaching my teachers new things.
+              I've been enrolling in formal programming lessons since 2018, but have consistently surpassed the curriculum available to me. Instead, I've found myself teaching my teachers new things.
             </p>
             <p>
-              I've become extremely familiar with all aspects of video games, what makes them fun, and how they work behind the scenes. I've played more or less every genre out there, from AAA blockbusters like Grand Theft Auto V, Death Stranding 2, HITMAN and Battlefield, to indie cult-classics like Flower, LEGO Builders Journey, Stray and Superliminal.
+              I've become extremely familiar with all aspects of video games over the years; what makes them fun, how they work behind the scenes, and the industry that builds them. I've played more or less every genre out there, from AAA blockbusters like Grand Theft Auto V, Death Stranding 2, HITMAN and Battlefield, to indie cult-classics like Flower, LEGO Builders Journey, Stray and Superliminal.
             </p>
             <p>
               I'm after a job in any of the fields I specialise in, particularly in a game development related role. If you have anything for me, please get in touch with me via the contact methods listed below.
@@ -284,9 +287,9 @@ export const Head = ({}) => (
   <>
     <html lang="en" />
     <meta property="og:site_title" content="riley.technology"/>
-    <meta property="og:title" content="Riley Cunningham - Video game & generalist programmer, video editor"/>
-    <meta property="og:description" content="Riley Cunningham is a gameplay, graphics, UI, tools, systems and web programmer working mainly in game development in Sydney, Australia with a decade of computer programming experience."/>
-    <title>Riley Cunningham - Video game & generalist programmer, video editor</title>
+    <meta property="og:title" content="Riley Cunningham - graphics, gameplay, UI, tools, systems and web programmer"/>
+    <meta property="og:description" content="Riley Cunningham is a graphics, gameplay, UI, tools, systems and web programmer working mainly in game development in Sydney, Australia with a decade of computer programming experience."/>
+    <title>Riley Cunningham - graphics, gameplay, UI, tools, systems and web programmer</title>
   </>
 )
 

@@ -1,5 +1,5 @@
 const taglines = {
-  "main": "I am a gameplay, graphics, UI, tools, systems and web programmer working mainly in game development in Sydney, Australia",
+  "main": "I am a graphics, gameplay, UI, tools, systems and web programmer working mainly in game development in Sydney, Australia",
   "unreal engine since": "Using Unreal Engine since 2021",
   "programming since": "Writing code since 2016",
   "c++ since": "Writing in C++ since 2021",
@@ -45,7 +45,9 @@ const rareTaglines = {
   "milieu 3": "Rolling Smoke on Pier Four",
   "milieu 4": "Soft Breath on Cracked Marble",
   "milieu 5": "Imperial Rust",
-  "milieu 6": "Hurricane Blues"
+  "milieu 6": "Hurricane Blues",
+  "eluvium 1": "Adolescnet Space Adventures Outside the Supermarket",
+  "stars of the lid 1": "That finger on your temple is the barrel of my raygun"
 }
 const rareTaglinesArray = Object.values(rareTaglines);
 type rareTaglinesEnum = keyof typeof rareTaglines;
