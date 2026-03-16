@@ -170,7 +170,8 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
           </CarouselContent>
         </Carousel>
         <div id="content" className="px-20 max-md:px-6 pt-12 max-md:pt-8 max-w-640 mx-auto **:text-foreground-dark">
-          <div id="hero" className="h-[80vh] w-full *:drop-shadow-xl/80">
+          <div className="absolute w-full h-80 top-0 left-0 bg-linear-to-b from-background/60 to-foreground/0"/>
+          <div id="hero" className="h-[80vh] w-full *:drop-shadow-xl/40">
             <h1 id="tagline" className="text-6xl max-md:text-3xl font-bold mb-5 max-md:mb-2 relative">{getTagline("main")}</h1>
             <div id="socials" className="relative **:fill-foreground-dark flex gap-1">
               <Link id="social-link" to="https://www.youtube.com/@RYRY1002">
@@ -241,7 +242,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
               </PaginationContent>
             </Pagination>
           )}
-          <section id="about-me" className="*:text-2xl *:max-md:text-base *:prose *:text-foreground *:my-5 pb-[2vw] *:drop-shadow-lg/80">
+          <section id="about-me" className="*:text-2xl *:max-md:text-base *:prose *:text-foreground *:my-5 pb-[2vw] *:drop-shadow-lg/40">
             <p>
               My name is Riley Cunningham. I'm an {myAge}-year-old self-taught graphics, gameplay, UI, tools, systems and web programmer based in inner Sydney, Australia.
             </p>
