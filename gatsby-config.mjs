@@ -1,6 +1,3 @@
-//import type { GatsbyConfig } from "gatsby";
-import path from "path";
-
 import remarkGfm from "remark-gfm";
 import rehypeShiki from "@shikijs/rehype";
 import {
@@ -134,12 +131,6 @@ const config = {
       },
       __key: "posts"
     }, {
-      resolve: "gatsby-plugin-nprogress",
-      options: {
-        color: "#ff5e27",
-        showSpinner: false
-      }
-    }, {
       resolve: "gatsby-plugin-manifest",
       options: {
         name: "Riley Cunningham - Video game & generalist programmer, video editor",
@@ -154,8 +145,7 @@ const config = {
       resolve: "gatsby-plugin-sharp",
       options: {
         defaults: {
-          //formats: ["avif", "webp"],
-          formats: ["webp"],
+          formats: [/*"avif", */"webp"],
           placeholder: "blurred",
           breakpoints: [720, 1080, 1366, 1920, 2560, 3840],
           backgroundColor: "transparent",
@@ -176,7 +166,6 @@ const config = {
             "chevron_left",
             "chevron_right",
             "last_page",
-
             "replay",
             "play_arrow",
             "pause",
