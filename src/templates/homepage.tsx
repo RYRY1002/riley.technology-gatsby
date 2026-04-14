@@ -135,12 +135,11 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
     }
   }
 
-  let DOB = new Date("2007-04-26");
-  let dateNow = new Date();
+  let DOB = new Date("2007-04-26T04:30:00+10:00");
+  let myAge = new Date(new Date() - new Date(DOB)).getFullYear() - 1970;
 
-  let myAgeInMonths = dateNow.getMonth() - DOB.getMonth() + (12 * (dateNow.getFullYear() - DOB.getFullYear()));
-  let myAge = (myAgeInMonths - (myAgeInMonths % 12)) / 12;
-
+  let shouldAn = myAge >= 11 && myAge <= 18;
+  
   return (
     <ThemeProvider attribute="class" enableSystem>
       <main className="relative z-1 bg-background">
@@ -244,7 +243,7 @@ export const BlogIndex: React.FC<PageProps> = ({ data, pageContext }: any) => {
           )}
           <section id="about-me" className="*:text-2xl *:max-md:text-base *:prose *:text-foreground *:my-5 pb-[2vw] *:drop-shadow-lg/40">
             <p>
-              My name is Riley Cunningham. I'm an {myAge}-year-old self-taught graphics, gameplay, UI, tools, systems and web programmer based in inner Sydney, Australia.
+              My name is Riley Cunningham. I'm a{shouldAn && "n"} {myAge}-year-old self-taught graphics, gameplay, UI, tools, systems and web programmer based in inner Sydney, Australia.
             </p>
             <p>
               I've always been fascinated by computers and the software they run. They are the most complicated machines with which the majority of humanity interacts with on a daily basis, making them a natural choice for endless exploration, modification, experimentation and creation that continues to this day.
